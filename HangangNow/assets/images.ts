@@ -1,5 +1,7 @@
 const images = {
-  common: {},
+  common: {
+    kakaoTextLogo: require('./images/common/kakao_text_logo.png'),
+  },
   components: {},
 };
 

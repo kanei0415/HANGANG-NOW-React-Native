@@ -1,6 +1,6 @@
 const colors = {
   brand: {
-    main: '#7a70eb' as const,
+    main: '#00a0a7' as const,
     sub: '#a684e6' as const,
   },
   line: {
@@ -17,7 +17,7 @@ const colors = {
   system: {
     error: '#dc0000' as const,
     success: '#46b712' as const,
-    disabled: '#e1e4e6' as const,
+    disabled: '#d3d3d3' as const,
   },
   background: {
     light: '#f7f7f9' as const,
