@@ -2,7 +2,8 @@ import colors from '@assets/colors';
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import Font from '@assets/font';
-import CDateInputContainer from '@components/common/CDateInput/containers/CDateInputContainer';
+import CInputContainer from '@components/common/CInput/containers/CInputContainer';
+import CSearchInputContainer from '@components/common/CSearchInput/containers/CSearchInputContainer';
 
 type Props = {};
 
@@ -13,9 +14,21 @@ const Home = ({}: Props) => {
     <View style={{ backgroundColor: colors.default.white, flex: 1 }}>
       <View style={{ marginTop: 120 }}>
         {/*<CButton active={true} icon={images.common.kakaoTextLogo} />*/}
-        {/*<CInputContainer onInputChange={() => {}} />*/}
-        <CDateInputContainer mode={'date'} onDateChanged={() => {}} />
-        {/*<CSearchInputContainer />*/}
+        <CInputContainer
+          onInputChange={() => {}}
+          isCheckValid={true}
+          onCheckValid={(input) => input.length > 0}
+        />
+      </View>
+      <View style={{ marginTop: 120 }}>
+        <CInputContainer
+          onInputChange={() => {}}
+          type={'password'}
+          isCheckValid={true}
+          onCheckValid={(input) => input.length > 0}
+        />
+        {/*<CDateInputContainer mode={'date'} onDateChanged={() => {}} />*/}
+        <CSearchInputContainer />
         {/*<LoginInputContainer*/}
         {/*  onInputChange={() => {}}*/}
         {/*  label={'아이디 (이메일 계정)'}*/}

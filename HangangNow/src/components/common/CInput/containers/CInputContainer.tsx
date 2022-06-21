@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {KeyboardTypeOptions, TextInput} from 'react-native';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { KeyboardTypeOptions, TextInput } from 'react-native';
 import CInput from '../CInput';
 
 type Props = {
@@ -8,6 +8,8 @@ type Props = {
   keyboardType?: KeyboardTypeOptions;
   type?: 'text' | 'password';
   initialState?: string;
+  isCheckValid?: boolean;
+  onCheckValid?: (input: string) => boolean;
 };
 
 const CInputContainer = ({
@@ -16,6 +18,8 @@ const CInputContainer = ({
   keyboardType = 'default',
   type = 'text',
   initialState = '',
+  isCheckValid = false,
+  onCheckValid = (_: string) => true,
 }: Props) => {
   const [input, setInput] = useState(initialState);
 
@@ -32,7 +36,7 @@ const CInputContainer = ({
   }, [inputRef]);
 
   const onPasswordVisiblePressed = useCallback(() => {
-    setPasswordVisible(prev => !prev);
+    setPasswordVisible((prev) => !prev);
   }, []);
 
   const onDeletePressed = useCallback(() => {
@@ -59,6 +63,8 @@ const CInputContainer = ({
       onPasswordVisiblePressed={onPasswordVisiblePressed}
       passwordVisible={passwordVisible}
       onDeletePressed={onDeletePressed}
+      isCheckValid={isCheckValid}
+      onCheckValid={onCheckValid}
     />
   );
 };

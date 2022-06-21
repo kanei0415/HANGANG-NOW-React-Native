@@ -23,6 +23,8 @@ type Props = {
   onPasswordVisiblePressed: () => void;
   passwordVisible: boolean;
   onDeletePressed: () => void;
+  isCheckValid: boolean;
+  onCheckValid: (input: string) => boolean;
 };
 
 const CInput = ({
@@ -38,9 +40,9 @@ const CInput = ({
   onPasswordVisiblePressed,
   passwordVisible,
   onDeletePressed,
+  isCheckValid,
+  onCheckValid,
 }: Props) => {
-  type = 'password';
-
   return (
     <TouchableWithoutFeedback onPress={onRootPressed}>
       <View
@@ -90,6 +92,18 @@ const CInput = ({
             </TouchableWithoutFeedback>
           </View>
         )}
+        {isCheckValid &&
+          onCheckValid(input) &&
+          (type === 'password' ? !isFocused : true) && (
+            <Image
+              source={images.components.common.check}
+              style={{
+                position: 'absolute',
+                right: 16,
+                bottom: 12,
+              }}
+            />
+          )}
       </View>
     </TouchableWithoutFeedback>
   );

@@ -35,8 +35,8 @@ const CCheck = ({
           style={{ width: 24, height: 24 }}
           source={
             checked
-              ? images.components.common.roundCheck
-              : images.components.common.roundUncheck
+              ? images.components.common.check
+              : images.components.common.uncheck
           }
         />
         <Text
