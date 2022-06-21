@@ -17,6 +17,7 @@ type Props = {
   checked: boolean;
   containerStyle: StyleProp<ViewStyle>;
   iconPosition: 'left' | 'right';
+  iconType?: 'round' | 'square';
 };
 
 const CCheck = ({
@@ -25,7 +26,17 @@ const CCheck = ({
   checked,
   containerStyle,
   iconPosition,
+  iconType,
 }: Props) => {
+  const checkedIcon =
+    iconType == 'square'
+      ? images.components.common.squareCheck
+      : images.components.common.roundCheck;
+  const uncheckedIcon =
+    iconType == 'square'
+      ? images.components.common.squareUncheck
+      : images.components.common.roundUncheck;
+
   return (
     <TouchableWithoutFeedback onPress={onPressed}>
       <View
@@ -38,11 +49,7 @@ const CCheck = ({
         ]}>
         <Image
           style={{ width: 24, height: 24 }}
-          source={
-            checked
-              ? images.components.common.check
-              : images.components.common.uncheck
-          }
+          source={checked ? checkedIcon : uncheckedIcon}
         />
         {iconPosition == 'right' && <View style={{ flex: 1 }} />}
         <Text

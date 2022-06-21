@@ -7,8 +7,10 @@ const images = {
   },
   components: {
     common: {
-      check: require('./images/components/common/CCheck/ic-square-checked.png'),
-      uncheck: require('./images/components/common/CCheck/ic-square-unchecked.png'),
+      squareCheck: require('./images/components/common/CCheck/ic-square-checked.png'),
+      squareUncheck: require('./images/components/common/CCheck/ic-square-unchecked.png'),
+      roundCheck: require('./images/components/common/CCheck/ic-round-checked.png'),
+      roundUncheck: require('./images/components/common/CCheck/ic-round-unchecked.png'),
       CSearch: {
         search: require('./images/components/common/CSearchInput/ic-search.png'),
       },

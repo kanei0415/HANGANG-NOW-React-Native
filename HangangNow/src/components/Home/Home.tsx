@@ -46,6 +46,25 @@ const Home = ({}: Props) => {
         {/*/>*/}
         <CCheckContainer
           iconPosition={'right'}
+          iconType={'square'}
+          checked={checked}
+          onPressed={() => setChecked(!checked)}
+        />
+        <CCheckContainer
+          iconPosition={'right'}
+          iconType={'round'}
+          checked={checked}
+          onPressed={() => setChecked(!checked)}
+        />
+        <CCheckContainer
+          iconPosition={'left'}
+          iconType={'square'}
+          checked={checked}
+          onPressed={() => setChecked(!checked)}
+        />
+        <CCheckContainer
+          iconPosition={'left'}
+          iconType={'round'}
           checked={checked}
           onPressed={() => setChecked(!checked)}
         />

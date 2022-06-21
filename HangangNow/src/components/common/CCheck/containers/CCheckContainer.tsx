@@ -7,7 +7,8 @@ type Props = {
   label?: string;
   checked?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
-  iconPosition: 'left' | 'right';
+  iconPosition?: 'left' | 'right';
+  iconType?: 'round' | 'square';
 };
 
 const CCheckContainer = ({
@@ -16,6 +17,7 @@ const CCheckContainer = ({
   checked = false,
   containerStyle,
   iconPosition = 'left',
+  iconType = 'square',
 }: Props) => {
   return (
     <CCheck
@@ -24,6 +26,7 @@ const CCheckContainer = ({
       checked={checked}
       containerStyle={containerStyle}
       iconPosition={iconPosition}
+      iconType={iconType}
     />
   );
 };

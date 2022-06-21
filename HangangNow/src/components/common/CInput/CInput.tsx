@@ -96,7 +96,7 @@ const CInput = ({
           onCheckValid(input) &&
           (type === 'password' ? !isFocused : true) && (
             <Image
-              source={images.components.common.check}
+              source={images.components.common.squareCheck}
               style={{
                 position: 'absolute',
                 right: 16,
