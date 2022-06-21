@@ -3,6 +3,7 @@ import CButton from '@components/common/CButton/CButton';
 import colors from '@assets/colors';
 
 type Props = {
+  type: 'primary' | 'outline';
   active?: boolean;
   label?: string;
   onPress?: () => void;
@@ -12,6 +13,7 @@ type Props = {
 };
 
 const CButtonContainer = ({
+  type,
   active = true,
   onPress = () => {},
   label = ' Test Label',
@@ -21,7 +23,8 @@ const CButtonContainer = ({
 }: Props) => {
   return (
     <CButton
-      active={active}
+      type={type}
+      active={type === 'outline' ? true : active}
       label={label}
       onPress={onPress}
       backgroundColor={backgroundColor}

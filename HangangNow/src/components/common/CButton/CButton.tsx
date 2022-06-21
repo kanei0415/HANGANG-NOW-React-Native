@@ -4,6 +4,7 @@ import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 
 type Props = {
+  type: 'primary' | 'outline';
   active: boolean;
   label: string;
   onPress: () => void;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 const CButton = ({
+  type,
   active,
   label,
   onPress,

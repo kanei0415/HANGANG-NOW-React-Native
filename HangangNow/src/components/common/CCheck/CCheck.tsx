@@ -28,15 +28,6 @@ const CCheck = ({
   iconPosition,
   iconType,
 }: Props) => {
-  const checkedIcon =
-    iconType == 'square'
-      ? images.components.common.squareCheck
-      : images.components.common.roundCheck;
-  const uncheckedIcon =
-    iconType == 'square'
-      ? images.components.common.squareUncheck
-      : images.components.common.roundUncheck;
-
   return (
     <TouchableWithoutFeedback onPress={onPressed}>
       <View
@@ -47,10 +38,24 @@ const CCheck = ({
           },
           containerStyle,
         ]}>
-        <Image
-          style={{ width: 24, height: 24 }}
-          source={checked ? checkedIcon : uncheckedIcon}
-        />
+        {iconType == 'square' && (
+          <Image
+            style={{ width: 24, height: 24 }}
+            source={
+              images.components.common[
+                checked ? 'squareCheck' : 'squareUncheck'
+              ]
+            }
+          />
+        )}
+        {iconType == 'round' && (
+          <Image
+            style={{ width: 24, height: 24 }}
+            source={
+              images.components.common[checked ? 'roundCheck' : 'roundUncheck']
+            }
+          />
+        )}
         {iconPosition == 'right' && <View style={{ flex: 1 }} />}
         <Text
           style={[
