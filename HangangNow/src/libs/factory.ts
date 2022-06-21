@@ -5,7 +5,10 @@ export function formatDate(date: Date, format?: string) {
 
   result = result.replace('YY', (date.getFullYear() % 100) + '');
 
-  result = result.replace('MM', date.getMonth() + 1 + '');
+  result = result.replace(
+    'MM',
+    `${date.getMonth() + 1 < 10 ? 0 : ''}${date.getMonth() + 1}`,
+  );
 
   result = result.replace('DD', date.getDate() + '');
   result = result.replace('dd', date.getDate() + '');

@@ -13,6 +13,7 @@ type Props = {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   mode: 'date' | 'time' | 'datetime';
+  format: string;
 };
 
 const CDateInput = ({
@@ -22,6 +23,7 @@ const CDateInput = ({
   open,
   setOpen,
   mode,
+  format,
 }: Props) => {
   return (
     <>
@@ -46,7 +48,7 @@ const CDateInput = ({
               color: date ? colors.font.black : colors.font.disabled,
             },
           ]}>
-          {date ? formatDate(date, 'HH : mm') : 'HH : mm'}
+          {date ? formatDate(date, format) : format}
         </Text>
         <Image source={images.common.time} style={{ width: 18, height: 18 }} />
       </TouchableOpacity>

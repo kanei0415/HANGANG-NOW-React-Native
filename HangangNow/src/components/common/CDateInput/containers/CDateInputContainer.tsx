@@ -4,9 +4,14 @@ import CDateInput from '../CDateInput';
 type Props = {
   onDateChanged: (date: Date) => void;
   mode?: 'date' | 'time' | 'datetime';
+  format?: string;
 };
 
-const CDateInputContainer = ({ onDateChanged, mode = 'time' }: Props) => {
+const CDateInputContainer = ({
+  onDateChanged,
+  mode = 'time',
+  format = 'YYYY / MM / dd',
+}: Props) => {
   const [date, setDate] = useState<Date | null>(null);
   const [open, setOpen] = useState<boolean>(false);
 
@@ -28,6 +33,7 @@ const CDateInputContainer = ({ onDateChanged, mode = 'time' }: Props) => {
       open={open}
       setOpen={setOpen}
       mode={mode}
+      format={format}
     />
   );
 };
