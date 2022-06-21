@@ -16,14 +16,24 @@ type Props = {
   label: string;
   checked: boolean;
   containerStyle: StyleProp<ViewStyle>;
+  iconPosition: 'left' | 'right';
 };
 
-const CCheck = ({ onPressed, label, checked, containerStyle }: Props) => {
+const CCheck = ({
+  onPressed,
+  label,
+  checked,
+  containerStyle,
+  iconPosition,
+}: Props) => {
   return (
     <TouchableWithoutFeedback onPress={onPressed}>
       <View
         style={[
-          { flexDirection: 'row', alignItems: 'center' },
+          {
+            alignItems: 'center',
+            flexDirection: iconPosition == 'left' ? 'row' : 'row-reverse',
+          },
           containerStyle,
         ]}>
         <Image
@@ -34,6 +44,7 @@ const CCheck = ({ onPressed, label, checked, containerStyle }: Props) => {
               : images.components.common.uncheck
           }
         />
+        {iconPosition == 'right' && <View style={{ flex: 1 }} />}
         <Text
           style={[
             NotoSans.Medium,

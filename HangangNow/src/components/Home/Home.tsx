@@ -1,14 +1,15 @@
 import colors from '@assets/colors';
-import React from 'react';
+import React, { useState } from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import Font from '@assets/font';
 import CInputContainer from '@components/common/CInput/containers/CInputContainer';
 import CButtonContainer from '@components/common/CButton/containers/CButtonContainer';
+import CCheckContainer from '@components/common/CCheck/containers/CCheckContainer';
 
 type Props = {};
 
 const Home = ({}: Props) => {
-  // const [checked, setChecked] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(false);
 
   return (
     <View style={{ backgroundColor: colors.default.white, flex: 1 }}>
@@ -43,7 +44,11 @@ const Home = ({}: Props) => {
         {/*  onInputChange={() => {}}*/}
         {/*  label={'아이디 (이메일 계정)'}*/}
         {/*/>*/}
-        {/*<CCheck checked={checked} onPressed={() => setChecked(!checked)} />*/}
+        <CCheckContainer
+          iconPosition={'right'}
+          checked={checked}
+          onPressed={() => setChecked(!checked)}
+        />
       </View>
       <View
         style={{
