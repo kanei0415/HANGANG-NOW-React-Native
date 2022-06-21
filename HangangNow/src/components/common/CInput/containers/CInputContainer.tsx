@@ -9,7 +9,8 @@ type Props = {
   type?: 'text' | 'password';
   initialState?: string;
   isCheckValid?: boolean;
-  onCheckValid?: (input: string) => boolean;
+  valid?: boolean;
+  errorText?: string;
 };
 
 const CInputContainer = ({
@@ -19,7 +20,8 @@ const CInputContainer = ({
   type = 'text',
   initialState = '',
   isCheckValid = false,
-  onCheckValid = (_: string) => true,
+  valid = false,
+  errorText = '',
 }: Props) => {
   const [input, setInput] = useState(initialState);
 
@@ -64,7 +66,8 @@ const CInputContainer = ({
       passwordVisible={passwordVisible}
       onDeletePressed={onDeletePressed}
       isCheckValid={isCheckValid}
-      onCheckValid={onCheckValid}
+      valid={valid}
+      errorText={errorText}
     />
   );
 };

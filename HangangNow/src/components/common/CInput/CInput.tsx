@@ -8,6 +8,7 @@ import {
   TextInput,
   TouchableWithoutFeedback,
   View,
+  Text,
 } from 'react-native';
 
 type Props = {
@@ -24,7 +25,8 @@ type Props = {
   passwordVisible: boolean;
   onDeletePressed: () => void;
   isCheckValid: boolean;
-  onCheckValid: (input: string) => boolean;
+  valid: boolean;
+  errorText: string;
 };
 
 const CInput = ({
@@ -41,60 +43,60 @@ const CInput = ({
   passwordVisible,
   onDeletePressed,
   isCheckValid,
-  onCheckValid,
+  valid,
+  errorText,
 }: Props) => {
   return (
-    <TouchableWithoutFeedback onPress={onRootPressed}>
-      <View
-        style={{
-          height: 48,
-          borderRadius: 8,
-          backgroundColor: colors.background.light,
-          flexDirection: 'row',
-          paddingLeft: 8,
-          paddingRight: 12,
-          paddingVertical: 8,
-          borderColor: colors.line.light,
-        }}>
-        <TextInput
-          keyboardType={keyboardType}
-          ref={inputRef}
-          secureTextEntry={type === 'password' && !passwordVisible}
-          style={[
-            NotoSans.Medium,
-            NotoSans.Size[15],
-            { flex: 1, color: colors.font.black, padding: 0, marginLeft: 8 },
-          ]}
-          defaultValue={input}
-          onChangeText={setInput}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-        />
-        {isFocused && type === 'password' && (
-          <View
-            style={{
-              position: 'absolute',
-              right: 16,
-              bottom: 12,
-            }}>
-            <TouchableWithoutFeedback
-              onPress={(e) => {
-                e.stopPropagation();
-                onPasswordVisiblePressed();
+    <View>
+      <TouchableWithoutFeedback onPress={onRootPressed}>
+        <View
+          style={{
+            height: 48,
+            borderRadius: 8,
+            backgroundColor: colors.background.light,
+            flexDirection: 'row',
+            paddingLeft: 8,
+            paddingRight: 12,
+            paddingVertical: 8,
+            borderColor: colors.line.light,
+          }}>
+          <TextInput
+            keyboardType={keyboardType}
+            ref={inputRef}
+            secureTextEntry={type === 'password' && !passwordVisible}
+            style={[
+              NotoSans.Medium,
+              NotoSans.Size[15],
+              { flex: 1, color: colors.font.black, padding: 0, marginLeft: 8 },
+            ]}
+            defaultValue={input}
+            onChangeText={setInput}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+          />
+          {isFocused && type === 'password' && (
+            <View
+              style={{
+                position: 'absolute',
+                right: 16,
+                bottom: 12,
               }}>
-              <Image
-                source={
-                  passwordVisible
-                    ? images.common.passwordShow
-                    : images.common.passwordHide
-                }
-              />
-            </TouchableWithoutFeedback>
-          </View>
-        )}
-        {isCheckValid &&
-          onCheckValid(input) &&
-          (type === 'password' ? !isFocused : true) && (
+              <TouchableWithoutFeedback
+                onPress={(e) => {
+                  e.stopPropagation();
+                  onPasswordVisiblePressed();
+                }}>
+                <Image
+                  source={
+                    passwordVisible
+                      ? images.common.passwordShow
+                      : images.common.passwordHide
+                  }
+                />
+              </TouchableWithoutFeedback>
+            </View>
+          )}
+          {isCheckValid && valid && (type === 'password' ? !isFocused : true) && (
             <Image
               source={images.components.common.squareCheck}
               style={{
@@ -104,8 +106,41 @@ const CInput = ({
               }}
             />
           )}
-      </View>
-    </TouchableWithoutFeedback>
+        </View>
+      </TouchableWithoutFeedback>
+      {errorText.length > 0 ? (
+        <View
+          style={{
+            marginTop: 10,
+            height: 30,
+            flexDirection: 'row',
+          }}>
+          <Image
+            style={{ width: 30, height: 30 }}
+            source={images.components.common.CSearch.x}
+          />
+          <Text
+            style={[
+              NotoSans.Medium,
+              NotoSans.Size[12],
+              {
+                color: colors.system.error,
+                marginTop: 4,
+              },
+            ]}>
+            {errorText}
+          </Text>
+        </View>
+      ) : (
+        <View
+          style={{
+            marginTop: 10,
+            height: 30,
+            flexDirection: 'row',
+          }}
+        />
+      )}
+    </View>
   );
 };
 

@@ -12,7 +12,8 @@ const images = {
       roundCheck: require('./images/components/common/CCheck/ic-round-checked.png'),
       roundUncheck: require('./images/components/common/CCheck/ic-round-unchecked.png'),
       CSearch: {
-        search: require('./images/components/common/CSearchInput/ic-search.png'),
+        search: require('./images/components/common/CInput/ic-search.png'),
+        x: require('./images/components/common/CInput/ic-close.png'),
       },
     },
   },
