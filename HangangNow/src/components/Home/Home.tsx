@@ -1,16 +1,18 @@
 import colors from '@assets/colors';
 import React from 'react';
 import { View } from 'react-native';
-import CButton from '@components/common/CButton/CButton';
-import images from '@assets/images';
+import CInputContainer from '@components/common/CInput/containers/CInputContainer';
 
 type Props = {};
 
-const Home = (props: Props) => {
+const Home = ({}: Props) => {
   return (
     <View style={{ backgroundColor: colors.default.black, flex: 1 }}>
       <View style={{ marginTop: 40 }}>
-        <CButton active={true} icon={images.common.kakaoTextLogo} />
+        {/*<CButton active={true} icon={images.common.kakaoTextLogo} />*/}
+        <CInputContainer onInputChange={() => {}} />
+        {/*<CDateInputContainer onDateChanged={() => {}} />*/}
+        {/*<CSearchInputContainer />*/}
       </View>
     </View>
   );

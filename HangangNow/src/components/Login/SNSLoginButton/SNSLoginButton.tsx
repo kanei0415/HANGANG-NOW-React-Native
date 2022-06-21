@@ -1,5 +1,10 @@
 import React from 'react';
-import { Text, TouchableOpacity, ImageSourcePropType } from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  Image,
+  ImageSourcePropType,
+} from 'react-native';
 import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 
@@ -11,11 +16,12 @@ type Props = {
   icon?: ImageSourcePropType;
 };
 
-const CButton = ({
+const SNSLoginButton = ({
   active = false,
   label = ' Test Label',
   onPress = () => {},
   backgroundColor = colors.brand.main,
+  icon,
 }: Props) => {
   return (
     <TouchableOpacity
@@ -28,6 +34,17 @@ const CButton = ({
       }}
       disabled={!active}
       onPress={onPress}>
+      {icon && (
+        <Image
+          style={{
+            width: 24,
+            height: 24,
+            position: 'absolute',
+            left: 20,
+          }}
+          source={icon}
+        />
+      )}
       <Text
         style={[
           NotoSans.Medium,
@@ -42,4 +59,4 @@ const CButton = ({
   );
 };
 
-export default CButton;
+export default SNSLoginButton;
