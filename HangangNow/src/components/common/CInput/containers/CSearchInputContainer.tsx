@@ -1,5 +1,5 @@
 import React from 'react';
-import CSearchInput from '../CSearchInput';
+import CSearchInput from '../components/CSearchInput';
 
 const CSearchInputContainer = () => {
   return <CSearchInput />;

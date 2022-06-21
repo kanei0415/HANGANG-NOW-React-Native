@@ -3,7 +3,6 @@ import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import Font from '@assets/font';
 import CInputContainer from '@components/common/CInput/containers/CInputContainer';
-import CSearchInputContainer from '@components/common/CSearchInput/containers/CSearchInputContainer';
 import CButton from '@components/common/CButton/CButton';
 import CBorderButton from '@components/common/CBorderButton/CBorderButton';
 
@@ -30,14 +29,14 @@ const Home = ({}: Props) => {
           isCheckValid={true}
           onCheckValid={(input) => input.length > 0}
         />
-        <CInputContainer
-          onInputChange={() => {}}
-          type={'password'}
-          isCheckValid={true}
-          onCheckValid={(input) => input.length > 0}
-        />
+        {/*<CInputContainer*/}
+        {/*  onInputChange={() => {}}*/}
+        {/*  type={'password'}*/}
+        {/*  isCheckValid={true}*/}
+        {/*  onCheckValid={(input) => input.length > 0}*/}
+        {/*/>*/}
         {/*<CDateInputContainer mode={'date'} onDateChanged={() => {}} />*/}
-        <CSearchInputContainer />
+        {/*<CSearchInputContainer />*/}
         {/*<LoginInputContainer*/}
         {/*  onInputChange={() => {}}*/}
         {/*  label={'아이디 (이메일 계정)'}*/}

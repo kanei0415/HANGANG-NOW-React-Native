@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import CDateInput from '../CDateInput';
+import CDateInput from '../components/CDateInput';
 
 type Props = {
   onDateChanged: (date: Date) => void;
