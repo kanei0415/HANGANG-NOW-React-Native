@@ -4,17 +4,21 @@ import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 
 type Props = {
-  active?: boolean;
-  label?: string;
-  onPress?: () => void;
-  backgroundColor?: string;
+  active: boolean;
+  label: string;
+  onPress: () => void;
+  backgroundColor: string;
+  borderWidth: number;
+  borderColor: string;
 };
 
 const CButton = ({
-  active = false,
-  label = ' Test Label',
-  onPress = () => {},
-  backgroundColor = colors.brand.main,
+  active,
+  label,
+  onPress,
+  backgroundColor,
+  borderWidth,
+  borderColor,
 }: Props) => {
   return (
     <TouchableOpacity
@@ -24,6 +28,8 @@ const CButton = ({
         alignItems: 'center',
         borderRadius: 24,
         backgroundColor: active ? backgroundColor : colors.system.disabled,
+        borderWidth: borderWidth,
+        borderColor: borderColor,
       }}
       disabled={!active}
       onPress={onPress}>
@@ -32,7 +38,7 @@ const CButton = ({
           NotoSans.Medium,
           NotoSans.Size[18],
           {
-            color: active ? colors.default.white : colors.font.light,
+            color: active ? colors.default.black : colors.font.disabled,
           },
         ]}>
         {label}

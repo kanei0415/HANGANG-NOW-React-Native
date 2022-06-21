@@ -3,8 +3,7 @@ import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 import Font from '@assets/font';
 import CInputContainer from '@components/common/CInput/containers/CInputContainer';
-import CButton from '@components/common/CButton/CButton';
-import CBorderButton from '@components/common/CBorderButton/CBorderButton';
+import CButtonContainer from '@components/common/CButton/containers/CButtonContainer';
 
 type Props = {};
 
@@ -14,8 +13,11 @@ const Home = ({}: Props) => {
   return (
     <View style={{ backgroundColor: colors.default.white, flex: 1 }}>
       <View style={{ marginTop: 120 }}>
-        <CBorderButton active={true} backgroundColor={colors.default.white} />
-        <CButton active={true} />
+        <CButtonContainer backgroundColor={colors.brand.main} />
+        <CButtonContainer
+          backgroundColor={colors.default.white}
+          borderWidth={2}
+        />
         <CInputContainer
           onInputChange={() => {}}
           isCheckValid={true}
