@@ -12,18 +12,13 @@ import {
 } from 'react-native';
 
 type Props = {
-  onPressed?: () => void;
-  label?: string;
-  checked?: boolean;
-  containerStyle?: StyleProp<ViewStyle>;
+  onPressed: () => void;
+  label: string;
+  checked: boolean;
+  containerStyle: StyleProp<ViewStyle>;
 };
 
-const CCheck = ({
-  onPressed,
-  label = 'TestLabel',
-  checked = false,
-  containerStyle,
-}: Props) => {
+const CCheck = ({ onPressed, label, checked, containerStyle }: Props) => {
   return (
     <TouchableWithoutFeedback onPress={onPressed}>
       <View
