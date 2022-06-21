@@ -4,6 +4,8 @@ import { View, TouchableOpacity, Text } from 'react-native';
 import Font from '@assets/font';
 import CInputContainer from '@components/common/CInput/containers/CInputContainer';
 import CSearchInputContainer from '@components/common/CSearchInput/containers/CSearchInputContainer';
+import CButton from '@components/common/CButton/CButton';
+import CBorderButton from '@components/common/CBorderButton/CBorderButton';
 
 type Props = {};
 
@@ -13,7 +15,8 @@ const Home = ({}: Props) => {
   return (
     <View style={{ backgroundColor: colors.default.white, flex: 1 }}>
       <View style={{ marginTop: 120 }}>
-        {/*<CButton active={true} icon={images.common.kakaoTextLogo} />*/}
+        <CBorderButton active={true} backgroundColor={colors.default.white} />
+        <CButton active={true} />
         <CInputContainer
           onInputChange={() => {}}
           isCheckValid={true}
@@ -21,6 +24,12 @@ const Home = ({}: Props) => {
         />
       </View>
       <View style={{ marginTop: 120 }}>
+        <CInputContainer
+          onInputChange={() => {}}
+          type={'password'}
+          isCheckValid={true}
+          onCheckValid={(input) => input.length > 0}
+        />
         <CInputContainer
           onInputChange={() => {}}
           type={'password'}

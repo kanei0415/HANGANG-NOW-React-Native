@@ -6,11 +6,12 @@ import NotoSans from '@assets/font';
 type Props = {
   active?: boolean;
   label?: string;
+  labelColor?: string;
   onPress?: () => void;
   backgroundColor?: string;
 };
 
-const CButton = ({
+const CBorderButton = ({
   active = false,
   label = ' Test Label',
   onPress = () => {},
@@ -24,6 +25,8 @@ const CButton = ({
         alignItems: 'center',
         borderRadius: 24,
         backgroundColor: active ? backgroundColor : colors.system.disabled,
+        borderWidth: 2,
+        borderColor: colors.background.middle,
       }}
       disabled={!active}
       onPress={onPress}>
@@ -32,7 +35,7 @@ const CButton = ({
           NotoSans.Medium,
           NotoSans.Size[18],
           {
-            color: active ? colors.default.white : colors.font.light,
+            color: active ? colors.default.black : colors.font.disabled,
           },
         ]}>
         {label}
@@ -41,4 +44,4 @@ const CButton = ({
   );
 };
 
-export default CButton;
+export default CBorderButton;
