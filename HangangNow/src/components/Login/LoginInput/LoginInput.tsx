@@ -5,7 +5,6 @@ import React, { RefObject } from 'react';
 import {
   Image,
   KeyboardTypeOptions,
-  Text,
   TextInput,
   TouchableWithoutFeedback,
   View,
@@ -13,12 +12,12 @@ import {
 
 type Props = {
   input: string;
-  placeholder: string;
   setInput: React.Dispatch<React.SetStateAction<string>>;
+  onRootPressed: () => void;
   isFocused: boolean;
   setIsFocused: React.Dispatch<React.SetStateAction<boolean>>;
   inputRef: RefObject<TextInput>;
-  label?: string;
+  label: string;
   keyboardType: KeyboardTypeOptions;
   type: 'text' | 'password';
   onPasswordVisiblePressed: () => void;
@@ -26,10 +25,10 @@ type Props = {
   onDeletePressed: () => void;
 };
 
-const CInputTopAlign = ({
+const LoginInput = ({
   input,
-  placeholder,
   setInput,
+  onRootPressed,
   isFocused,
   setIsFocused,
   inputRef,
@@ -40,68 +39,55 @@ const CInputTopAlign = ({
   passwordVisible,
   onDeletePressed,
 }: Props) => {
+  type = 'password';
+
   return (
-    <View>
-      {label && (
-        <Text
-          style={[
-            NotoSans.Medium,
-            NotoSans.Size[12],
-            {
-              color: colors.font.black,
-            },
-          ]}>
-          {label}
-        </Text>
-      )}
-      <View style={{ marginTop: label ? 8 : 0, position: 'relative' }}>
+    <TouchableWithoutFeedback onPress={onRootPressed}>
+      <View
+        style={[
+          {
+            height: 48,
+            backgroundColor: colors.background.light,
+            flexDirection: 'row',
+            borderRadius: 24,
+            paddingLeft: 8,
+            paddingRight: 12,
+            paddingVertical: 8,
+            borderColor: colors.line.light,
+          },
+          !isFocused && {
+            shadowColor: '#000000',
+            shadowOpacity: 0.3,
+            shadowOffset: { width: 2, height: 2 },
+            elevation: 3,
+          },
+          isFocused && {
+            borderColor: colors.line.middle,
+            borderWidth: 1,
+          },
+        ]}>
         <TextInput
           keyboardType={keyboardType}
           ref={inputRef}
           secureTextEntry={type === 'password' && !passwordVisible}
-          onChangeText={setInput}
-          placeholder={placeholder}
           style={[
             NotoSans.Medium,
-            NotoSans.Size[12],
-            {
-              padding: 0,
-              margin: 0,
-              height: 48,
-              borderRadius: 8,
-              borderWidth: 1,
-              backgroundColor: colors.background.light,
-              borderColor: isFocused ? colors.brand.main : colors.line.light,
-              paddingLeft: 12,
-              paddingRight: 40,
-            },
+            NotoSans.Size[15],
+            { flex: 1, color: colors.font.black, padding: 0, marginLeft: 8 },
           ]}
           defaultValue={input}
+          onChangeText={setInput}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
+          placeholder={label}
+          placeholderTextColor={colors.font.disabled}
         />
-        {/*{isFocused && type === 'text' && (*/}
-        {/*  <View*/}
-        {/*    style={{*/}
-        {/*      position: 'absolute',*/}
-        {/*      right: 9,*/}
-        {/*      bottom: 15,*/}
-        {/*    }}>*/}
-        {/*    <TouchableWithoutFeedback*/}
-        {/*      onPress={e => {*/}
-        {/*        e.stopPropagation();*/}
-        {/*        onDeletePressed();*/}
-        {/*      }}>*/}
-        {/*      <Image source={images.common.delete} />*/}
-        {/*    </TouchableWithoutFeedback>*/}
-        {/*  </View>*/}
-        {/*)}*/}
         {isFocused && type === 'password' && (
           <View
             style={{
               position: 'absolute',
-              right: 8,
-              bottom: 6,
+              right: 16,
+              bottom: 12,
             }}>
             <TouchableWithoutFeedback
               onPress={(e) => {
@@ -119,8 +105,8 @@ const CInputTopAlign = ({
           </View>
         )}
       </View>
-    </View>
+    </TouchableWithoutFeedback>
   );
 };
 
-export default CInputTopAlign;
+export default LoginInput;

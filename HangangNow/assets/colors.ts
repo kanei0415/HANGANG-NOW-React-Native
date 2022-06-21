@@ -5,7 +5,7 @@ const colors = {
   },
   line: {
     light: '#f1f1f5' as const,
-    middle: '#e5e5ec' as const,
+    middle: '#505050' as const,
   },
   font: {
     disabled: '#999999' as const,

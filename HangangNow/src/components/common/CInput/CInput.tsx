@@ -72,7 +72,7 @@ const CInput = ({
           <View
             style={{
               position: 'absolute',
-              right: 8,
+              right: 16,
               bottom: 12,
             }}>
             <TouchableWithoutFeedback

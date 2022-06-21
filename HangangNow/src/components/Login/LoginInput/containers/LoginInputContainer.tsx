@@ -1,20 +1,18 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {KeyboardTypeOptions, TextInput} from 'react-native';
-import CInputTopAlign from '../components/CInputTopAlign';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { KeyboardTypeOptions, TextInput } from 'react-native';
+import LoginInput from '../LoginInput';
 
 type Props = {
   onInputChange: (newVal: string) => void;
   label?: string;
-  placeholder?: string;
   keyboardType?: KeyboardTypeOptions;
   type?: 'text' | 'password';
   initialState?: string;
 };
 
-const CInputTopAlignContainer = ({
+const LoginInputContainer = ({
   onInputChange,
-  label,
-  placeholder = 'Test Placeholder',
+  label = 'Test Label',
   keyboardType = 'default',
   type = 'text',
   initialState = '',
@@ -27,8 +25,14 @@ const CInputTopAlignContainer = ({
 
   const inputRef = useRef<TextInput>(null);
 
+  const onRootPressed = useCallback(() => {
+    if (inputRef?.current) {
+      inputRef.current.focus();
+    }
+  }, [inputRef]);
+
   const onPasswordVisiblePressed = useCallback(() => {
-    setPasswordVisible(prev => !prev);
+    setPasswordVisible((prev) => !prev);
   }, []);
 
   const onDeletePressed = useCallback(() => {
@@ -42,10 +46,10 @@ const CInputTopAlignContainer = ({
   }, [onInputChange, input]);
 
   return (
-    <CInputTopAlign
+    <LoginInput
       input={input}
-      placeholder={placeholder}
       setInput={setInput}
+      onRootPressed={onRootPressed}
       setIsFocused={setIsFocused}
       isFocused={isFocused}
       inputRef={inputRef}
@@ -59,4 +63,4 @@ const CInputTopAlignContainer = ({
   );
 };
 
-export default CInputTopAlignContainer;
+export default LoginInputContainer;
