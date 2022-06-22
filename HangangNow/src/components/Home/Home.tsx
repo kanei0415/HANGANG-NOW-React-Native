@@ -23,7 +23,7 @@ const Home = ({}: Props) => {
   return (
     <View style={{ backgroundColor: colors.default.white, flex: 1 }}>
       <View
-        style={{ marginTop: 120, marginHorizontal: 20 }}
+        style={{ marginTop: 200, marginHorizontal: 20 }}
         onLayout={({ nativeEvent: { layout } }) => setSelectPosition(layout)}>
         <CSelectContainer
           options={['1', '2', '3']}
@@ -31,14 +31,14 @@ const Home = ({}: Props) => {
           placeholder={'1234'}
           position={selectPosition}
         />
-        <View style={{ marginTop: 120 }}>
-          <CCheckContainer
-            iconPosition={'right'}
-            iconType={'square'}
-            checked={checked}
-            onPressed={() => setChecked(!checked)}
-          />
-        </View>
+      </View>
+      <View style={{ marginTop: 120 }}>
+        <CCheckContainer
+          iconPosition={'right'}
+          iconType={'square'}
+          checked={checked}
+          onPressed={() => setChecked(!checked)}
+        />
       </View>
       <View
         style={{

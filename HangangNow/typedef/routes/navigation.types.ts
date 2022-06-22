@@ -1,26 +1,52 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
-export type LogInStackParamListTypes = {
+export type MainStackParamListTypes = {
+  // account
   emailLogIn: undefined;
   emailSignUp: undefined;
   kakaoLogIn: undefined;
   findAccount: undefined;
-};
 
-export type KakaoLogInStackParamListTypes = {
-  logIn: undefined;
-  signUp: undefined;
-};
-
-export type EmailSignUpStackParamListTypes = {
+  // emailSignUp
   email: undefined;
   password: undefined;
   termsAndConditions: undefined;
-};
 
-export type FindAccountStackParamListTypes = {
+  // FindAccount
   findIdByPersonalInfo: undefined;
   findPasswordByEmail: undefined;
+
+  // mainTab
+  mainTab: undefined;
+
+  // surroundingFacility
+  surroundingFacility: undefined;
+  convenientFacility: undefined;
+  foodFacility: undefined;
+  sportsFacility: undefined;
+
+  // outing
+  outing: undefined;
+  courseRecommendation: undefined;
+  placeRecommendation: undefined;
+
+  // home
+  home: undefined;
+  eventBanner: undefined;
+  flyerBanner: undefined;
+  hangangRecommendation: undefined;
+
+  // hangangNow
+  hangangNow: undefined;
+  parkInfo: undefined;
+  clothesByWeather: undefined;
+  hangangMap: undefined;
+
+  // myPage
+  myPage: undefined;
+  hangangTypeCheck: undefined;
+  placeScrap: undefined;
+  calendar: undefined;
 };
 
 export type MainTabParamListTypes = {
@@ -31,66 +57,8 @@ export type MainTabParamListTypes = {
   myPage: undefined;
 };
 
-export type SurroundingFacilityParamListTypes = {
-  surroundingFacility: undefined;
-  convenientFacility: undefined;
-  foodFacility: undefined;
-  sportsFacility: undefined;
-};
-
-export type OutingParamListTypes = {
-  outing: undefined;
-  courseRecommendation: undefined;
-  placeRecommendation: undefined;
-};
-
-export type HomeParamListTypes = {
-  home: undefined;
-  eventBanner: undefined;
-  flyerBanner: undefined;
-  hangangRecommendation: undefined;
-};
-
-export type HangangNowParamListTypes = {
-  hangangNow: undefined;
-  parkInfo: undefined;
-  clothesByWeather: undefined;
-  hangangMap: undefined;
-};
-
-export type MyPageParamListTypes = {
-  myPage: undefined;
-  hangangTypeCheck: undefined;
-  placeScrap: undefined;
-  calendar: undefined;
-};
-
-export type LogInStackNavigationTypes =
-  NativeStackNavigationProp<LogInStackParamListTypes>;
-
-export type KakaoStackNavigationTypes =
-  NativeStackNavigationProp<KakaoLogInStackParamListTypes>;
-
-export type EmailSignUpStackNavigationTypes =
-  NativeStackNavigationProp<EmailSignUpStackParamListTypes>;
-
-export type FindAccountStackNavigationTypes =
-  NativeStackNavigationProp<FindAccountStackParamListTypes>;
+export type MainStackNavigationTypes =
+  NativeStackNavigationProp<MainStackParamListTypes>;
 
 export type MainTabNavigationTypes =
   NativeStackNavigationProp<MainTabParamListTypes>;
-
-export type SurroundingFacilityStackNavigationTypes =
-  NativeStackNavigationProp<SurroundingFacilityParamListTypes>;
-
-export type OutingStackNavigationTypes =
-  NativeStackNavigationProp<OutingParamListTypes>;
-
-export type HomeStackNavigationTypes =
-  NativeStackNavigationProp<HomeParamListTypes>;
-
-export type HangangNowStackNavigationTypes =
-  NativeStackNavigationProp<HangangNowParamListTypes>;
-
-export type MyPageStackNavigationTypes =
-  NativeStackNavigationProp<MyPageParamListTypes>;

@@ -8,20 +8,9 @@ type Props = {
   active: boolean;
   label: string;
   onPress: () => void;
-  backgroundColor: string;
-  borderWidth: number;
-  borderColor: string;
 };
 
-const CButton = ({
-  type,
-  active,
-  label,
-  onPress,
-  backgroundColor,
-  borderWidth,
-  borderColor,
-}: Props) => {
+const CButton = ({ type, active, label, onPress }: Props) => {
   return (
     <TouchableOpacity
       style={{
@@ -29,9 +18,9 @@ const CButton = ({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 24,
-        backgroundColor: active ? backgroundColor : colors.system.disabled,
-        borderWidth: borderWidth,
-        borderColor: borderColor,
+        backgroundColor: active ? colors.brand.main : colors.system.disabled,
+        borderWidth: type === 'outline' ? 1 : 0,
+        borderColor: colors.background.middle,
       }}
       disabled={!active}
       onPress={onPress}>

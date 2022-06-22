@@ -100,6 +100,7 @@ function CSelect<T>({
           }}>
           {options.map((item, idx) => (
             <View
+              key={`selectOption_${idx}`}
               style={{
                 paddingLeft: 16,
                 paddingVertical: 13,

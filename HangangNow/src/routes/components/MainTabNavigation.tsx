@@ -1,11 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { MainTabParamListTypes } from '@typedef/routes/navigation.types';
-import SurroundingFacilityStackNavigationContainer from '@routes/containers/SurroundingFacilityStackNavigationContainer';
-import OutingStackNavigationContainer from '@routes/containers/OutingStackNavigationContainer';
-import HangangNowStackNavigationContainer from '@routes/containers/HangangNowStackNavigationContainer';
-import HomeStackNavigationContainer from '@routes/containers/HomeStackNavigationContainer';
-import MyPageStackNavigationContainer from '@routes/containers/MyPageStackNavigationContainer';
+import HomeContainer from '@components/Home/containers/HomeContainer';
 
 const Stack = createNativeStackNavigator<MainTabParamListTypes>();
 
@@ -17,17 +13,11 @@ const MainTabNavigation = () => {
         headerShown: false,
         animation: 'slide_from_right',
       }}>
-      <Stack.Screen
-        name='surroundingFacility'
-        component={SurroundingFacilityStackNavigationContainer}
-      />
-      <Stack.Screen name='outing' component={OutingStackNavigationContainer} />
-      <Stack.Screen name='home' component={HomeStackNavigationContainer} />
-      <Stack.Screen
-        name='hangangNow'
-        component={HangangNowStackNavigationContainer}
-      />
-      <Stack.Screen name='myPage' component={MyPageStackNavigationContainer} />
+      <Stack.Screen name='surroundingFacility' component={HomeContainer} />
+      <Stack.Screen name='outing' component={HomeContainer} />
+      <Stack.Screen name='home' component={HomeContainer} />
+      <Stack.Screen name='hangangNow' component={HomeContainer} />
+      <Stack.Screen name='myPage' component={HomeContainer} />
     </Stack.Navigator>
   );
 };
