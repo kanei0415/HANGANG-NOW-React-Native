@@ -13,6 +13,8 @@ const RootNavigationContainer = () => {
 
   const [isEndSplashTimer, setIsEndSplashTimer] = useState<boolean>(false);
 
+  const [isLoadedAutoLogin, setIsLoadedAutoLogin] = useState<boolean>(false);
+
   const { __updateLoginFromHooks } = useLogin();
 
   const { getAutoLoggedIn } = useAutoLogin();
@@ -24,16 +26,21 @@ const RootNavigationContainer = () => {
   }, []);
 
   useEffect(() => {
-    setTimeout(async () => {
-      const autoLoggedIn = await getAutoLoggedIn();
+    getAutoLoggedIn().then((autoLoggedIn) => {
+      setIsLoadedAutoLogin(true);
       __updateLoginFromHooks(autoLoggedIn);
-    }, 0);
-  }, []);
+    });
+  }, [getAutoLoggedIn, __updateLoginFromHooks]);
 
-  if (!isEndSplashTimer || !loggedIn) {
-    return <SplashContainer />;
-  }
-  return <RootNavigation loggedIn={loggedIn} />;
+  return (
+    <>
+      {isEndSplashTimer && isLoadedAutoLogin ? (
+        <RootNavigation loggedIn={loggedIn} />
+      ) : (
+        <SplashContainer />
+      )}
+    </>
+  );
 };
 
 export default RootNavigationContainer;
