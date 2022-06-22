@@ -16,7 +16,7 @@ type Props = {
   icon?: ImageSourcePropType;
 };
 
-const SNSLoginButton = ({
+const SNSLogInButton = ({
   active = false,
   label = ' Test Label',
   onPress = () => {},
@@ -59,4 +59,4 @@ const SNSLoginButton = ({
   );
 };
 
-export default SNSLoginButton;
+export default SNSLogInButton;

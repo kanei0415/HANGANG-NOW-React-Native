@@ -1,13 +1,20 @@
 import React from 'react';
 import { View } from 'react-native';
-import MainStackNavigationContainer from '@routes/containers/MainStackNavigationContainer';
+import LogInStackNavigationContainer from '@routes/containers/LogInStackNavigationContainer';
+import MainTabNavigationContainer from '@routes/containers/MainTabNavigationContainer';
 
-type Props = {};
+type Props = {
+  loggedIn: boolean;
+};
 
-const RootNavigation = (props: Props) => {
+const RootNavigation = ({ loggedIn }: Props) => {
   return (
     <View style={{ flex: 1 }}>
-      <MainStackNavigationContainer />
+      {loggedIn ? (
+        <LogInStackNavigationContainer />
+      ) : (
+        <MainTabNavigationContainer />
+      )}
     </View>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { KeyboardTypeOptions, TextInput } from 'react-native';
-import LoginInput from '../LoginInput';
+import LogInInput from '../LogInInput';
 
 type Props = {
   onInputChange: (newVal: string) => void;
@@ -10,7 +10,7 @@ type Props = {
   initialState?: string;
 };
 
-const LoginInputContainer = ({
+const LogInInputContainer = ({
   onInputChange,
   label = 'Test Label',
   keyboardType = 'default',
@@ -46,7 +46,7 @@ const LoginInputContainer = ({
   }, [onInputChange, input]);
 
   return (
-    <LoginInput
+    <LogInInput
       input={input}
       setInput={setInput}
       onRootPressed={onRootPressed}
@@ -63,4 +63,4 @@ const LoginInputContainer = ({
   );
 };
 
-export default LoginInputContainer;
+export default LogInInputContainer;

@@ -25,7 +25,7 @@ type Props = {
   onDeletePressed: () => void;
 };
 
-const LoginInput = ({
+const LogInInput = ({
   input,
   setInput,
   onRootPressed,
@@ -109,4 +109,4 @@ const LoginInput = ({
   );
 };
 
-export default LoginInput;
+export default LogInInput;

@@ -1,10 +1,11 @@
 import HomeContainer from '@components/Home/containers/HomeContainer';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import { HomeParamListTypes } from '@typedef/routes/navigation.types';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<HomeParamListTypes>();
 
-const MainStackNavigation = () => {
+const HomeStackNavigation = () => {
   return (
     <Stack.Navigator
       initialRouteName='home'
@@ -13,8 +14,11 @@ const MainStackNavigation = () => {
         animation: 'slide_from_right',
       }}>
       <Stack.Screen name='home' component={HomeContainer} />
+      <Stack.Screen name='eventBanner' component={HomeContainer} />
+      <Stack.Screen name='flyerBanner' component={HomeContainer} />
+      <Stack.Screen name='hangangRecommendation' component={HomeContainer} />
     </Stack.Navigator>
   );
 };
 
-export default MainStackNavigation;
+export default HomeStackNavigation;
