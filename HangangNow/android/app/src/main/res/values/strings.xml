@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">HangangNow</string>
+    <string name="kakao_app_key">20c9c617aa1e829cc32f3b6a9518da23</string>
 </resources>

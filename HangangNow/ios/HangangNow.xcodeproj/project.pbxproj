@@ -8,6 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* HangangNowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* HangangNowTests.m */; };
+		0C7C0359285F8A31006461A0 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C034D285F8A31006461A0 /* Roboto-Bold.ttf */; };
+		0C7C035A285F8A31006461A0 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C034E285F8A31006461A0 /* Roboto-Medium.ttf */; };
+		0C7C035B285F8A31006461A0 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C034F285F8A31006461A0 /* Roboto-Regular.ttf */; };
+		0C7C035C285F8A31006461A0 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C0350285F8A31006461A0 /* Roboto-Thin.ttf */; };
+		0C7C035D285F8A31006461A0 /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C0351285F8A31006461A0 /* NotoSansKR-Light.otf */; };
+		0C7C035E285F8A31006461A0 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C0352285F8A31006461A0 /* NotoSansKR-Regular.otf */; };
+		0C7C035F285F8A31006461A0 /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C0353285F8A31006461A0 /* NotoSansKR-Black.otf */; };
+		0C7C0360285F8A31006461A0 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C0354285F8A31006461A0 /* Roboto-Light.ttf */; };
+		0C7C0361285F8A31006461A0 /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C0355285F8A31006461A0 /* NotoSansKR-Bold.otf */; };
+		0C7C0362285F8A31006461A0 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C0356285F8A31006461A0 /* NotoSansKR-Medium.otf */; };
+		0C7C0363285F8A31006461A0 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C0357285F8A31006461A0 /* Roboto-Black.ttf */; };
+		0C7C0364285F8A31006461A0 /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0C7C0358285F8A31006461A0 /* NotoSansKR-Thin.otf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-HangangNow.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-HangangNow.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -30,6 +42,18 @@
 		00E356EE1AD99517003FC87E /* HangangNowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HangangNowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* HangangNowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HangangNowTests.m; sourceTree = "<group>"; };
+		0C7C034D285F8A31006461A0 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "../../assets/fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		0C7C034E285F8A31006461A0 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "../../assets/fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		0C7C034F285F8A31006461A0 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../../assets/fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		0C7C0350285F8A31006461A0 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Thin.ttf"; path = "../../assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		0C7C0351285F8A31006461A0 /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Light.otf"; path = "../../assets/fonts/NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		0C7C0352285F8A31006461A0 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Regular.otf"; path = "../../assets/fonts/NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		0C7C0353285F8A31006461A0 /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Black.otf"; path = "../../assets/fonts/NotoSansKR-Black.otf"; sourceTree = "<group>"; };
+		0C7C0354285F8A31006461A0 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Light.ttf"; path = "../../assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
+		0C7C0355285F8A31006461A0 /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Bold.otf"; path = "../../assets/fonts/NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		0C7C0356285F8A31006461A0 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Medium.otf"; path = "../../assets/fonts/NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		0C7C0357285F8A31006461A0 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Black.ttf"; path = "../../assets/fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
+		0C7C0358285F8A31006461A0 /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Thin.otf"; path = "../../assets/fonts/NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* HangangNow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HangangNow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = HangangNow/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = HangangNow/AppDelegate.mm; sourceTree = "<group>"; };
@@ -83,6 +107,25 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		0C7C034C285F8A23006461A0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0C7C0353285F8A31006461A0 /* NotoSansKR-Black.otf */,
+				0C7C0355285F8A31006461A0 /* NotoSansKR-Bold.otf */,
+				0C7C0351285F8A31006461A0 /* NotoSansKR-Light.otf */,
+				0C7C0356285F8A31006461A0 /* NotoSansKR-Medium.otf */,
+				0C7C0352285F8A31006461A0 /* NotoSansKR-Regular.otf */,
+				0C7C0358285F8A31006461A0 /* NotoSansKR-Thin.otf */,
+				0C7C0357285F8A31006461A0 /* Roboto-Black.ttf */,
+				0C7C034D285F8A31006461A0 /* Roboto-Bold.ttf */,
+				0C7C0354285F8A31006461A0 /* Roboto-Light.ttf */,
+				0C7C034E285F8A31006461A0 /* Roboto-Medium.ttf */,
+				0C7C034F285F8A31006461A0 /* Roboto-Regular.ttf */,
+				0C7C0350285F8A31006461A0 /* Roboto-Thin.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		13B07FAE1A68108700A75B9A /* HangangNow */ = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +165,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				0C7C034C285F8A23006461A0 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -242,7 +286,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C7C035C285F8A31006461A0 /* Roboto-Thin.ttf in Resources */,
+				0C7C035E285F8A31006461A0 /* NotoSansKR-Regular.otf in Resources */,
+				0C7C0362285F8A31006461A0 /* NotoSansKR-Medium.otf in Resources */,
+				0C7C035B285F8A31006461A0 /* Roboto-Regular.ttf in Resources */,
+				0C7C0360285F8A31006461A0 /* Roboto-Light.ttf in Resources */,
+				0C7C035F285F8A31006461A0 /* NotoSansKR-Black.otf in Resources */,
+				0C7C035D285F8A31006461A0 /* NotoSansKR-Light.otf in Resources */,
+				0C7C035A285F8A31006461A0 /* Roboto-Medium.ttf in Resources */,
+				0C7C0364285F8A31006461A0 /* NotoSansKR-Thin.otf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				0C7C0359285F8A31006461A0 /* Roboto-Bold.ttf in Resources */,
+				0C7C0363285F8A31006461A0 /* Roboto-Black.ttf in Resources */,
+				0C7C0361285F8A31006461A0 /* NotoSansKR-Bold.otf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +540,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5QPGL288HU;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HangangNow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -510,6 +567,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5QPGL288HU;
 				INFOPLIST_FILE = HangangNow/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
