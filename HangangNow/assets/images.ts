@@ -15,6 +15,10 @@ const images = {
         search: require('./images/components/common/CInput/ic-search.png'),
         x: require('./images/components/common/CInput/ic-close.png'),
       },
+      CSelect: {
+        underArrow: require('./images/components/common/CSelect/ic-down-arrow.png'),
+        leftArrow: require('./images/components/common/CSelect/ic-cselect-back-btn.png'),
+      },
     },
   },
 };

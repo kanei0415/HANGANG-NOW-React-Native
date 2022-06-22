@@ -1,80 +1,44 @@
 import colors from '@assets/colors';
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text } from 'react-native';
+import { View, TouchableOpacity, Text, LayoutRectangle } from 'react-native';
 import Font from '@assets/font';
-import CInputContainer from '@components/common/CInput/containers/CInputContainer';
+import CSelectContainer from '@components/common/CSelect/containers/CSelectContainer';
+import CCheckContainer from '@components/common/CCheck/containers/CCheckContainer';
 
 type Props = {};
 
 const Home = ({}: Props) => {
-  const [text, setText] = useState<string>('');
-  const [errorText, setErrorText] = useState<string>('');
-  const [textValid, setTextValid] = useState<boolean>(false);
+  // const [text, setText] = useState<string>('');
+  // const [errorText, setErrorText] = useState<string>('');
+  // const [textValid, setTextValid] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(false);
 
-  // const [checked, setChecked] = useState<boolean>(false);
+  const [selectPosition, setSelectPosition] = useState<LayoutRectangle>({
+    x: 0,
+    y: 0,
+    width: 0,
+    height: 0,
+  });
 
   return (
     <View style={{ backgroundColor: colors.default.white, flex: 1 }}>
-      <View style={{ marginTop: 120 }}>
-        {/*<CButtonContainer backgroundColor={colors.brand.main} />*/}
-        {/*<CButtonContainer*/}
-        {/*  backgroundColor={colors.default.white}*/}
-        {/*  borderWidth={2}*/}
-        {/*/>*/}
-        <CInputContainer
-          onInputChange={(newVal) => {
-            setText(newVal);
-            const newTextValid = text.length > 0;
-            setTextValid(newTextValid);
-            setErrorText(newTextValid ? '' : '1자 이상 입력해야 합니다.');
-          }}
-          isCheckValid={textValid}
-          valid={true}
-          errorText={errorText}
+      <View
+        style={{ marginTop: 120, marginHorizontal: 20 }}
+        onLayout={({ nativeEvent: { layout } }) => setSelectPosition(layout)}>
+        <CSelectContainer
+          options={['1', '2', '3']}
+          labelSelector={(item: string) => item}
+          placeholder={'1234'}
+          position={selectPosition}
         />
-      </View>
-      <View style={{ marginTop: 120 }}>
-        {/*<CInputContainer*/}
-        {/*  onInputChange={() => {}}*/}
-        {/*  type={'password'}*/}
-        {/*  isCheckValid={true}*/}
-        {/*/>*/}
-        {/*<CInputContainer*/}
-        {/*  onInputChange={() => {}}*/}
-        {/*  type={'password'}*/}
-        {/*  isCheckValid={true}*/}
-        {/*  onCheckValid={(input) => input.length > 0}*/}
-        {/*/>*/}
-        {/*<CDateInputContainer mode={'date'} onDateChanged={() => {}} />*/}
-        {/*<CSearchInputContainer />*/}
-        {/*<LoginInputContainer*/}
-        {/*  onInputChange={() => {}}*/}
-        {/*  label={'아이디 (이메일 계정)'}*/}
-        {/*/>*/}
-        {/*<CCheckContainer*/}
-        {/*  iconPosition={'right'}*/}
-        {/*  iconType={'square'}*/}
-        {/*  checked={checked}*/}
-        {/*  onPressed={() => setChecked(!checked)}*/}
-        {/*/>*/}
-        {/*<CCheckContainer*/}
-        {/*  iconPosition={'right'}*/}
-        {/*  iconType={'round'}*/}
-        {/*  checked={checked}*/}
-        {/*  onPressed={() => setChecked(!checked)}*/}
-        {/*/>*/}
-        {/*<CCheckContainer*/}
-        {/*  iconPosition={'left'}*/}
-        {/*  iconType={'square'}*/}
-        {/*  checked={checked}*/}
-        {/*  onPressed={() => setChecked(!checked)}*/}
-        {/*/>*/}
-        {/*<CCheckContainer*/}
-        {/*  iconPosition={'left'}*/}
-        {/*  iconType={'round'}*/}
-        {/*  checked={checked}*/}
-        {/*  onPressed={() => setChecked(!checked)}*/}
-        {/*/>*/}
+        <View style={{ marginTop: 120 }}>
+          <CCheckContainer
+            iconPosition={'right'}
+            iconType={'square'}
+            checked={checked}
+            onPressed={() => setChecked(!checked)}
+          />
+        </View>
       </View>
       <View
         style={{
