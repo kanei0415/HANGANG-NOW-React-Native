@@ -7,10 +7,13 @@ import {
   TouchableWithoutFeedback,
   View,
   LayoutRectangle,
+  Dimensions,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import images from '@assets/images';
 import CCheckContainer from '@components/common/CCheck/containers/CCheckContainer';
+
+const windowHeight = Dimensions.get('window').height;
 
 type Props<T> = {
   onSelectInputClicked: () => void;
@@ -78,7 +81,10 @@ function CSelect<T>({
         backdropColor={'#00000000'}
         style={{
           margin: 0,
-          // padding: 0,
+          left: position.x,
+          top: position.y + 48,
+          width: position.width,
+          marginBottom: windowHeight - (48 + 13) * options.length - 1,
           flexDirection: 'column',
           justifyContent: 'flex-end',
         }}
@@ -87,15 +93,10 @@ function CSelect<T>({
         isVisible={optionVisible}>
         <View
           style={{
-            // top: 0,
             backgroundColor: '#FFFFFF',
-            // maxHeight: 500,
-            left: position.x,
-            right: position.width,
-            top: position.y + 48,
+            flex: 1,
             borderWidth: 1,
             borderColor: colors.line.light,
-            flex: 1,
           }}>
           {options.map((item, idx) => (
             <View

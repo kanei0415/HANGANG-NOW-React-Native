@@ -22,7 +22,8 @@ function CSelectContainer<T>({
   const [selected, setSelected] = useState<T | null>(null);
 
   const onSelectInputClicked = useCallback(() => {
-    setOptionVisible(!optionVisible);
+    // setOptionVisible(!optionVisible);
+    setOptionVisible(true);
   }, []);
 
   const onBackDropPressed = useCallback(() => setOptionVisible(false), []);
