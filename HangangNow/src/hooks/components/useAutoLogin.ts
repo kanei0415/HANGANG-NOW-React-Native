@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useCallback } from 'react';
 
-const LOGGED_IN = 'LOGGED_IN';
+const LOGGED_IN = '@loggedIn';
 
 export default function useAutoLogin() {
   const getAutoLoggedIn = useCallback(async () => {
