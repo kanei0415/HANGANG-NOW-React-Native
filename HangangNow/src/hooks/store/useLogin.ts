@@ -1,20 +1,21 @@
 import { updateLoginAction } from '@store/login/acitons';
 import { RootState } from '@store/rootReducer';
 import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function useLogin() {
-  const { loggedIn } = useSelector((root: RootState) => root.loginReducer);
+  const login = useSelector((root: RootState) => root.loginReducer.login);
 
   const dispatch = useDispatch();
 
   const __updateLoginFromHooks = useCallback(
-    (loggedIn: boolean) => dispatch(updateLoginAction(loggedIn)),
+    (diff: boolean) => dispatch(updateLoginAction(diff)),
     [dispatch],
   );
 
   return {
-    loggedIn,
+    login,
     __updateLoginFromHooks,
   };
 }

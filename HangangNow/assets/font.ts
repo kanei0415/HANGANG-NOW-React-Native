@@ -11,17 +11,18 @@ type FontContainerTypes = {
   Regular: StyleProp<Pick<TextStyle, FontStructureType>>;
   Medium: StyleProp<Pick<TextStyle, FontStructureType>>;
   Bold: StyleProp<Pick<TextStyle, FontStructureType>>;
-  Size: FontSizeTypes;
+  f_10: FontSizeTypes;
+  f_11: FontSizeTypes;
+  f_12: FontSizeTypes;
+  f_13: FontSizeTypes;
+  f_14: FontSizeTypes;
+  f_15: FontSizeTypes;
+  f_16: FontSizeTypes;
+  f_17: FontSizeTypes;
+  f_18: FontSizeTypes;
+  f_19: FontSizeTypes;
+  f_20: FontSizeTypes;
 };
-
-const fontSize: FontSizeTypes = [...new Array(30).keys()].map((i) => [
-  {
-    fontSize: i + 1,
-  },
-  Platform.OS === 'android' && {
-    includeFontPadding: false,
-  },
-]);
 
 export const Roboto: FontContainerTypes = {
   Light: {
@@ -36,7 +37,50 @@ export const Roboto: FontContainerTypes = {
   Bold: {
     fontFamily: 'Roboto-Bold',
   },
-  Size: fontSize,
+  f_10: [
+    { fontSize: 10 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_11: [
+    { fontSize: 11 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_12: [
+    { fontSize: 12 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_13: [
+    { fontSize: 13 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_14: [
+    { fontSize: 14 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_15: [
+    { fontSize: 15 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_16: [
+    { fontSize: 16 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_17: [
+    { fontSize: 17 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_18: [
+    { fontSize: 18 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_19: [
+    { fontSize: 19 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_20: [
+    { fontSize: 20 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
 };
 
 const NotoSans: FontContainerTypes = {
@@ -52,7 +96,50 @@ const NotoSans: FontContainerTypes = {
   Bold: {
     fontFamily: 'NotoSansKR-Bold',
   },
-  Size: fontSize,
+  f_10: [
+    { fontSize: 10 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_11: [
+    { fontSize: 11 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_12: [
+    { fontSize: 12 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_13: [
+    { fontSize: 13 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_14: [
+    { fontSize: 14 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_15: [
+    { fontSize: 15 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_16: [
+    { fontSize: 16 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_17: [
+    { fontSize: 17 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_18: [
+    { fontSize: 18 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_19: [
+    { fontSize: 19 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_20: [
+    { fontSize: 20 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
 };
 
 export default NotoSans;

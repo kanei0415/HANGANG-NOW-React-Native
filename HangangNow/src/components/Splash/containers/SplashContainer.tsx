@@ -1,9 +1,7 @@
 import React from 'react';
-import Splash from '@components/Splash/Splash';
+import Splash from '../Splash';
 
-type Props = {};
-
-const SplashContainer = ({}: Props) => {
+const SplashContainer = () => {
   return <Splash />;
 };
 

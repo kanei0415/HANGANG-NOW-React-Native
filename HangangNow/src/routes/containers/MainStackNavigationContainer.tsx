@@ -1,5 +1,5 @@
 import MainStackNavigation from '@routes/components/MainStackNavigation';
-import React, { useState } from 'react';
+import React from 'react';
 
 const MainStackNavigationContainer = () => {
   return <MainStackNavigation />;
