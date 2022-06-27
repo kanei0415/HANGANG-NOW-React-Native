@@ -1,73 +1,84 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { KeyboardTypeOptions, TextInput } from 'react-native';
+import { KeyboardType, StyleProp, TextInput, ViewStyle } from 'react-native';
 import CInput from '../CInput';
 
 type Props = {
-  onInputChange: (newVal: string) => void;
+  forceFocused?: boolean;
+  forceInput?: string;
+  onChange?: (value: string) => void;
+  containerStyle?: StyleProp<ViewStyle>;
+  placeHolder?: string;
   label?: string;
-  keyboardType?: KeyboardTypeOptions;
-  type?: 'text' | 'password';
-  initialState?: string;
-  isCheckValid?: boolean;
-  valid?: boolean;
-  errorText?: string;
+  keyboardType?: KeyboardType;
+  inputType?: 'default' | 'password' | 'datetime';
+  success?: boolean;
+  error?: {
+    occured: boolean;
+    msg: string;
+  };
 };
 
 const CInputContainer = ({
-  onInputChange,
-  label = 'Test Label',
+  forceFocused = false,
+  forceInput = '',
+  onChange = () => {},
+  containerStyle = {},
+  placeHolder = '',
+  label = '',
   keyboardType = 'default',
-  type = 'text',
-  initialState = '',
-  isCheckValid = false,
-  valid = false,
-  errorText = '',
+  inputType = 'default',
+  success = false,
+  error = {
+    occured: false,
+    msg: '',
+  },
 }: Props) => {
-  const [input, setInput] = useState(initialState);
+  const [input, setInput] = useState('');
 
-  const [isFocused, setIsFocused] = useState(false);
-
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [focused, setFocused] = useState(false);
 
   const inputRef = useRef<TextInput>(null);
 
-  const onRootPressed = useCallback(() => {
-    if (inputRef?.current) {
-      inputRef.current.focus();
-    }
-  }, [inputRef]);
-
-  const onPasswordVisiblePressed = useCallback(() => {
-    setPasswordVisible((prev) => !prev);
+  const onFocused = useCallback(() => {
+    setFocused(true);
   }, []);
 
-  const onDeletePressed = useCallback(() => {
-    if (inputRef?.current) {
-      inputRef.current.clear();
-    }
-  }, [inputRef]);
+  const onBlured = useCallback(() => {
+    setFocused(false);
+  }, []);
 
   useEffect(() => {
-    onInputChange(input);
-  }, [onInputChange, input]);
+    if (forceFocused && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [forceFocused, inputRef]);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.clear();
+      setInput(forceInput);
+    }
+  }, [inputRef, forceInput]);
+
+  useEffect(() => {
+    onChange(input);
+  }, [onChange, input]);
 
   return (
     <CInput
+      defaultValue={forceInput}
       input={input}
       setInput={setInput}
-      onRootPressed={onRootPressed}
-      setIsFocused={setIsFocused}
-      isFocused={isFocused}
-      inputRef={inputRef}
+      focused={focused}
+      onFocused={onFocused}
+      onBlured={onBlured}
+      containerStyle={containerStyle}
+      placeHolder={placeHolder}
       label={label}
       keyboardType={keyboardType}
-      type={type}
-      onPasswordVisiblePressed={onPasswordVisiblePressed}
-      passwordVisible={passwordVisible}
-      onDeletePressed={onDeletePressed}
-      isCheckValid={isCheckValid}
-      valid={valid}
-      errorText={errorText}
+      inputType={inputType}
+      success={success}
+      error={error}
     />
   );
 };

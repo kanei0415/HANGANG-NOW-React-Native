@@ -1,145 +1,113 @@
 import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 import images from '@assets/images';
-import React, { RefObject } from 'react';
+import React from 'react';
 import {
   Image,
-  KeyboardTypeOptions,
-  TextInput,
-  TouchableWithoutFeedback,
-  View,
+  KeyboardType,
+  StyleProp,
   Text,
+  TextInput,
+  View,
+  ViewStyle,
 } from 'react-native';
 
 type Props = {
+  defaultValue: string;
   input: string;
   setInput: React.Dispatch<React.SetStateAction<string>>;
-  onRootPressed: () => void;
-  isFocused: boolean;
-  setIsFocused: React.Dispatch<React.SetStateAction<boolean>>;
-  inputRef: RefObject<TextInput>;
+  focused: boolean;
+  onFocused: () => void;
+  onBlured: () => void;
+  containerStyle: StyleProp<ViewStyle>;
+  placeHolder: string;
   label: string;
-  keyboardType: KeyboardTypeOptions;
-  type: 'text' | 'password';
-  onPasswordVisiblePressed: () => void;
-  passwordVisible: boolean;
-  onDeletePressed: () => void;
-  isCheckValid: boolean;
-  valid: boolean;
-  errorText: string;
+  keyboardType: KeyboardType;
+  inputType: 'default' | 'password' | 'datetime';
+  success: boolean;
+  error: {
+    occured: boolean;
+    msg: string;
+  };
 };
 
 const CInput = ({
+  defaultValue,
   input,
   setInput,
-  onRootPressed,
-  isFocused,
-  setIsFocused,
-  inputRef,
+  focused,
+  onFocused,
+  onBlured,
+  containerStyle,
+  placeHolder,
   label,
   keyboardType,
-  type,
-  onPasswordVisiblePressed,
-  passwordVisible,
-  onDeletePressed,
-  isCheckValid,
-  valid,
-  errorText,
+  success,
+  error: { occured, msg },
 }: Props) => {
   return (
-    <View>
-      <TouchableWithoutFeedback onPress={onRootPressed}>
-        <View
-          style={{
-            height: 48,
-            borderRadius: 8,
-            backgroundColor: colors.background.light,
-            flexDirection: 'row',
-            paddingLeft: 8,
-            paddingRight: 12,
-            paddingVertical: 8,
-            borderColor: colors.line.light,
-          }}>
-          <TextInput
-            keyboardType={keyboardType}
-            ref={inputRef}
-            secureTextEntry={type === 'password' && !passwordVisible}
-            style={[
-              NotoSans.Medium,
-              NotoSans.Size[15],
-              { flex: 1, color: colors.font.black, padding: 0, marginLeft: 8 },
-            ]}
-            defaultValue={input}
-            onChangeText={setInput}
-            onFocus={() => setIsFocused(true)}
-            onBlur={() => setIsFocused(false)}
-          />
-          {isFocused && type === 'password' && (
-            <View
-              style={{
-                position: 'absolute',
-                right: 16,
-                bottom: 12,
-              }}>
-              <TouchableWithoutFeedback
-                onPress={(e) => {
-                  e.stopPropagation();
-                  onPasswordVisiblePressed();
-                }}>
-                <Image
-                  source={
-                    passwordVisible
-                      ? images.common.passwordShow
-                      : images.common.passwordHide
-                  }
-                />
-              </TouchableWithoutFeedback>
-            </View>
-          )}
-          {isCheckValid && valid && (type === 'password' ? !isFocused : true) && (
-            <Image
-              source={images.components.common.squareCheck}
-              style={{
-                position: 'absolute',
-                right: 16,
-                bottom: 12,
-              }}
-            />
-          )}
-        </View>
-      </TouchableWithoutFeedback>
-      {errorText.length > 0 ? (
-        <View
-          style={{
-            marginTop: 10,
-            height: 30,
-            flexDirection: 'row',
-          }}>
-          <Image
-            style={{ width: 30, height: 30 }}
-            source={images.components.common.CSearch.x}
-          />
-          <Text
-            style={[
-              NotoSans.Medium,
-              NotoSans.Size[12],
-              {
-                color: colors.system.error,
-                marginTop: 4,
-              },
-            ]}>
-            {errorText}
-          </Text>
-        </View>
-      ) : (
-        <View
-          style={{
-            marginTop: 10,
-            height: 30,
-            flexDirection: 'row',
-          }}
+    <View style={[{}, containerStyle]}>
+      <Text
+        style={[
+          NotoSans.Medium,
+          NotoSans.f_12,
+          {
+            color: colors.typo.black,
+            marginBottom: 8,
+            display: label ? 'flex' : 'none',
+          },
+        ]}>
+        {label}
+      </Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          position: 'relative',
+        }}>
+        <TextInput
+          onChangeText={setInput}
+          onFocus={onFocused}
+          onBlur={onBlured}
+          keyboardType={keyboardType}
+          placeholder={placeHolder}
+          defaultValue={defaultValue}
+          style={[
+            NotoSans.Medium,
+            NotoSans.f_15,
+            {
+              flex: 1,
+              height: 48,
+              color: colors.typo.black,
+              borderWidth: 1,
+              borderColor: colors.typo.gray.light,
+              paddingLeft: 12,
+            },
+            input !== '' && { borderColor: colors.main.gray },
+            focused && { borderColor: colors.typo.gray.dark },
+            occured && { borderColor: colors.main.error },
+            success && { borderColor: colors.main.primary, paddingRight: 28 },
+          ]}
         />
-      )}
+        {success && (
+          <Image
+            source={images.components.common.checked}
+            style={{ position: 'absolute', right: 8, height: 15 }}
+          />
+        )}
+      </View>
+      <Text
+        style={[
+          NotoSans.Regular,
+          NotoSans.f_12,
+          {
+            color: colors.main.error,
+            marginTop: 6,
+            display: occured ? 'flex' : 'none',
+          },
+        ]}>
+        {msg}
+      </Text>
     </View>
   );
 };

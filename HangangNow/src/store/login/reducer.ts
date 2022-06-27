@@ -2,11 +2,11 @@ import { LoginActionTypes } from './acitons';
 import { UPDATE_LOGIN_ACTION_TYPE } from './modules/actionTypes';
 
 export type LoginStateTypes = {
-  loggedIn: boolean;
+  login: boolean;
 };
 
 const init: LoginStateTypes = {
-  loggedIn: false,
+  login: false,
 };
 
 const loginReducer = (
@@ -15,7 +15,10 @@ const loginReducer = (
 ): LoginStateTypes => {
   switch (type) {
     case UPDATE_LOGIN_ACTION_TYPE:
-      return { ...prev, ...payload };
+      return {
+        login: payload,
+      };
+
     default:
       return prev;
   }

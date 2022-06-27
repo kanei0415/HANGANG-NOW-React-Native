@@ -1,33 +1,23 @@
 const colors = {
-  brand: {
-    main: '#00a0a7' as const,
-    sub: '#a684e6' as const,
-  },
-  line: {
-    light: '#f1f1f5' as const,
-    middle: '#505050' as const,
-  },
-  font: {
-    disabled: '#999999' as const,
-    light: '#767676' as const,
-    middle: '#505050' as const,
-    black: '#111111' as const,
-    white: '#ffffff' as const,
-  },
-  system: {
-    error: '#dc0000' as const,
-    success: '#46b712' as const,
-    disabled: '#d3d3d3' as const,
-  },
   background: {
-    light: '#f7f7f9' as const,
-    middle: '#f1f1f5' as const,
-    strong: '#eaeaf2' as const,
+    white: '#FFFFFF',
   },
-  default: {
-    white: '#ffffff' as const,
-    black: '#000000' as const,
+  main: {
+    primary: '#3DC8E4',
+    secondary: '#D1F0F6',
+    gray: '#DBDBDB',
+    error: '#F85757',
   },
-};
+  typo: {
+    main: '#39BBD5',
+    gray: {
+      light: '#C0C0C0',
+      middle: '#949090',
+      dark: '#414141',
+    },
+    white: '#FFFFFF',
+    black: '#111111',
+  },
+} as const;
 
 export default colors;
