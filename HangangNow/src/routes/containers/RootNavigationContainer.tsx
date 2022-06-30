@@ -24,7 +24,7 @@ const RootNavigationContainer = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsTimerEnd(true);
-    }, 400);
+    }, 1500);
 
     return () => {
       clearTimeout(timeout);

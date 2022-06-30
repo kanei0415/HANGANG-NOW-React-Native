@@ -6,11 +6,15 @@ const images = {
       checked: require('./images/components/common/ic-checked.png'),
       passwordHide: require('./images/components/common/ic-password-hide.png'),
       passwordShow: require('./images/components/common/ic-password-show.png'),
-      unChecked: require('./images/components/common/ic-un-check.png'),
+      unChecked: require('./images/components/common/ic-unchecked.png'),
     },
     Splash: {
       line: require('./images/components/Splash/ic-splash-line.png'),
       text: require('./images/components/Splash/ic-splash-text.png'),
+    },
+    Login: {
+      label: require('./images/components/Login/ic-label.png'),
+      kakao: require('./images/components/Login/ic-kakao.png'),
     },
   },
 } as const;

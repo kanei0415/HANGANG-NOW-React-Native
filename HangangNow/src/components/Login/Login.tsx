@@ -1,13 +1,151 @@
+import colors from '@assets/colors';
+import NotoSans from '@assets/font';
+import images from '@assets/images';
+import CCheck from '@components/common/CCheck/CCheck';
 import CInputContainer from '@components/common/CInput/containers/CInputContainer';
 import React from 'react';
-import { Text, View } from 'react-native';
+import {
+  Dimensions,
+  Image,
+  Keyboard,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 
-const Login = () => {
+type Props = {};
+
+const { width, height } = Dimensions.get('window');
+
+const Login = ({}: Props) => {
   return (
-    <View>
-      <Text>{'Login'}</Text>
-      <CInputContainer />
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: colors.default.white,
+          paddingHorizontal: 20,
+          height: height,
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'flex-end',
+            marginTop: 24,
+          }}>
+          <TouchableOpacity
+            style={{
+              paddingHorizontal: 12,
+              paddingVertical: 8,
+              borderRadius: 40,
+              backgroundColor: colors.main.secondary,
+            }}>
+            <Text
+              style={[
+                NotoSans.Medium,
+                NotoSans.f_14,
+                { color: colors.main.primary },
+              ]}>
+              {'미리보기'}
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{ marginTop: 60 }}>
+          <Image source={images.components.Login.label} />
+        </View>
+        <View style={{ marginTop: 44 }}>
+          <View>
+            <CInputContainer placeHolder='아이디를 입력해주세요' />
+          </View>
+          <View style={{ marginTop: 12 }}>
+            <CInputContainer
+              placeHolder='비밀번호를 입력해주세요'
+              inputType='password'
+            />
+          </View>
+          <View style={{ marginTop: 12 }}>
+            <CCheck checked label='자동 로그인' />
+          </View>
+        </View>
+        <View
+          style={{
+            position: 'absolute',
+            top: height * 0.8 - 100,
+            width: width,
+            paddingHorizontal: 20,
+          }}>
+          <TouchableOpacity
+            style={{
+              height: 48,
+              justifyContent: 'center',
+              alignItems: 'center',
+              backgroundColor: colors.main.secondary,
+              borderRadius: 2,
+            }}>
+            <Text
+              style={[
+                NotoSans.Medium,
+                NotoSans.f_15,
+                { color: colors.main.primary },
+              ]}>
+              {'일반 회원가입'}
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              height: 48,
+              justifyContent: 'center',
+              alignItems: 'center',
+              flexDirection: 'row',
+              backgroundColor: '#ffe60a',
+              marginTop: 16,
+              borderRadius: 2,
+            }}>
+            <Image source={images.components.Login.kakao} />
+            <Text
+              style={[NotoSans.Medium, NotoSans.f_15, { color: '#381e1e' }]}>
+              {'카카오 계정으로 시작하기'}
+            </Text>
+          </TouchableOpacity>
+          <View
+            style={{
+              marginTop: 24,
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <TouchableOpacity>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_14,
+                  { color: colors.typo.gray.middle },
+                ]}>
+                {'아이디 찾기'}
+              </Text>
+            </TouchableOpacity>
+            <View
+              style={{
+                width: 1,
+                height: 15,
+                backgroundColor: colors.typo.gray.middle,
+                marginHorizontal: 24,
+              }}></View>
+            <TouchableOpacity>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_14,
+                  { color: colors.typo.gray.middle },
+                ]}>
+                {'비밀번호 찾기'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

@@ -18,6 +18,10 @@ const colors = {
     white: '#FFFFFF',
     black: '#111111',
   },
+  default: {
+    black: '#000000',
+    white: '#FFFFFF',
+  },
 } as const;
 
 export default colors;
