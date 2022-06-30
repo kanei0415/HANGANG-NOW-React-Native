@@ -8,6 +8,7 @@ import {
   StyleProp,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
   ViewStyle,
 } from 'react-native';
@@ -24,6 +25,8 @@ type Props = {
   label: string;
   keyboardType: KeyboardType;
   inputType: 'default' | 'password' | 'datetime';
+  passwordVisible: boolean;
+  onPasswordIconPressed: () => void;
   success: boolean;
   error: {
     occured: boolean;
@@ -42,11 +45,14 @@ const CInput = ({
   placeHolder,
   label,
   keyboardType,
+  inputType,
+  passwordVisible,
+  onPasswordIconPressed,
   success,
   error: { occured, msg },
 }: Props) => {
   return (
-    <View style={[{}, containerStyle]}>
+    <View style={[{ borderRadius: 2 }, containerStyle]}>
       <Text
         style={[
           NotoSans.Medium,
@@ -66,6 +72,7 @@ const CInput = ({
           position: 'relative',
         }}>
         <TextInput
+          secureTextEntry={inputType === 'password' && !passwordVisible}
           onChangeText={setInput}
           onFocus={onFocused}
           onBlur={onBlured}
@@ -92,8 +99,21 @@ const CInput = ({
         {success && (
           <Image
             source={images.components.common.checked}
-            style={{ position: 'absolute', right: 8, height: 15 }}
+            style={{ position: 'absolute', right: 8 }}
           />
+        )}
+        {inputType === 'password' && input !== '' && (
+          <TouchableOpacity
+            onPress={onPasswordIconPressed}
+            style={{ position: 'absolute', right: 8 }}>
+            <Image
+              source={
+                images.components.common[
+                  passwordVisible ? 'passwordHide' : 'passwordShow'
+                ]
+              }
+            />
+          </TouchableOpacity>
         )}
       </View>
       <Text

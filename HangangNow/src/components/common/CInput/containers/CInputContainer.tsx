@@ -34,6 +34,7 @@ const CInputContainer = ({
   },
 }: Props) => {
   const [input, setInput] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const [focused, setFocused] = useState(false);
 
@@ -46,6 +47,11 @@ const CInputContainer = ({
   const onBlured = useCallback(() => {
     setFocused(false);
   }, []);
+
+  const onPasswordIconPressed = useCallback(
+    () => setPasswordVisible((prev) => !prev),
+    [],
+  );
 
   useEffect(() => {
     if (forceFocused && inputRef.current) {
@@ -77,6 +83,8 @@ const CInputContainer = ({
       label={label}
       keyboardType={keyboardType}
       inputType={inputType}
+      passwordVisible={passwordVisible}
+      onPasswordIconPressed={onPasswordIconPressed}
       success={success}
       error={error}
     />

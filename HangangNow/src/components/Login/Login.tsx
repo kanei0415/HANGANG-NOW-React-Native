@@ -1,6 +1,7 @@
 import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 import images from '@assets/images';
+import CButton from '@components/common/CButton/CButton';
 import CCheck from '@components/common/CCheck/CCheck';
 import CInputContainer from '@components/common/CInput/containers/CInputContainer';
 import React from 'react';
@@ -51,10 +52,10 @@ const Login = ({}: Props) => {
             </Text>
           </TouchableOpacity>
         </View>
-        <View style={{ marginTop: 60 }}>
+        <View style={{ marginTop: height * 0.05 + 15 }}>
           <Image source={images.components.Login.label} />
         </View>
-        <View style={{ marginTop: 44 }}>
+        <View style={{ marginTop: 20 }}>
           <View>
             <CInputContainer placeHolder='아이디를 입력해주세요' />
           </View>
@@ -67,11 +68,14 @@ const Login = ({}: Props) => {
           <View style={{ marginTop: 12 }}>
             <CCheck checked label='자동 로그인' />
           </View>
+          <View style={{ marginTop: 12 }}>
+            <CButton disabled={false} label='로그인' />
+          </View>
         </View>
         <View
           style={{
             position: 'absolute',
-            top: height * 0.8 - 100,
+            top: height * 0.85 - 120,
             width: width,
             paddingHorizontal: 20,
           }}>
