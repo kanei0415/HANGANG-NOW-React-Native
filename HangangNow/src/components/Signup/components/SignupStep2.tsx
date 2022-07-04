@@ -20,7 +20,7 @@ const SignupStep2 = ({ onNextBtnPressed }: Props) => {
         <Text
           style={[
             NotoSans.Medium,
-            NotoSans.f_12,
+            NotoSans.f_13,
             {
               color: colors.typo.black,
             },
@@ -41,7 +41,7 @@ const SignupStep2 = ({ onNextBtnPressed }: Props) => {
         <Text
           style={[
             NotoSans.Medium,
-            NotoSans.f_12,
+            NotoSans.f_13,
             {
               color: colors.typo.black,
             },
@@ -66,7 +66,7 @@ const SignupStep2 = ({ onNextBtnPressed }: Props) => {
         <Text
           style={[
             NotoSans.Medium,
-            NotoSans.f_12,
+            NotoSans.f_13,
             {
               color: colors.typo.black,
             },
@@ -91,7 +91,7 @@ const SignupStep2 = ({ onNextBtnPressed }: Props) => {
         <Text
           style={[
             NotoSans.Medium,
-            NotoSans.f_12,
+            NotoSans.f_13,
             {
               color: colors.typo.black,
             },

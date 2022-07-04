@@ -22,7 +22,11 @@ const CButton = ({ label = '', disabled = false, onPressed }: Props) => {
         alignItems: 'center',
       }}>
       <Text
-        style={[NotoSans.Medium, NotoSans.f_15, { color: colors.typo.white }]}>
+        style={[
+          NotoSans.Medium,
+          NotoSans.f_15,
+          { color: disabled ? colors.typo.gray.middle : colors.typo.white },
+        ]}>
         {label}
       </Text>
     </TouchableOpacity>

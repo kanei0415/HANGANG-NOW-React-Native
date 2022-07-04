@@ -59,7 +59,7 @@ const CInput = ({
       <Text
         style={[
           NotoSans.Medium,
-          NotoSans.f_12,
+          NotoSans.f_13,
           {
             color: colors.typo.black,
             marginBottom: 8,
