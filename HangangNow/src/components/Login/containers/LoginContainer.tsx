@@ -22,6 +22,11 @@ const LoginContainer = () => {
     [navigation],
   );
 
+  const onFindPWPressed = useCallback(
+    () => navigation.navigate('findPW'),
+    [navigation],
+  );
+
   return (
     <Login
       onEmailSignupPressed={onEmailSignupPressed}
@@ -29,6 +34,7 @@ const LoginContainer = () => {
       autoLoginChecked={autoLoginChecked}
       setAutoLoginChecked={setAutoLoginChecked}
       onFindIDPressed={onFindIDPressed}
+      onFindPWPressed={onFindPWPressed}
     />
   );
 };

@@ -21,6 +21,7 @@ type Props = {
   autoLoginChecked: boolean;
   setAutoLoginChecked: React.Dispatch<React.SetStateAction<boolean>>;
   onFindIDPressed: () => void;
+  onFindPWPressed: () => void;
 };
 
 const { width, height } = Dimensions.get('window');
@@ -31,6 +32,7 @@ const Login = ({
   autoLoginChecked,
   setAutoLoginChecked,
   onFindIDPressed,
+  onFindPWPressed,
 }: Props) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -154,7 +156,7 @@ const Login = ({
                 backgroundColor: colors.typo.gray.middle,
                 marginHorizontal: 24,
               }}></View>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onFindPWPressed}>
               <Text
                 style={[
                   NotoSans.Medium,

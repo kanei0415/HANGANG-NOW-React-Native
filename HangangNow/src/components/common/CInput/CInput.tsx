@@ -55,7 +55,7 @@ const CInput = ({
   error,
 }: Props) => {
   return (
-    <View style={[{ borderRadius: 4 }, containerStyle]}>
+    <View style={[{}, containerStyle]}>
       <Text
         style={[
           NotoSans.Medium,
@@ -91,6 +91,7 @@ const CInput = ({
               color: colors.typo.black,
               borderWidth: 1,
               borderColor: colors.typo.gray.light,
+              borderRadius: 4,
               paddingLeft: 12,
             },
             input !== '' && { borderColor: colors.main.gray },

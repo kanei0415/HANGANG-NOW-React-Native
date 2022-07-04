@@ -1,6 +1,6 @@
 import FindIDContainer from '@components/FindID/containers/FindIDContainer';
 import FindIDStep2Container from '@components/FindID/containers/FindIDStep2Container';
-import FindIDStep3Container from '@components/FindID/containers/FindIDStep3Container';
+import FindPWContainer from '@components/FindPW/containers/FindPWContainer';
 import LoginContainer from '@components/Login/containers/LoginContainer';
 import SignupContainer from '@components/Signup/containers/SignupContainer';
 import SignupStep2Container from '@components/Signup/containers/SignupStep2Container';
@@ -25,7 +25,7 @@ const MainStackNavigation = () => {
       <Stack.Screen name='signupStep3' component={SignupStep3Container} />
       <Stack.Screen name='findID' component={FindIDContainer} />
       <Stack.Screen name='findIDStep2' component={FindIDStep2Container} />
-      <Stack.Screen name='findIDStep3' component={FindIDStep3Container} />
+      <Stack.Screen name='findPW' component={FindPWContainer} />
     </Stack.Navigator>
   );
 };
