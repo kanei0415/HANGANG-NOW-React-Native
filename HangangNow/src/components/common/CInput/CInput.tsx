@@ -27,9 +27,12 @@ type Props = {
   inputType: 'default' | 'password' | 'datetime';
   passwordVisible: boolean;
   onPasswordIconPressed: () => void;
-  success: boolean;
+  success: {
+    on: boolean;
+    msg: string;
+  };
   error: {
-    occured: boolean;
+    on: boolean;
     msg: string;
   };
 };
@@ -49,10 +52,10 @@ const CInput = ({
   passwordVisible,
   onPasswordIconPressed,
   success,
-  error: { occured, msg },
+  error,
 }: Props) => {
   return (
-    <View style={[{ borderRadius: 2 }, containerStyle]}>
+    <View style={[{ borderRadius: 4 }, containerStyle]}>
       <Text
         style={[
           NotoSans.Medium,
@@ -92,16 +95,10 @@ const CInput = ({
             },
             input !== '' && { borderColor: colors.main.gray },
             focused && { borderColor: colors.typo.gray.dark },
-            occured && { borderColor: colors.main.error },
-            success && { borderColor: colors.main.primary, paddingRight: 28 },
+            error.on && { borderColor: colors.main.error },
+            success.on && { borderColor: colors.main.primary },
           ]}
         />
-        {success && (
-          <Image
-            source={images.components.common.checked}
-            style={{ position: 'absolute', right: 8 }}
-          />
-        )}
         {inputType === 'password' && input !== '' && (
           <TouchableOpacity
             onPress={onPasswordIconPressed}
@@ -121,12 +118,12 @@ const CInput = ({
           NotoSans.Regular,
           NotoSans.f_12,
           {
-            color: colors.main.error,
+            color: success.on ? colors.main.primary : colors.main.error,
             marginTop: 6,
-            display: occured ? 'flex' : 'none',
+            display: success.on || error.on ? 'flex' : 'none',
           },
         ]}>
-        {msg}
+        {success.msg || error.msg}
       </Text>
     </View>
   );

@@ -15,11 +15,21 @@ import {
   View,
 } from 'react-native';
 
-type Props = {};
+type Props = {
+  onEmailSignupPressed: () => void;
+  onKakaoSignupPressed: () => void;
+  autoLoginChecked: boolean;
+  setAutoLoginChecked: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 const { width, height } = Dimensions.get('window');
 
-const Login = ({}: Props) => {
+const Login = ({
+  onEmailSignupPressed,
+  onKakaoSignupPressed,
+  autoLoginChecked,
+  setAutoLoginChecked,
+}: Props) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View
@@ -55,7 +65,7 @@ const Login = ({}: Props) => {
         <View style={{ marginTop: height * 0.05 + 15 }}>
           <Image source={images.components.Login.label} />
         </View>
-        <View style={{ marginTop: 20 }}>
+        <View style={{ marginTop: 32 }}>
           <View>
             <CInputContainer placeHolder='아이디를 입력해주세요' />
           </View>
@@ -65,10 +75,14 @@ const Login = ({}: Props) => {
               inputType='password'
             />
           </View>
-          <View style={{ marginTop: 12 }}>
-            <CCheck checked label='자동 로그인' />
+          <View style={{ marginTop: 20 }}>
+            <CCheck
+              checked={autoLoginChecked}
+              label='자동 로그인'
+              onPressed={() => setAutoLoginChecked(!autoLoginChecked)}
+            />
           </View>
-          <View style={{ marginTop: 12 }}>
+          <View style={{ marginTop: 20 }}>
             <CButton disabled={false} label='로그인' />
           </View>
         </View>
@@ -80,12 +94,13 @@ const Login = ({}: Props) => {
             paddingHorizontal: 20,
           }}>
           <TouchableOpacity
+            onPress={onEmailSignupPressed}
             style={{
               height: 48,
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: colors.main.secondary,
-              borderRadius: 2,
+              borderRadius: 4,
             }}>
             <Text
               style={[
@@ -93,7 +108,7 @@ const Login = ({}: Props) => {
                 NotoSans.f_15,
                 { color: colors.main.primary },
               ]}>
-              {'일반 회원가입'}
+              {'이메일 회원가입'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -104,7 +119,7 @@ const Login = ({}: Props) => {
               flexDirection: 'row',
               backgroundColor: '#ffe60a',
               marginTop: 16,
-              borderRadius: 2,
+              borderRadius: 4,
             }}>
             <Image source={images.components.Login.kakao} />
             <Text

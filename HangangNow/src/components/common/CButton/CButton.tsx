@@ -6,15 +6,17 @@ import { Text, TouchableOpacity } from 'react-native';
 type Props = {
   label?: string;
   disabled?: boolean;
+  onPressed?: () => void;
 };
 
-const CButton = ({ label = '', disabled = false }: Props) => {
+const CButton = ({ label = '', disabled = false, onPressed }: Props) => {
   return (
     <TouchableOpacity
+      onPress={onPressed}
       disabled={disabled}
       style={{
         height: 48,
-        borderRadius: 2,
+        borderRadius: 4,
         backgroundColor: disabled ? colors.main.gray : colors.main.primary,
         justifyContent: 'center',
         alignItems: 'center',

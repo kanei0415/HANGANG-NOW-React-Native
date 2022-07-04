@@ -3,7 +3,6 @@ const images = {
     common: {
       back: require('./images/components/common/ic-back.png'),
       check: require('./images/components/common/ic-check.png'),
-      checked: require('./images/components/common/ic-checked.png'),
       passwordHide: require('./images/components/common/ic-password-hide.png'),
       passwordShow: require('./images/components/common/ic-password-show.png'),
       unChecked: require('./images/components/common/ic-unchecked.png'),

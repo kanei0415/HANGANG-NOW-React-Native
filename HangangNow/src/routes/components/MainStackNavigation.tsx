@@ -1,4 +1,6 @@
-import Login from '@components/Login/Login';
+import LoginContainer from '@components/Login/containers/LoginContainer';
+import SignupContainer from '@components/Signup/containers/SignupContainer';
+import SignupStep2Container from '@components/Signup/containers/SignupStep2Container';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { MainStackParamListTypes } from '@typedef/routes/navigation.types';
 import React from 'react';
@@ -13,7 +15,9 @@ const MainStackNavigation = () => {
         headerShown: false,
         animation: 'slide_from_right',
       }}>
-      <Stack.Screen name='login' component={Login} />
+      <Stack.Screen name='login' component={LoginContainer} />
+      <Stack.Screen name='signup' component={SignupContainer} />
+      <Stack.Screen name='signupStep2' component={SignupStep2Container} />
     </Stack.Navigator>
   );
 };

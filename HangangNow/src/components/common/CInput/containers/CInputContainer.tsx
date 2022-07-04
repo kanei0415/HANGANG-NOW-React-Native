@@ -11,9 +11,12 @@ type Props = {
   label?: string;
   keyboardType?: KeyboardType;
   inputType?: 'default' | 'password' | 'datetime';
-  success?: boolean;
+  success?: {
+    on: boolean;
+    msg: string;
+  };
   error?: {
-    occured: boolean;
+    on: boolean;
     msg: string;
   };
 };
@@ -27,9 +30,12 @@ const CInputContainer = ({
   label = '',
   keyboardType = 'default',
   inputType = 'default',
-  success = false,
+  success = {
+    on: false,
+    msg: '',
+  },
   error = {
-    occured: false,
+    on: false,
     msg: '',
   },
 }: Props) => {
