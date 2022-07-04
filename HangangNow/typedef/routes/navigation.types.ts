@@ -3,11 +3,8 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 export type MainStackParamListTypes = {
   login: undefined;
   signup: undefined;
-  signupStep2:
-    | {
-        kakaoEmail: string;
-      }
-    | undefined;
+  signupStep2: undefined;
+  signupStep3: undefined;
 };
 
 export type MainTabParamListTypes = {
