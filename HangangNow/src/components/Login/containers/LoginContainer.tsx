@@ -14,7 +14,15 @@ const LoginContainer = () => {
   }, [navigation]);
 
   const onKakaoSignupPressed = useCallback(async () => {
-    const token = await login();
+    const token = await login().catch((err) => {
+      if (err + '' === 'Error: user cancelled.') {
+        return null;
+      }
+    });
+
+    if (!token) {
+      return;
+    }
   }, []);
 
   const onFindIDPressed = useCallback(

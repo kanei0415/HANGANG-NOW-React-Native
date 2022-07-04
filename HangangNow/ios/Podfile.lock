@@ -1,4 +1,5 @@
 PODS:
+  - Alamofire (5.6.1)
   - boost (1.76.0)
   - BVLinearGradient (2.5.6):
     - React
@@ -75,6 +76,45 @@ PODS:
     - FlipperKit/FlipperKitNetworkPlugin
   - fmt (6.2.1)
   - glog (0.3.5)
+  - kakao-login (4.1.0):
+    - KakaoSDK (= 2.9.0)
+    - KakaoSDKAuth (= 2.9.0)
+    - KakaoSDKCommon (= 2.9.0)
+    - KakaoSDKTalk (= 2.9.0)
+    - KakaoSDKUser (= 2.9.0)
+    - React
+  - KakaoSDK (2.9.0):
+    - KakaoSDKAuth (= 2.9.0)
+    - KakaoSDKCommon (= 2.9.0)
+    - KakaoSDKLink (= 2.9.0)
+    - KakaoSDKNavi (= 2.9.0)
+    - KakaoSDKStory (= 2.9.0)
+    - KakaoSDKTalk (= 2.9.0)
+    - KakaoSDKTemplate (= 2.9.0)
+    - KakaoSDKUser (= 2.9.0)
+  - KakaoSDKAuth (2.9.0):
+    - KakaoSDKCommon (= 2.9.0)
+  - KakaoSDKCommon (2.9.0):
+    - KakaoSDKCommon/Common (= 2.9.0)
+    - KakaoSDKCommon/Network (= 2.9.0)
+  - KakaoSDKCommon/Common (2.9.0)
+  - KakaoSDKCommon/Network (2.9.0):
+    - Alamofire (~> 5.1)
+    - KakaoSDKCommon/Common (= 2.9.0)
+  - KakaoSDKLink (2.9.0):
+    - KakaoSDKCommon (= 2.9.0)
+    - KakaoSDKTemplate (= 2.9.0)
+  - KakaoSDKNavi (2.9.0):
+    - KakaoSDKCommon/Common (= 2.9.0)
+  - KakaoSDKStory (2.9.0):
+    - KakaoSDKUser (= 2.9.0)
+  - KakaoSDKTalk (2.9.0):
+    - KakaoSDKTemplate (= 2.9.0)
+    - KakaoSDKUser (= 2.9.0)
+  - KakaoSDKTemplate (2.9.0):
+    - KakaoSDKCommon/Common (= 2.9.0)
+  - KakaoSDKUser (2.9.0):
+    - KakaoSDKAuth (= 2.9.0)
   - libevent (2.1.12)
   - OpenSSL-Universal (1.1.1100)
   - RCT-Folly (2021.06.28.00-v2):
@@ -373,6 +413,8 @@ PODS:
   - RNScreens (3.13.1):
     - React-Core
     - React-RCTImage
+  - RNSVG (12.3.0):
+    - React-Core
   - SocketRocket (0.6.0)
   - TOCropViewController (2.6.1)
   - Yoga (1.14.0)
@@ -407,6 +449,7 @@ DEPENDENCIES:
   - FlipperKit/FlipperKitUserDefaultsPlugin (= 0.125.0)
   - FlipperKit/SKIOSNetworkPlugin (= 0.125.0)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - "kakao-login (from `../node_modules/@react-native-seoul/kakao-login`)"
   - OpenSSL-Universal (= 1.1.1100)
   - RCT-Folly (from `../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec`)
   - RCTRequired (from `../node_modules/react-native/Libraries/RCTRequired`)
@@ -441,10 +484,12 @@ DEPENDENCIES:
   - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
   trunk:
+    - Alamofire
     - CocoaAsyncSocket
     - Flipper
     - Flipper-Boost-iOSX
@@ -456,6 +501,15 @@ SPEC REPOS:
     - Flipper-RSocket
     - FlipperKit
     - fmt
+    - KakaoSDK
+    - KakaoSDKAuth
+    - KakaoSDKCommon
+    - KakaoSDKLink
+    - KakaoSDKNavi
+    - KakaoSDKStory
+    - KakaoSDKTalk
+    - KakaoSDKTemplate
+    - KakaoSDKUser
     - libevent
     - OpenSSL-Universal
     - SocketRocket
@@ -475,6 +529,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/React/FBReactNativeSpec"
   glog:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
+  kakao-login:
+    :path: "../node_modules/@react-native-seoul/kakao-login"
   RCT-Folly:
     :podspec: "../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec"
   RCTRequired:
@@ -537,10 +593,13 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-image-crop-picker"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
   boost: a7c83b31436843459a1961bfd74b96033dc77234
   BVLinearGradient: e3aad03778a456d77928f594a649e96995f1c872
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
@@ -558,6 +617,16 @@ SPEC CHECKSUMS:
   FlipperKit: cbdee19bdd4e7f05472a66ce290f1b729ba3cb86
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 476ee3e89abb49e07f822b48323c51c57124b572
+  kakao-login: aa837051ea9ba368eff0a9d00132db22e6ee0647
+  KakaoSDK: d5a5a38ebf4da97beeecf100ac3dc9a020e19648
+  KakaoSDKAuth: 5d9eec3317320dc60015ba8d597b2ad32fc70b1a
+  KakaoSDKCommon: aaed06bb779b92cd6f5c35e94160d4ecfaaac511
+  KakaoSDKLink: 575d1119427a7b278eb49da656f8d648a0a94411
+  KakaoSDKNavi: 8b767610d59fc044f1f5df3f29c89688a446a1fc
+  KakaoSDKStory: a494a364a3539601289d01aadd117f165f39d7b2
+  KakaoSDKTalk: b0ac197fd7fce4afc9af3f012c1abee7f053c910
+  KakaoSDKTemplate: eaf03ad5e44d374cbfff85588552a5627cd0519c
+  KakaoSDKUser: 37e92bfc1d36b339420952080a8d31c217a38a63
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   OpenSSL-Universal: ebc357f1e6bc71fa463ccb2fe676756aff50e88c
   RCT-Folly: 4d8508a426467c48885f1151029bc15fa5d7b3b8
@@ -591,6 +660,7 @@ SPEC CHECKSUMS:
   RNDeviceInfo: 1e3f62b9ec32f7754fac60bd06b8f8a27124e7f0
   RNImageCropPicker: 44e2807bc410741f35d4c45b6586aedfe3da39d2
   RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
+  RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
   SocketRocket: fccef3f9c5cedea1353a9ef6ada904fde10d6608
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   Yoga: 6671cf077f614314c22fd09ddf87d7abeee64e96
@@ -598,4 +668,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 636d59be6bd987f496633b623f1038cf0eaf7a30
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2
