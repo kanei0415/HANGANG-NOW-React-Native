@@ -9,6 +9,12 @@ const LoginContainer = () => {
 
   const [autoLoginChecked, setAutoLoginChecked] = useState(false);
 
+  const onLoginPressed = useCallback(() => {
+    navigation.reset({
+      routes: [{ name: 'mainTab' }],
+    });
+  }, [navigation]);
+
   const onEmailSignupPressed = useCallback(() => {
     navigation.navigate('signup');
   }, [navigation]);
@@ -43,6 +49,7 @@ const LoginContainer = () => {
       setAutoLoginChecked={setAutoLoginChecked}
       onFindIDPressed={onFindIDPressed}
       onFindPWPressed={onFindPWPressed}
+      onLoginPressed={onLoginPressed}
     />
   );
 };

@@ -22,6 +22,7 @@ type Props = {
   setAutoLoginChecked: React.Dispatch<React.SetStateAction<boolean>>;
   onFindIDPressed: () => void;
   onFindPWPressed: () => void;
+  onLoginPressed: () => void;
 };
 
 const { width, height } = Dimensions.get('window');
@@ -33,6 +34,7 @@ const Login = ({
   setAutoLoginChecked,
   onFindIDPressed,
   onFindPWPressed,
+  onLoginPressed,
 }: Props) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -87,7 +89,7 @@ const Login = ({
             />
           </View>
           <View style={{ marginTop: 20 }}>
-            <CButton disabled={false} label='로그인' />
+            <CButton label='로그인' onPressed={onLoginPressed} />
           </View>
         </View>
         <View
