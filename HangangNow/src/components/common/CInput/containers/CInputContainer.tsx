@@ -11,9 +11,12 @@ type Props = {
   label?: string;
   keyboardType?: KeyboardType;
   inputType?: 'default' | 'password' | 'datetime';
-  success?: boolean;
+  success?: {
+    on: boolean;
+    msg: string;
+  };
   error?: {
-    occured: boolean;
+    on: boolean;
     msg: string;
   };
 };
@@ -27,13 +30,17 @@ const CInputContainer = ({
   label = '',
   keyboardType = 'default',
   inputType = 'default',
-  success = false,
+  success = {
+    on: false,
+    msg: '',
+  },
   error = {
-    occured: false,
+    on: false,
     msg: '',
   },
 }: Props) => {
   const [input, setInput] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const [focused, setFocused] = useState(false);
 
@@ -46,6 +53,11 @@ const CInputContainer = ({
   const onBlured = useCallback(() => {
     setFocused(false);
   }, []);
+
+  const onPasswordIconPressed = useCallback(
+    () => setPasswordVisible((prev) => !prev),
+    [],
+  );
 
   useEffect(() => {
     if (forceFocused && inputRef.current) {
@@ -77,6 +89,8 @@ const CInputContainer = ({
       label={label}
       keyboardType={keyboardType}
       inputType={inputType}
+      passwordVisible={passwordVisible}
+      onPasswordIconPressed={onPasswordIconPressed}
       success={success}
       error={error}
     />

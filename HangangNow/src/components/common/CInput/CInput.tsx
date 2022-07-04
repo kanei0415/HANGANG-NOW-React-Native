@@ -8,6 +8,7 @@ import {
   StyleProp,
   Text,
   TextInput,
+  TouchableOpacity,
   View,
   ViewStyle,
 } from 'react-native';
@@ -24,9 +25,14 @@ type Props = {
   label: string;
   keyboardType: KeyboardType;
   inputType: 'default' | 'password' | 'datetime';
-  success: boolean;
+  passwordVisible: boolean;
+  onPasswordIconPressed: () => void;
+  success: {
+    on: boolean;
+    msg: string;
+  };
   error: {
-    occured: boolean;
+    on: boolean;
     msg: string;
   };
 };
@@ -42,15 +48,18 @@ const CInput = ({
   placeHolder,
   label,
   keyboardType,
+  inputType,
+  passwordVisible,
+  onPasswordIconPressed,
   success,
-  error: { occured, msg },
+  error,
 }: Props) => {
   return (
-    <View style={[{}, containerStyle]}>
+    <View style={[{ borderRadius: 4 }, containerStyle]}>
       <Text
         style={[
           NotoSans.Medium,
-          NotoSans.f_12,
+          NotoSans.f_13,
           {
             color: colors.typo.black,
             marginBottom: 8,
@@ -66,6 +75,7 @@ const CInput = ({
           position: 'relative',
         }}>
         <TextInput
+          secureTextEntry={inputType === 'password' && !passwordVisible}
           onChangeText={setInput}
           onFocus={onFocused}
           onBlur={onBlured}
@@ -85,15 +95,22 @@ const CInput = ({
             },
             input !== '' && { borderColor: colors.main.gray },
             focused && { borderColor: colors.typo.gray.dark },
-            occured && { borderColor: colors.main.error },
-            success && { borderColor: colors.main.primary, paddingRight: 28 },
+            error.on && { borderColor: colors.main.error },
+            success.on && { borderColor: colors.main.primary },
           ]}
         />
-        {success && (
-          <Image
-            source={images.components.common.checked}
-            style={{ position: 'absolute', right: 8, height: 15 }}
-          />
+        {inputType === 'password' && input !== '' && (
+          <TouchableOpacity
+            onPress={onPasswordIconPressed}
+            style={{ position: 'absolute', right: 8 }}>
+            <Image
+              source={
+                images.components.common[
+                  passwordVisible ? 'passwordHide' : 'passwordShow'
+                ]
+              }
+            />
+          </TouchableOpacity>
         )}
       </View>
       <Text
@@ -101,12 +118,12 @@ const CInput = ({
           NotoSans.Regular,
           NotoSans.f_12,
           {
-            color: colors.main.error,
+            color: success.on ? colors.main.primary : colors.main.error,
             marginTop: 6,
-            display: occured ? 'flex' : 'none',
+            display: success.on || error.on ? 'flex' : 'none',
           },
         ]}>
-        {msg}
+        {success.msg || error.msg}
       </Text>
     </View>
   );
