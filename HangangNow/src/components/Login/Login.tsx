@@ -20,6 +20,7 @@ type Props = {
   onKakaoSignupPressed: () => void;
   autoLoginChecked: boolean;
   setAutoLoginChecked: React.Dispatch<React.SetStateAction<boolean>>;
+  onFindIDPressed: () => void;
 };
 
 const { width, height } = Dimensions.get('window');
@@ -29,6 +30,7 @@ const Login = ({
   onKakaoSignupPressed,
   autoLoginChecked,
   setAutoLoginChecked,
+  onFindIDPressed,
 }: Props) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -112,6 +114,7 @@ const Login = ({
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={onKakaoSignupPressed}
             style={{
               height: 48,
               justifyContent: 'center',
@@ -134,7 +137,7 @@ const Login = ({
               alignItems: 'center',
               justifyContent: 'center',
             }}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={onFindIDPressed}>
               <Text
                 style={[
                   NotoSans.Medium,
