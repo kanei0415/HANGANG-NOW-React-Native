@@ -7,7 +7,7 @@ export type MainStackParamListTypes = {
   signupStep3: undefined;
   findID: undefined;
   findIDStep2: undefined;
-  findIDStep3: undefined;
+  findPW: undefined;
 };
 
 export type MainTabParamListTypes = {
