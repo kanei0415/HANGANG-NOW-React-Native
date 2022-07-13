@@ -9,12 +9,26 @@ const LoginContainer = () => {
 
   const [autoLoginChecked, setAutoLoginChecked] = useState(false);
 
+  const onLoginPressed = useCallback(() => {
+    navigation.reset({
+      routes: [{ name: 'mainTab' }],
+    });
+  }, [navigation]);
+
   const onEmailSignupPressed = useCallback(() => {
     navigation.navigate('signup');
   }, [navigation]);
 
   const onKakaoSignupPressed = useCallback(async () => {
-    const token = await login();
+    const token = await login().catch((err) => {
+      if (err + '' === 'Error: user cancelled.') {
+        return null;
+      }
+    });
+
+    if (!token) {
+      return;
+    }
   }, []);
 
   const onFindIDPressed = useCallback(
@@ -35,6 +49,7 @@ const LoginContainer = () => {
       setAutoLoginChecked={setAutoLoginChecked}
       onFindIDPressed={onFindIDPressed}
       onFindPWPressed={onFindPWPressed}
+      onLoginPressed={onLoginPressed}
     />
   );
 };

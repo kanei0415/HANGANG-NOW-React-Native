@@ -8,6 +8,8 @@ export type MainStackParamListTypes = {
   findID: undefined;
   findIDStep2: undefined;
   findPW: undefined;
+  findPWDone: undefined;
+  mainTab: undefined;
 };
 
 export type MainTabParamListTypes = {
