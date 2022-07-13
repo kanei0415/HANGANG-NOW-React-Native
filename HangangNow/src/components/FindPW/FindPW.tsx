@@ -7,7 +7,11 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-const FindPW = () => {
+type Props = {
+  onDonePressed: () => void;
+};
+
+const FindPW = ({ onDonePressed }: Props) => {
   return (
     <KeyboardAwareScrollView
       style={{
@@ -53,7 +57,7 @@ const FindPW = () => {
         />
       </View>
       <View style={{ paddingHorizontal: 20, marginTop: 40 }}>
-        <CButton label='완료하기' />
+        <CButton label='완료하기' onPressed={onDonePressed} />
       </View>
     </KeyboardAwareScrollView>
   );
