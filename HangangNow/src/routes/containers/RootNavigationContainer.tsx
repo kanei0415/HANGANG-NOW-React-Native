@@ -3,15 +3,22 @@ import SplashContainer from '@components/Splash/containers/SplashContainer';
 import useAutoLogin from '@hooks/storage/useAutoLogin';
 import useLogin from '@hooks/store/useLogin';
 import RootNavigation from '@routes/RootNavigation';
+import useLoginResponse from '@hooks/storage/useLoginResponse';
+import useAuth from '@hooks/store/useAuth';
 
 const RootNavigationContainer = () => {
   const [isTimerEnd, setIsTimerEnd] = useState(false);
 
   const [autoLoginLoaded, setAutoLoginLoaded] = useState(false);
+  const [authLoaded, setAuthLoaded] = useState(false);
 
   const { __updateLoginFromHooks } = useLogin();
 
   const { __getAutoLoginFromStorage } = useAutoLogin();
+
+  const { __updateLoginResponseFromHooks } = useAuth();
+
+  const { __getLoginResponseFromStorage } = useLoginResponse();
 
   const loadAutoLogin = useCallback(async () => {
     const login = await __getAutoLoginFromStorage();
@@ -20,6 +27,16 @@ const RootNavigationContainer = () => {
 
     setAutoLoginLoaded(true);
   }, [__getAutoLoginFromStorage, __updateLoginFromHooks]);
+
+  const loadLoginResponseBody = useCallback(async () => {
+    const loginResponse = await __getLoginResponseFromStorage();
+
+    if (loginResponse) {
+      __updateLoginResponseFromHooks(loginResponse);
+    }
+
+    setAuthLoaded(true);
+  }, [__getLoginResponseFromStorage]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -33,9 +50,10 @@ const RootNavigationContainer = () => {
 
   useEffect(() => {
     loadAutoLogin();
-  }, [loadAutoLogin]);
+    loadLoginResponseBody();
+  }, [loadAutoLogin, loadLoginResponseBody]);
 
-  return isTimerEnd && autoLoginLoaded ? (
+  return isTimerEnd && autoLoginLoaded && authLoaded ? (
     <RootNavigation />
   ) : (
     <SplashContainer />

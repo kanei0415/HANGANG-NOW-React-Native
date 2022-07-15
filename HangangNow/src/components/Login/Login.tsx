@@ -16,6 +16,8 @@ import {
 } from 'react-native';
 
 type Props = {
+  setLoginId: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
   onEmailSignupPressed: () => void;
   onKakaoSignupPressed: () => void;
   autoLoginChecked: boolean;
@@ -28,6 +30,8 @@ type Props = {
 const { width, height } = Dimensions.get('window');
 
 const Login = ({
+  setLoginId,
+  setPassword,
   onEmailSignupPressed,
   onKakaoSignupPressed,
   autoLoginChecked,
