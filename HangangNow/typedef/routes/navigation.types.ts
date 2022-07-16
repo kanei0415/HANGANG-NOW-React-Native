@@ -5,6 +5,9 @@ export type MainStackParamListTypes = {
   signup: undefined;
   signupStep2: undefined;
   signupStep3: undefined;
+  signupDone: {
+    name: string;
+  };
   findID: undefined;
   findIDStep2: undefined;
   findPW: undefined;

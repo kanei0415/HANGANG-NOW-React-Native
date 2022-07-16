@@ -15,6 +15,9 @@ const images = {
       label: require('./images/components/Login/ic-label.png'),
       kakao: require('./images/components/Login/ic-kakao.png'),
     },
+    Signup: {
+      done: require('./images/components/Signup/ic-done.png'),
+    },
   },
 } as const;
 

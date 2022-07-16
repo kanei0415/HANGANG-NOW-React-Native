@@ -2,6 +2,7 @@ import colors from '@assets/colors';
 import NotoSans, { Roboto } from '@assets/font';
 import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
+import CDateInputContainer from '@components/common/CInput/containers/CDateInputContainer';
 import CInputContainer from '@components/common/CInput/containers/CInputContainer';
 import {
   FEMALE_TYPE,
@@ -51,95 +52,10 @@ const SignupStep3 = ({ gender, setGender, onDoneBtnPressed }: Props) => {
         </View>
       </View>
       <View style={{ paddingHorizontal: 20, marginTop: 24 }}>
-        <Text
-          style={[
-            NotoSans.Medium,
-            NotoSans.f_13,
-            { color: colors.typo.black },
-          ]}>
-          {'생년월일'}
-        </Text>
-        <View
-          style={{ flexDirection: 'row', alignItems: 'center', marginTop: 12 }}>
-          <TextInput
-            placeholder='YYYY'
-            keyboardType='number-pad'
-            maxLength={4}
-            style={[
-              Roboto.Medium,
-              Roboto.f_14,
-              {
-                minWidth: 80,
-                color: colors.typo.black,
-                textAlign: 'center',
-                textAlignVertical: 'center',
-                borderRadius: 4,
-                borderWidth: 1,
-                borderColor: '#a4a4a3',
-              },
-            ]}
-          />
-          <Text
-            style={[
-              NotoSans.Medium,
-              NotoSans.f_15,
-              { color: colors.typo.black, marginHorizontal: 12 },
-            ]}>
-            {'년'}
-          </Text>
-          <TextInput
-            placeholder='MM'
-            keyboardType='number-pad'
-            maxLength={4}
-            style={[
-              Roboto.Medium,
-              Roboto.f_14,
-              {
-                minWidth: 60,
-                color: colors.typo.black,
-                textAlign: 'center',
-                textAlignVertical: 'center',
-                borderRadius: 4,
-                borderWidth: 1,
-                borderColor: '#a4a4a3',
-              },
-            ]}
-          />
-          <Text
-            style={[
-              NotoSans.Medium,
-              NotoSans.f_15,
-              { color: colors.typo.black, marginHorizontal: 12 },
-            ]}>
-            {'년'}
-          </Text>
-          <TextInput
-            placeholder='DD'
-            keyboardType='number-pad'
-            maxLength={4}
-            style={[
-              Roboto.Medium,
-              Roboto.f_14,
-              {
-                minWidth: 60,
-                color: colors.typo.black,
-                textAlign: 'center',
-                textAlignVertical: 'center',
-                borderRadius: 4,
-                borderWidth: 1,
-                borderColor: '#a4a4a3',
-              },
-            ]}
-          />
-          <Text
-            style={[
-              NotoSans.Medium,
-              NotoSans.f_15,
-              { color: colors.typo.black, marginHorizontal: 12 },
-            ]}>
-            {'년'}
-          </Text>
-        </View>
+        <CDateInputContainer
+          label='생년월일'
+          placeHolder='생년월일을 선택 해주세요'
+        />
       </View>
       <View style={{ marginTop: 40, paddingHorizontal: 20 }}>
         <CButton label='완료하기' onPressed={onDoneBtnPressed} />

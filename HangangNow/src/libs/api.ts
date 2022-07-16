@@ -2,8 +2,8 @@ import axios from 'axios';
 
 export const API_ORIGIN =
   process.env.NODE_ENV === 'development'
-    ? 'https://backend.wim.kro.kr:6006'
-    : 'https://backend.wim.kro.kr:6006';
+    ? 'http://ec2-13-124-170-69.ap-northeast-2.compute.amazonaws.com:8080'
+    : 'http://ec2-13-124-170-69.ap-northeast-2.compute.amazonaws.com:8080';
 
 axios.defaults.baseURL = `${API_ORIGIN}/api/v1`;
 

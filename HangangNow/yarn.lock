@@ -1469,6 +1469,13 @@
     sudo-prompt "^9.0.0"
     wcwidth "^1.0.1"
 
+"@react-native-community/datetimepicker@^6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@react-native-community/datetimepicker/-/datetimepicker-6.2.0.tgz#50bc629e70e4030c48205c01efbc65a8f35d82d4"
+  integrity sha512-w1ZS+wYO3qSASliRp+B7mPphOhtVm++rhSbj1WsgXdgLgDXSkDxpMnAXXQu9M0XdcgBwVJ6wDExeIwuzU5Jtfg==
+  dependencies:
+    invariant "^2.2.4"
+
 "@react-native-community/eslint-config@^3.0.2":
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@react-native-community/eslint-config/-/eslint-config-3.0.2.tgz#1258d24e471ebd1d64667fd239488a4db44a637f"
@@ -6024,11 +6031,6 @@ react-native-codegen@^0.0.13:
     jscodeshift "^0.13.1"
     nullthrows "^1.1.1"
 
-react-native-date-picker@^4.2.2:
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/react-native-date-picker/-/react-native-date-picker-4.2.2.tgz#07fb8a9021fb48ef9a20b043d33c14e858220883"
-  integrity sha512-x0jxWbJXKDXivRDwsUx58tKOxe719XoVqqq6UzMSYSsTiPL2i13r7PyDxop3f3et/62qbcMgeswl+/CLdX6+Eg==
-
 react-native-device-info@^9.0.0:
   version "9.0.2"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-9.0.2.tgz#00c7ab139a620ac9650852cd0ef0fb69d9a4418d"
@@ -6063,6 +6065,13 @@ react-native-linear-gradient@^2.5.6:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.5.6.tgz#96215cbc5ec7a01247a20890888aa75b834d44a0"
   integrity sha512-HDwEaXcQIuXXCV70O+bK1rizFong3wj+5Q/jSyifKFLg0VWF95xh8XQgfzXwtq0NggL9vNjPKXa016KuFu+VFg==
+
+react-native-modal-datetime-picker@^13.1.2:
+  version "13.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-modal-datetime-picker/-/react-native-modal-datetime-picker-13.1.2.tgz#7c8bd3402acb4dcfbca49c926a7f18dd108c69c4"
+  integrity sha512-PZDkuY7HayRX1KE2X2dm29CvCLzwj/vn6B6QdPbjZea/GEKvHBMOLGdhFCcA9+gD64Y41+VqfytUh2fdvUvQ1g==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-native-modal@^13.0.1:
   version "13.0.1"

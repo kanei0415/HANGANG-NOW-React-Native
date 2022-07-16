@@ -4,6 +4,7 @@ import FindPWContainer from '@components/FindPW/containers/FindPWContainer';
 import FindPWDoneContainer from '@components/FindPW/containers/FindPWDoneContainer';
 import LoginContainer from '@components/Login/containers/LoginContainer';
 import SignupContainer from '@components/Signup/containers/SignupContainer';
+import SignupDoneContainer from '@components/Signup/containers/SignupDoneContainer';
 import SignupStep2Container from '@components/Signup/containers/SignupStep2Container';
 import SignupStep3Container from '@components/Signup/containers/SignupStep3Container';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -25,6 +26,7 @@ const MainStackNavigation = () => {
       <Stack.Screen name='signup' component={SignupContainer} />
       <Stack.Screen name='signupStep2' component={SignupStep2Container} />
       <Stack.Screen name='signupStep3' component={SignupStep3Container} />
+      <Stack.Screen name='signupDone' component={SignupDoneContainer} />
       <Stack.Screen name='findID' component={FindIDContainer} />
       <Stack.Screen name='findIDStep2' component={FindIDStep2Container} />
       <Stack.Screen name='findPW' component={FindPWContainer} />

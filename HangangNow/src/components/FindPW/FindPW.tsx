@@ -55,9 +55,20 @@ const FindPW = ({ onDonePressed }: Props) => {
           placeHolder='예: ABC1234@naver.com'
           keyboardType='email-address'
         />
+        <View style={{ marginTop: 24 }}>
+          <CInputContainer placeHolder='인증번호를 입력해주세요' />
+        </View>
+        <View style={{ marginTop: 24, flexDirection: 'row' }}>
+          <View style={{ flex: 1, marginRight: 8 }}>
+            <CButton label='인증번호 전송' />
+          </View>
+          <View style={{ flex: 1 }}>
+            <CButton label='인증완료' />
+          </View>
+        </View>
       </View>
       <View style={{ paddingHorizontal: 20, marginTop: 40 }}>
-        <CButton label='완료하기' onPressed={onDonePressed} />
+        <CButton label='비밀번호 재설정' onPressed={onDonePressed} />
       </View>
     </KeyboardAwareScrollView>
   );

@@ -15,7 +15,10 @@ const SignupStep3Container = () => {
       navigation.reset({
         routes: [
           {
-            name: 'login',
+            name: 'signupDone',
+            params: {
+              name: '홍길동',
+            },
           },
         ],
       }),

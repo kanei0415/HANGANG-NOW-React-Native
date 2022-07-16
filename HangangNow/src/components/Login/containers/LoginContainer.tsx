@@ -52,8 +52,8 @@ const LoginContainer = () => {
       navigation.reset({
         routes: [{ name: 'mainTab' }],
       });
-    } else {
-      alertMessage('로그인에 실패 했습니다');
+    } else if (config.status === 400) {
+      alertMessage('로그인 실패');
     }
   }, [
     loginId,

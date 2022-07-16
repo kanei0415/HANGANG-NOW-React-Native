@@ -81,6 +81,7 @@ const CInput = ({
           onBlur={onBlured}
           keyboardType={keyboardType}
           placeholder={placeHolder}
+          placeholderTextColor={colors.typo.gray.light}
           defaultValue={defaultValue}
           style={[
             NotoSans.Medium,

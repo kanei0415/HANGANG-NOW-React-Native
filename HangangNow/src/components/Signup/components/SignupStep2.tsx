@@ -14,6 +14,7 @@ type Props = {
 const SignupStep2 = ({ onNextBtnPressed }: Props) => {
   return (
     <KeyboardAwareScrollView
+      contentContainerStyle={{ paddingBottom: 80 }}
       style={{ flex: 1, backgroundColor: colors.default.white }}>
       <CHeaderContainer title='회원가입' />
       <View style={{ paddingHorizontal: 20, marginTop: 24 }}>
@@ -37,7 +38,7 @@ const SignupStep2 = ({ onNextBtnPressed }: Props) => {
           </View>
         </View>
       </View>
-      <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
+      <View style={{ paddingHorizontal: 20, marginTop: 24 }}>
         <Text
           style={[
             NotoSans.Medium,
@@ -62,7 +63,7 @@ const SignupStep2 = ({ onNextBtnPressed }: Props) => {
           containerStyle={{ marginTop: 12 }}
         />
       </View>
-      <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
+      <View style={{ paddingHorizontal: 20, marginTop: 24 }}>
         <Text
           style={[
             NotoSans.Medium,
@@ -87,7 +88,7 @@ const SignupStep2 = ({ onNextBtnPressed }: Props) => {
           containerStyle={{ marginTop: 12 }}
         />
       </View>
-      <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
+      <View style={{ paddingHorizontal: 20, marginTop: 24 }}>
         <Text
           style={[
             NotoSans.Medium,
@@ -116,6 +117,27 @@ const SignupStep2 = ({ onNextBtnPressed }: Props) => {
           <View style={{ width: 80, marginLeft: 12 }}>
             <CButton label='중복 확인' />
           </View>
+        </View>
+        <View style={{ marginTop: 24 }}>
+          <CInputContainer placeHolder='인증번호를 입력해주세요' />
+        </View>
+        <View style={{ marginTop: 24, flexDirection: 'row' }}>
+          <View style={{ flex: 1, marginRight: 8 }}>
+            <CButton label='인증번호 전송' />
+          </View>
+          <View style={{ flex: 1 }}>
+            <CButton label='인증완료' />
+          </View>
+        </View>
+        <View style={{ marginTop: 4 }}>
+          <Text
+            style={[
+              NotoSans.Medium,
+              NotoSans.f_11,
+              { color: colors.typo.gray.middle, marginTop: 4 },
+            ]}>
+            {`메일이 올바르게 전송되지 않았다면 '인증번호 재전송'을 눌러주세요`}
+          </Text>
         </View>
       </View>
       <View style={{ paddingHorizontal: 20, marginTop: 40 }}>
