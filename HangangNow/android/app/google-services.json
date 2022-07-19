@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "380600431783",
+    "project_id": "hangang-now",
+    "storage_bucket": "hangang-now.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380600431783:android:b12b043e648d4ce0f25782",
+        "android_client_info": {
+          "package_name": "com.hangangnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380600431783-42ik3ur8htigut0kk3bt4q87cugtgaub.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hangangnow",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "380600431783-a89cqems54n8jlohp8f67ghv8up1lrdf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7O7P6IBihDQfO2o_ybRu5TCpuxXxRKDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380600431783-a89cqems54n8jlohp8f67ghv8up1lrdf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

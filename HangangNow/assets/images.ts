@@ -18,6 +18,13 @@ const images = {
     Signup: {
       done: require('./images/components/Signup/ic-done.png'),
     },
+    Mbti: {
+      back: require('./images/components/Mbti/ic-primary-back.png'),
+      text: require('./images/components/Mbti/ic-text.png'),
+    },
+    Diary: {
+      triangle: require('./images/components/Diary/ic-tri.png'),
+    },
   },
 } as const;
 

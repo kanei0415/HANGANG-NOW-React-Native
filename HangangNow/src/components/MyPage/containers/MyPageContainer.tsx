@@ -1,9 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import { MainStackNavigationTypes } from '@typedef/routes/navigation.types';
 import React, { useCallback } from 'react';
-import Home from '../Home';
+import MyPage from '../MyPage';
 
-const HomeContainer = () => {
+const MyPageContainer = () => {
   const navigation = useNavigation<MainStackNavigationTypes>();
 
   const onDiaryPressed = useCallback(
@@ -16,7 +16,9 @@ const HomeContainer = () => {
     [navigation],
   );
 
-  return <Home onDiaryPressed={onDiaryPressed} onMbtiPressed={onMbtiPressed} />;
+  return (
+    <MyPage onDiaryPressed={onDiaryPressed} onMbtiPressed={onMbtiPressed} />
+  );
 };
 
-export default HomeContainer;
+export default MyPageContainer;

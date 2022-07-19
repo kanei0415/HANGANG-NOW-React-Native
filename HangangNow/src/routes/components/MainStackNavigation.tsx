@@ -1,8 +1,12 @@
+import DiaryContainer from '@components/Diary/containers/DiaryContainer';
 import FindIDContainer from '@components/FindID/containers/FindIDContainer';
 import FindIDStep2Container from '@components/FindID/containers/FindIDStep2Container';
 import FindPWContainer from '@components/FindPW/containers/FindPWContainer';
 import FindPWDoneContainer from '@components/FindPW/containers/FindPWDoneContainer';
 import LoginContainer from '@components/Login/containers/LoginContainer';
+import MbtiContainer from '@components/Mbti/containers/MbtiContainer';
+import MbtiInspectContaienr from '@components/Mbti/containers/MbtiInspectContainer';
+import MbtiResultCotainer from '@components/Mbti/containers/MbtiResultContainer';
 import SignupContainer from '@components/Signup/containers/SignupContainer';
 import SignupDoneContainer from '@components/Signup/containers/SignupDoneContainer';
 import SignupStep2Container from '@components/Signup/containers/SignupStep2Container';
@@ -32,6 +36,13 @@ const MainStackNavigation = () => {
       <Stack.Screen name='findPW' component={FindPWContainer} />
       <Stack.Screen name='findPWDone' component={FindPWDoneContainer} />
       <Stack.Screen name='mainTab' component={MainTabNavigationContainer} />
+      <Stack.Screen name='diary' component={DiaryContainer} />
+
+      <Stack.Group>
+        <Stack.Screen name='mbti' component={MbtiContainer} />
+        <Stack.Screen name='mbtiInspect' component={MbtiInspectContaienr} />
+        <Stack.Screen name='mbtiResult' component={MbtiResultCotainer} />
+      </Stack.Group>
     </Stack.Navigator>
   );
 };

@@ -1,4 +1,5 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { MbtiResultTypes } from '@typedef/components/Mbti/mbti.types';
 
 export type MainStackParamListTypes = {
   login: undefined;
@@ -13,10 +14,18 @@ export type MainStackParamListTypes = {
   findPW: undefined;
   findPWDone: undefined;
   mainTab: undefined;
+  diary: undefined;
+  mbti: undefined;
+  mbtiInspect: undefined;
+  mbtiResult: {
+    prevUid: string | null;
+    result: MbtiResultTypes | null;
+  };
 };
 
 export type MainTabParamListTypes = {
   home: undefined;
+  mypage: undefined;
 };
 
 export type MainStackNavigationTypes =
