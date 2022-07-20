@@ -5,8 +5,6 @@ import useLogin from '@hooks/store/useLogin';
 import RootNavigation from '@routes/RootNavigation';
 import useLoginResponse from '@hooks/storage/useLoginResponse';
 import useAuth from '@hooks/store/useAuth';
-import dynamiclink from '@react-native-firebase/dynamic-links';
-import { getMbtiLinkConfig } from '@libs/link';
 
 const RootNavigationContainer = () => {
   const [isTimerEnd, setIsTimerEnd] = useState(false);
@@ -21,14 +19,6 @@ const RootNavigationContainer = () => {
   const { __updateLoginResponseFromHooks } = useAuth();
 
   const { __getLoginResponseFromStorage } = useLoginResponse();
-
-  const __test__generateLink = useCallback(async () => {
-    const link = await dynamiclink().buildShortLink(
-      getMbtiLinkConfig('test-mbti-uid-001'),
-    );
-
-    console.log(link);
-  }, []);
 
   const loadAutoLogin = useCallback(async () => {
     const login = await __getAutoLoginFromStorage();
@@ -57,12 +47,6 @@ const RootNavigationContainer = () => {
       clearTimeout(timeout);
     };
   }, []);
-
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      __test__generateLink();
-    }
-  }, [__test__generateLink]);
 
   useEffect(() => {
     loadAutoLogin();

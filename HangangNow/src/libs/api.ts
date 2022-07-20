@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 export const API_ORIGIN =
   process.env.NODE_ENV === 'development'
@@ -7,33 +7,56 @@ export const API_ORIGIN =
 
 axios.defaults.baseURL = `${API_ORIGIN}/api/v1`;
 
-axios.interceptors.request.use((req) => {
-  if (process.env.NODE_ENV === 'development') {
-    console.log(req);
-  }
+axios.defaults.validateStatus = function (status) {
+  return status <= 500;
+};
 
-  return req;
-});
+axios.interceptors.request.use(
+  (req) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[AxiosRequest]', req);
+    }
 
-axios.interceptors.response.use((res) => {
-  if (process.env.NODE_ENV === 'development') {
-    console.log(res);
-  }
+    return req;
+  },
+  (err) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('[AxiosError]', err);
+    }
 
-  return res;
-});
+    return err.response;
+  },
+);
+
+axios.interceptors.response.use(
+  (res) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('[AxiosResponse]', res);
+    }
+
+    return res;
+  },
+  (err: AxiosError) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('[AxiosError]', err);
+    }
+
+    return err.response;
+  },
+);
 
 export const apiRoute = {
   health: '/health',
   auth: {
-    checkEmail: '',
-    checkId: '',
-    authCodeSend: '',
+    checkEmail: '/auth/dup/email',
+    checkId: '/auth/dup/loginId',
+    authCodeSend: '/auth/emailAuth',
+    checkCode: '',
     login: '/auth/login',
     findId: '/auth/loginId',
     findPassword: 'auth/password',
     refresh: '/auth/reissue',
-    signup: '/signup',
+    signup: '/auth/signup',
   },
 };
 
@@ -41,16 +64,6 @@ export type BasicResponse<T> = {
   data: T;
   config: {
     status: number;
-  };
-};
-
-export type BasicListApiResponse<T> = {
-  data: T;
-  meta: {
-    total: number;
-    page: number;
-    maxPage: number;
-    count: number;
   };
 };
 
@@ -71,17 +84,14 @@ export function requestGet<T>(
           data: res.data as T,
           config: {
             status: res.status,
-            ...res.data?.meta,
           },
         } as BasicResponse<T>),
     )
-    .catch((err) => {
-      console.error('[Axios Error]', err);
-
+    .catch((err: AxiosError) => {
       return {
         data: {} as T,
         config: {
-          status: -1,
+          status: err.response?.status,
         },
       } as BasicResponse<T>;
     });
@@ -106,17 +116,14 @@ export function requestSecureGet<T>(
           data: res.data as T,
           config: {
             status: res.status,
-            ...res.data?.meta,
           },
         } as BasicResponse<T>),
     )
-    .catch((err) => {
-      console.error('[Axios Error]', err);
-
+    .catch((err: AxiosError) => {
       return {
         data: {} as T,
         config: {
-          status: -1,
+          status: err.response?.status,
         },
       } as BasicResponse<T>;
     });
@@ -139,17 +146,14 @@ export function requestDelete<T>(
           data: res.data as T,
           config: {
             status: res.status,
-            ...res.data?.meta,
           },
         } as BasicResponse<T>),
     )
-    .catch((err) => {
-      console.error('[Axios Error]', err);
-
+    .catch((err: AxiosError) => {
       return {
         data: {} as T,
         config: {
-          status: -1,
+          status: err.response?.status,
         },
       } as BasicResponse<T>;
     });
@@ -174,17 +178,14 @@ export function requestSecureDelete<T>(
           data: res.data as T,
           config: {
             status: res.status,
-            ...res.data?.meta,
           },
         } as BasicResponse<T>),
     )
-    .catch((err) => {
-      console.error('[Axios Error]', err);
-
+    .catch((err: AxiosError) => {
       return {
         data: {} as T,
         config: {
-          status: -1,
+          status: err.response?.status,
         },
       } as BasicResponse<T>;
     });
@@ -210,17 +211,14 @@ export function requestSecurePost<T>(
           data: res.data as T,
           config: {
             status: res.status,
-            ...res.data?.meta,
           },
         } as BasicResponse<T>),
     )
-    .catch((err) => {
-      console.error('[Axios Error]', err);
-
+    .catch((err: AxiosError) => {
       return {
         data: {} as T,
         config: {
-          status: -1,
+          status: err.response?.status,
         },
       } as BasicResponse<T>;
     });
@@ -244,17 +242,14 @@ export function requestPost<T>(
           data: res.data as T,
           config: {
             status: res.status,
-            ...res.data?.meta,
           },
         } as BasicResponse<T>),
     )
-    .catch((err) => {
-      console.error('[Axios Error]', err);
-
+    .catch((err: AxiosError) => {
       return {
         data: {} as T,
         config: {
-          status: -1,
+          status: err.response?.status,
         },
       } as BasicResponse<T>;
     });
@@ -280,17 +275,14 @@ export function requestSecurePatch<T>(
           data: res.data as T,
           config: {
             status: res.status,
-            ...res.data?.meta,
           },
         } as BasicResponse<T>),
     )
-    .catch((err) => {
-      console.error('[Axios Error]', err);
-
+    .catch((err: AxiosError) => {
       return {
         data: {} as T,
         config: {
-          status: -1,
+          status: err.response?.status,
         },
       } as BasicResponse<T>;
     });
@@ -316,17 +308,14 @@ export function requestMultipart<T>(
           data: res.data as T,
           config: {
             status: res.status,
-            ...res.data?.meta,
           },
         } as BasicResponse<T>),
     )
-    .catch((err) => {
-      console.error('[Axios Error]', err);
-
+    .catch((err: AxiosError) => {
       return {
         data: {} as T,
         config: {
-          status: -1,
+          status: err.response?.status,
         },
       } as BasicResponse<T>;
     });

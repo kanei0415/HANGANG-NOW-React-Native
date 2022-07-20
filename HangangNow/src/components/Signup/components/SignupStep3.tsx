@@ -16,9 +16,19 @@ type Props = {
   gender: GenderTypes | null;
   setGender: React.Dispatch<React.SetStateAction<GenderTypes | null>>;
   onDoneBtnPressed: () => void;
+  setBirth: React.Dispatch<React.SetStateAction<Date | null>>;
+  setName: React.Dispatch<React.SetStateAction<string | null>>;
+  doneBtnAvailable: boolean;
 };
 
-const SignupStep3 = ({ gender, setGender, onDoneBtnPressed }: Props) => {
+const SignupStep3 = ({
+  gender,
+  setGender,
+  onDoneBtnPressed,
+  setBirth,
+  setName,
+  doneBtnAvailable,
+}: Props) => {
   return (
     <KeyboardAwareScrollView
       style={{
@@ -27,7 +37,11 @@ const SignupStep3 = ({ gender, setGender, onDoneBtnPressed }: Props) => {
       }}>
       <CHeaderContainer title='회원가입' />
       <View style={{ paddingHorizontal: 20, marginTop: 40 }}>
-        <CInputContainer label='이름' placeHolder='이름을 입력해주세요' />
+        <CInputContainer
+          label='이름'
+          placeHolder='이름을 입력해주세요'
+          onChange={setName}
+        />
       </View>
       <View style={{ paddingHorizontal: 20, marginTop: 24 }}>
         <Text
@@ -53,12 +67,17 @@ const SignupStep3 = ({ gender, setGender, onDoneBtnPressed }: Props) => {
       </View>
       <View style={{ paddingHorizontal: 20, marginTop: 24 }}>
         <CDateInputContainer
+          onDateSelected={setBirth}
           label='생년월일'
           placeHolder='생년월일을 선택 해주세요'
         />
       </View>
       <View style={{ marginTop: 40, paddingHorizontal: 20 }}>
-        <CButton label='완료하기' onPressed={onDoneBtnPressed} />
+        <CButton
+          label='완료하기'
+          onPressed={onDoneBtnPressed}
+          disabled={!doneBtnAvailable}
+        />
       </View>
     </KeyboardAwareScrollView>
   );

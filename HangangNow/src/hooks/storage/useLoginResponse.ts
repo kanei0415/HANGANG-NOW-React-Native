@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { LoginResponseBody } from '@typedef/components/Login/login.types';
 import { useCallback } from 'react';
 
-const LOGIN_RESPONSE_STORAGE_KEY_VALUE = '@loginResponse';
+export const LOGIN_RESPONSE_STORAGE_KEY_VALUE = '@loginResponse';
 
 export default function useLoginResponse() {
   const __getLoginResponseFromStorage = useCallback(async () => {

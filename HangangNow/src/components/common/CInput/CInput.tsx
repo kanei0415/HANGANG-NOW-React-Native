@@ -1,6 +1,7 @@
 import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 import images from '@assets/images';
+import { InputResultTypes } from '@typedef/components/common/cinput.types';
 import React from 'react';
 import {
   Image,
@@ -27,14 +28,9 @@ type Props = {
   inputType: 'default' | 'password' | 'datetime';
   passwordVisible: boolean;
   onPasswordIconPressed: () => void;
-  success: {
-    on: boolean;
-    msg: string;
-  };
-  error: {
-    on: boolean;
-    msg: string;
-  };
+  success: InputResultTypes;
+  error: InputResultTypes;
+  disabled: InputResultTypes;
 };
 
 const CInput = ({
@@ -53,6 +49,7 @@ const CInput = ({
   onPasswordIconPressed,
   success,
   error,
+  disabled,
 }: Props) => {
   return (
     <View style={[{}, containerStyle]}>
@@ -75,6 +72,10 @@ const CInput = ({
           position: 'relative',
         }}>
         <TextInput
+          value={disabled.on ? disabled.msg : input}
+          editable={!disabled.on}
+          selectTextOnFocus={!disabled.on}
+          autoCapitalize='none'
           secureTextEntry={inputType === 'password' && !passwordVisible}
           onChangeText={setInput}
           onFocus={onFocused}
