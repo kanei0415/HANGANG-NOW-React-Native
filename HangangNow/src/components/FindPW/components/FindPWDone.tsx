@@ -3,15 +3,32 @@ import NotoSans from '@assets/font';
 import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import CInputContainer from '@components/common/CInput/containers/CInputContainer';
+import { InputResultTypes } from '@typedef/components/common/cinput.types';
 import React from 'react';
 import { Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 type Props = {
-  onGoLoginPressed: () => void;
+  setPassword: React.Dispatch<React.SetStateAction<string | null>>;
+  passwordInputError: InputResultTypes | null;
+  passwordInputSuccess: InputResultTypes | null;
+  setPasswordConfirm: React.Dispatch<React.SetStateAction<string | null>>;
+  passwordConfirmInputError: InputResultTypes | null;
+  passwordConfirmInputSuccess: InputResultTypes | null;
+  doneBtnActive: boolean;
+  onDonePressed: () => void;
 };
 
-const FindPWDone = ({ onGoLoginPressed }: Props) => {
+const FindPWDone = ({
+  setPassword,
+  passwordInputError,
+  passwordInputSuccess,
+  setPasswordConfirm,
+  passwordConfirmInputError,
+  passwordConfirmInputSuccess,
+  doneBtnActive,
+  onDonePressed,
+}: Props) => {
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1, backgroundColor: colors.default.white }}>
@@ -43,7 +60,14 @@ const FindPWDone = ({ onGoLoginPressed }: Props) => {
           ]}>
           {'영문 · 숫자를 포함하여 8~15 자로 입력해주세요'}
         </Text>
-        <CInputContainer placeHolder='예: abcd1234' inputType='password' />
+        <CInputContainer
+          onChange={setPassword}
+          error={passwordInputError}
+          success={passwordInputSuccess}
+          placeHolder='예: abcd1234'
+          inputType='password'
+          containerStyle={{ marginTop: 12 }}
+        />
       </View>
       <View style={{ marginTop: 24, paddingHorizontal: 20 }}>
         <Text
@@ -62,10 +86,21 @@ const FindPWDone = ({ onGoLoginPressed }: Props) => {
           ]}>
           {'비밀번호를 다시 한 번 입력해주세요'}
         </Text>
-        <CInputContainer inputType='password' placeHolder='예: abcd1234' />
+        <CInputContainer
+          onChange={setPasswordConfirm}
+          error={passwordConfirmInputError}
+          success={passwordConfirmInputSuccess}
+          placeHolder='예: abcd1234'
+          inputType='password'
+          containerStyle={{ marginTop: 12 }}
+        />
       </View>
       <View style={{ marginTop: 40, paddingHorizontal: 20 }}>
-        <CButton onPressed={onGoLoginPressed} label='비밀번호 재설정 완료' />
+        <CButton
+          onPressed={onDonePressed}
+          label='비밀번호 재설정 완료'
+          disabled={!doneBtnActive}
+        />
       </View>
     </KeyboardAwareScrollView>
   );

@@ -1,7 +1,15 @@
-import { FirebaseDynamicLinksTypes } from '@react-native-firebase/dynamic-links';
+export type MbtiLinkResultTypes =
+  | {
+      type: 'result';
+      uid: string;
+    }
+  | {
+      type: 'start';
+      uid: null;
+    };
 
 export const getMbtiLinkConfig = (mbtiUid?: string) => ({
-  link: `https://hangangnow/mbti/${mbtiUid ?? 'start'}`,
+  link: `https://hangangnow/mbti${mbtiUid ? '/result/' + mbtiUid : '/start'}`,
   domainUriPrefix: 'https://hangangnow.page.link',
   android: {
     packageName: 'com.hangangnow',
@@ -9,13 +17,27 @@ export const getMbtiLinkConfig = (mbtiUid?: string) => ({
 });
 
 export const parseMbtiLink = (
-  link: FirebaseDynamicLinksTypes.DynamicLink,
-): string | null => {
-  const mbtiUid = link.url.split('mbti/')[1];
-
-  if (!mbtiUid) {
+  link: string | null,
+): MbtiLinkResultTypes | null => {
+  if (!link) {
     return null;
   }
 
-  return mbtiUid;
+  if (link.endsWith('start')) {
+    return {
+      type: 'start',
+      uid: null,
+    };
+  }
+
+  const mbtiUid = link.split('/result/')[1];
+
+  if (!mbtiUid) {
+    throw Error('dynamiclink malformed error');
+  }
+
+  return {
+    type: 'result',
+    uid: mbtiUid,
+  };
 };

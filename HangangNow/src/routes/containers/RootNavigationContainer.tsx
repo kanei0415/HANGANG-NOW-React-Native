@@ -5,6 +5,9 @@ import useLogin from '@hooks/store/useLogin';
 import RootNavigation from '@routes/RootNavigation';
 import useLoginResponse from '@hooks/storage/useLoginResponse';
 import useAuth from '@hooks/store/useAuth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import dynamiclink from '@react-native-firebase/dynamic-links';
+import { getMbtiLinkConfig } from '@libs/link';
 
 const RootNavigationContainer = () => {
   const [isTimerEnd, setIsTimerEnd] = useState(false);
@@ -52,6 +55,26 @@ const RootNavigationContainer = () => {
     loadAutoLogin();
     loadLoginResponseBody();
   }, [loadAutoLogin, loadLoginResponseBody]);
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      AsyncStorage.getAllKeys().then((keys) => {
+        keys.forEach((key) => {
+          AsyncStorage.getItem(key).then((value) => {
+            console.log('[Storage]', key, value ? JSON.parse(value) : null);
+          });
+        });
+      });
+
+      dynamiclink()
+        .buildShortLink(getMbtiLinkConfig())
+        .then((val) => console.log('[Linking]', val));
+
+      dynamiclink()
+        .buildShortLink(getMbtiLinkConfig('TEST_MBTI_UID'))
+        .then((val) => console.log('[Linking]', val));
+    }
+  }, []);
 
   return isTimerEnd && autoLoginLoaded && authLoaded ? (
     <RootNavigation />

@@ -1,6 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hangangnow">
 
+    <queries>
+        <package android:name="com.kakao.talk" />
+    </queries>
+
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:name=".MainApplication"
@@ -40,6 +44,9 @@
 
                 <data
                     android:host="oauth"
+                    android:scheme="kakaof4c3c4b4a5aac94a0bde2b603e37a935" />
+                <data
+                    android:host="kakaolink"
                     android:scheme="kakaof4c3c4b4a5aac94a0bde2b603e37a935" />
             </intent-filter>
         </activity>

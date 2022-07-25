@@ -140,7 +140,12 @@ const SignupStep2Container = () => {
       if (data) {
         setLoginIdInputError({
           on: true,
-          msg: '이미 등록된 아이디입니다.',
+          msg: '이미 등록된 아이디입니다',
+        });
+      } else {
+        setLoginIdInputSuccess({
+          on: true,
+          msg: '사용 가능한 아이디입니다',
         });
       }
     } else {
@@ -161,6 +166,7 @@ const SignupStep2Container = () => {
 
       if (config.status === 200) {
         setEmailDuplicatedCheck(true);
+
         setEmailDuplicated(data);
 
         if (data) {
@@ -168,6 +174,13 @@ const SignupStep2Container = () => {
             on: true,
             msg: '이미 등록된 이메일 입니다',
           });
+        } else {
+          setEmailInputSuccess({
+            on: true,
+            msg: '사용 가능한 이메일 입니다',
+          });
+
+          return true;
         }
       } else {
         setEmailDuplicatedCheck(false);
@@ -176,12 +189,14 @@ const SignupStep2Container = () => {
         alertMessage('이메일 중복 체크에 실패했습니다');
       }
     }
+
+    return false;
   }, [email, emailValid]);
 
   const onEmailCheckPressed = useCallback(async () => {
-    await onEmailDuplicatedCheck();
+    const send = await onEmailDuplicatedCheck();
 
-    if (emailDuplicatedChecked && !emailDuplicated) {
+    if (send) {
       const { config } = await requestPost(
         apiRoute.auth.authCodeSend,
         {},
@@ -310,12 +325,6 @@ const SignupStep2Container = () => {
       }
     }
   }, [code, codeValid]);
-
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      navigation.navigate('signupStep3');
-    }
-  }, []);
 
   return (
     <SignupStep2

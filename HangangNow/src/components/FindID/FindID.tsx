@@ -3,15 +3,26 @@ import NotoSans from '@assets/font';
 import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import CInputContainer from '@components/common/CInput/containers/CInputContainer';
+import { InputResultTypes } from '@typedef/components/common/cinput.types';
 import React from 'react';
 import { Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 type Props = {
+  setName: React.Dispatch<React.SetStateAction<string | null>>;
+  setEmail: React.Dispatch<React.SetStateAction<string | null>>;
+  emailInputError: InputResultTypes | null;
+  onDoneBtnActive: boolean;
   onDonePressed: () => void;
 };
 
-const FindID = ({ onDonePressed }: Props) => {
+const FindID = ({
+  setName,
+  setEmail,
+  emailInputError,
+  onDoneBtnActive,
+  onDonePressed,
+}: Props) => {
   return (
     <KeyboardAwareScrollView
       style={{
@@ -30,7 +41,11 @@ const FindID = ({ onDonePressed }: Props) => {
         </Text>
       </View>
       <View style={{ paddingHorizontal: 20 }}>
-        <CInputContainer label='이름' placeHolder='이름을 입력해주세요' />
+        <CInputContainer
+          onChange={setName}
+          label='이름'
+          placeHolder='이름을 입력해주세요'
+        />
       </View>
       <View style={{ marginTop: 24, paddingHorizontal: 20 }}>
         <Text
@@ -50,12 +65,18 @@ const FindID = ({ onDonePressed }: Props) => {
           {'입력하신 이메일로 아이디가 전송됩니다'}
         </Text>
         <CInputContainer
+          error={emailInputError}
+          onChange={setEmail}
           placeHolder='예: ABC1234@naver.com'
           keyboardType='email-address'
         />
       </View>
       <View style={{ paddingHorizontal: 20, marginTop: 40 }}>
-        <CButton label='완료하기' onPressed={onDonePressed} />
+        <CButton
+          label='완료하기'
+          onPressed={onDonePressed}
+          disabled={!onDoneBtnActive}
+        />
       </View>
     </KeyboardAwareScrollView>
   );

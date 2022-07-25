@@ -12,7 +12,9 @@ export type MainStackParamListTypes = {
   findID: undefined;
   findIDStep2: undefined;
   findPW: undefined;
-  findPWDone: undefined;
+  findPWDone: {
+    email: string;
+  };
   mainTab: undefined;
   diary: undefined;
   mbti: undefined;

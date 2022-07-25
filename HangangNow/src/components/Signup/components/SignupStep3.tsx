@@ -1,5 +1,5 @@
 import colors from '@assets/colors';
-import NotoSans, { Roboto } from '@assets/font';
+import NotoSans from '@assets/font';
 import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import CDateInputContainer from '@components/common/CInput/containers/CDateInputContainer';
@@ -10,7 +10,7 @@ import {
   MALE_TYPE,
 } from '@typedef/components/Signup/signup.types';
 import React from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 type Props = {
   gender: GenderTypes | null;

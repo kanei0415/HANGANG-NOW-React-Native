@@ -13,15 +13,21 @@ import SignupStep2Container from '@components/Signup/containers/SignupStep2Conta
 import SignupStep3Container from '@components/Signup/containers/SignupStep3Container';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import MainTabNavigationContainer from '@routes/containers/MainTabNavigationContainer';
+import { LoginResponseBody } from '@typedef/components/Login/login.types';
 import { MainStackParamListTypes } from '@typedef/routes/navigation.types';
 import React from 'react';
 
 const Stack = createNativeStackNavigator<MainStackParamListTypes>();
 
-const MainStackNavigation = () => {
+type Props = {
+  login: boolean;
+  loginResponse: LoginResponseBody | null;
+};
+
+const MainStackNavigation = ({ login, loginResponse }: Props) => {
   return (
     <Stack.Navigator
-      initialRouteName='login'
+      initialRouteName={login && loginResponse != null ? 'mainTab' : 'login'}
       screenOptions={{
         headerShown: false,
         animation: 'slide_from_right',
@@ -35,7 +41,13 @@ const MainStackNavigation = () => {
       <Stack.Screen name='findIDStep2' component={FindIDStep2Container} />
       <Stack.Screen name='findPW' component={FindPWContainer} />
       <Stack.Screen name='findPWDone' component={FindPWDoneContainer} />
-      <Stack.Screen name='mainTab' component={MainTabNavigationContainer} />
+      <Stack.Screen
+        name='mainTab'
+        component={MainTabNavigationContainer}
+        options={{
+          animation: 'default',
+        }}
+      />
       <Stack.Screen name='diary' component={DiaryContainer} />
 
       <Stack.Group>

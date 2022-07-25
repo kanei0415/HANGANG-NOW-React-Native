@@ -51,12 +51,12 @@ export const apiRoute = {
     checkEmail: '/auth/dup/email',
     checkId: '/auth/dup/loginId',
     authCodeSend: '/auth/emailAuth',
-    checkCode: '',
     login: '/auth/login',
     findId: '/auth/loginId',
     findPassword: 'auth/password',
     refresh: '/auth/reissue',
     signup: '/auth/signup',
+    kakao: '/auth/kakao?',
   },
 };
 
@@ -231,6 +231,70 @@ export function requestPost<T>(
 ): Promise<BasicResponse<T>> {
   return axios
     .post(url, body, {
+      headers: {
+        'Content-Type': 'application/json',
+        ...header,
+      },
+    })
+    .then(
+      (res) =>
+        ({
+          data: res.data as T,
+          config: {
+            status: res.status,
+          },
+        } as BasicResponse<T>),
+    )
+    .catch((err: AxiosError) => {
+      return {
+        data: {} as T,
+        config: {
+          status: err.response?.status,
+        },
+      } as BasicResponse<T>;
+    });
+}
+
+export function requestSecurePut<T>(
+  url: string,
+  header: object,
+  body: object,
+  token: string,
+): Promise<BasicResponse<T>> {
+  return axios
+    .put(url, body, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+        ...header,
+      },
+    })
+    .then(
+      (res) =>
+        ({
+          data: res.data as T,
+          config: {
+            status: res.status,
+          },
+        } as BasicResponse<T>),
+    )
+    .catch((err: AxiosError) => {
+      return {
+        data: {} as T,
+        config: {
+          status: err.response?.status,
+        },
+      } as BasicResponse<T>;
+    });
+}
+
+export function requestPut<T>(
+  url: string,
+  header: object,
+  body: object,
+): Promise<BasicResponse<T>> {
+  return axios
+    .put(url, body, {
       headers: {
         'Content-Type': 'application/json',
         ...header,
