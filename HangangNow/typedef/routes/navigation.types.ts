@@ -21,7 +21,11 @@ export type MainStackParamListTypes = {
   mbtiInspect: undefined;
   mbtiResult: {
     prevUid: string | null;
-    result: MbtiResultTypes | null;
+    result: string | null;
+  };
+  setting: undefined;
+  calendarDateDetail: {
+    date: number;
   };
 };
 

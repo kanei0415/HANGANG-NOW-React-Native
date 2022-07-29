@@ -25,6 +25,14 @@ const images = {
     Diary: {
       triangle: require('./images/components/Diary/ic-tri.png'),
     },
+    MyPage: {
+      placeholder: require('./images/components/MyPage/ic-ph-profile.png'),
+      rightArrow: require('./images/components/MyPage/ic-right-arrow.png'),
+      setting: require('./images/components/MyPage/ic-setting.png'),
+      prev: require('./images/components/MyPage/ic-prev.png'),
+      next: require('./images/components/MyPage/ic-next.png'),
+      add: require('./images/components/MyPage/ic-add.png'),
+    },
   },
 } as const;
 

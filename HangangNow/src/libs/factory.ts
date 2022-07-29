@@ -1,3 +1,5 @@
+const DAY_KOR = ['일', '월', '화', '수', '목', '금', '토'];
+
 export function formatDate(date: Date, format?: string) {
   let result = format ?? 'YYYY-MM-DD HH:mm:ss';
 
@@ -20,6 +22,8 @@ export function formatDate(date: Date, format?: string) {
 
   result = result.replace('SS', date.getSeconds() + '');
   result = result.replace('ss', date.getSeconds() + '');
+
+  result = result.replace('day', DAY_KOR[date.getDay()]);
 
   return result;
 }

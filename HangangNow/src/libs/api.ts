@@ -58,6 +58,9 @@ export const apiRoute = {
     signup: '/auth/signup',
     kakao: '/auth/kakao?',
   },
+  memo: {
+    loadMemo: '/memos',
+  },
 };
 
 export type BasicResponse<T> = {

@@ -7,6 +7,8 @@ import LoginContainer from '@components/Login/containers/LoginContainer';
 import MbtiContainer from '@components/Mbti/containers/MbtiContainer';
 import MbtiInspectContaienr from '@components/Mbti/containers/MbtiInspectContainer';
 import MbtiResultCotainer from '@components/Mbti/containers/MbtiResultContainer';
+import CalendarDateDetailContainer from '@components/MyPage/containers/CalendarDateDetailContainer';
+import SettingContainer from '@components/Setting/containers/SettingContainer';
 import SignupContainer from '@components/Signup/containers/SignupContainer';
 import SignupDoneContainer from '@components/Signup/containers/SignupDoneContainer';
 import SignupStep2Container from '@components/Signup/containers/SignupStep2Container';
@@ -54,6 +56,14 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
         <Stack.Screen name='mbti' component={MbtiContainer} />
         <Stack.Screen name='mbtiInspect' component={MbtiInspectContaienr} />
         <Stack.Screen name='mbtiResult' component={MbtiResultCotainer} />
+      </Stack.Group>
+
+      <Stack.Group>
+        <Stack.Screen name='setting' component={SettingContainer} />
+        <Stack.Screen
+          name='calendarDateDetail'
+          component={CalendarDateDetailContainer}
+        />
       </Stack.Group>
     </Stack.Navigator>
   );
