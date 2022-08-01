@@ -3,6 +3,7 @@ import NotoSans from '@assets/font';
 import images from '@assets/images';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import { formatDate } from '@libs/factory';
+import { ProfileTypes } from '@typedef/components/common/common.types';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -14,6 +15,7 @@ type Props = {
   onPrevMonthPressed: () => void;
   onNextMonthPressed: () => void;
   onDateItemPressed: (d: Date) => void;
+  profile: ProfileTypes;
 };
 
 const MyPage = ({
@@ -23,6 +25,7 @@ const MyPage = ({
   onPrevMonthPressed,
   onNextMonthPressed,
   onDateItemPressed,
+  profile,
 }: Props) => {
   return (
     <KeyboardAwareScrollView
@@ -49,7 +52,7 @@ const MyPage = ({
               {'헛! 둘! 헛! 둘! 활동가 유형'}
             </Text>
             <Text style={[NotoSans.Medium, NotoSans.f_18]}>
-              <Text style={{ color: colors.main.primary }}>{'김민지'}</Text>
+              <Text style={{ color: colors.main.primary }}>{profile.name}</Text>
               <Text style={{ color: colors.typo.black }}>{' 님'}</Text>
             </Text>
           </View>

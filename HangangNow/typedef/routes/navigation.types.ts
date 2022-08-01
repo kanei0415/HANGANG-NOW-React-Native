@@ -26,6 +26,7 @@ export type MainStackParamListTypes = {
   setting: undefined;
   calendarDateDetail: {
     date: number;
+    prev: string;
   };
 };
 

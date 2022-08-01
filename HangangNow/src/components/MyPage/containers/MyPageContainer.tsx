@@ -1,6 +1,9 @@
+import useAuth from '@hooks/store/useAuth';
+import useProfile from '@hooks/store/useProfile';
+import { apiRoute, requestSecureGet } from '@libs/api';
 import { getCalendarDateList } from '@libs/calendar';
-import { formatDate } from '@libs/factory';
 import { useNavigation } from '@react-navigation/native';
+import { MemoTypes } from '@typedef/components/MyPage/mypage.types';
 import { MainStackNavigationTypes } from '@typedef/routes/navigation.types';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import MyPage from '../MyPage';
@@ -8,9 +11,13 @@ import MyPage from '../MyPage';
 const MyPageContainer = () => {
   const navigation = useNavigation<MainStackNavigationTypes>();
 
+  const { loginResponse } = useAuth();
+
+  const { profile } = useProfile();
+
   const [date, setDate] = useState(new Date());
 
-  const [memos, setMemos] = useState<any[]>([]);
+  const [memos, setMemos] = useState<MemoTypes[]>([]);
 
   const calendarList = useMemo(() => getCalendarDateList(date), [date]);
 
@@ -38,22 +45,35 @@ const MyPageContainer = () => {
     });
   }, []);
 
-  const loadMemos = useCallback(() => {}, [date]);
+  const loadMemos = useCallback(async () => {
+    if (!loginResponse?.accessToken) {
+      return;
+    }
+
+    const {} = await requestSecureGet<any>(
+      apiRoute.memo.loadMemo,
+      {},
+      loginResponse.accessToken,
+    );
+  }, [date]);
 
   const onDateItemPressed = useCallback(
     (date: Date) => {
       navigation.navigate('calendarDateDetail', {
         date: date.getTime(),
+        prev: JSON.stringify(
+          memos.filter((item) => new Date(item.memoDate) === date),
+        ),
       });
     },
-    [navigation],
+    [navigation, memos],
   );
 
   useEffect(() => {
     loadMemos();
   }, [loadMemos]);
 
-  return (
+  return profile ? (
     <MyPage
       date={date}
       calendarList={calendarList}
@@ -61,8 +81,9 @@ const MyPageContainer = () => {
       onPrevMonthPressed={onPrevMonthPressed}
       onNextMonthPressed={onNextMonthPressed}
       onDateItemPressed={onDateItemPressed}
+      profile={profile}
     />
-  );
+  ) : null;
 };
 
 export default MyPageContainer;

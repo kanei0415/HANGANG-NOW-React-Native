@@ -59,12 +59,6 @@ const SignupStep2Container = () => {
     [loginId],
   );
 
-  const loginIdDone = useMemo(() => {
-    return (
-      loginIdValid && loginIdDuplicatedChecked && loginIdDuplicated === false
-    );
-  }, [loginIdValid, loginIdDuplicatedChecked, loginIdDuplicated]);
-
   const passwordValid = useMemo(
     () =>
       password !== null && password !== '' && check(password, REGEX.password),
@@ -74,11 +68,6 @@ const SignupStep2Container = () => {
   const passwordMatched = useMemo(
     () => password === passwordConfirm,
     [password, passwordConfirm],
-  );
-
-  const passwordDone = useMemo(
-    () => passwordValid && passwordMatched,
-    [passwordValid],
   );
 
   const emailValid = useMemo(
@@ -101,18 +90,11 @@ const SignupStep2Container = () => {
     [emailValid, codeSended],
   );
 
-  const emailDone = useMemo(() => {
-    return emailValid && emailCodeChecked;
-  }, [emailValid, emailCodeChecked]);
-
-  const nextBtnAvailable = useMemo(
-    () => emailDone && passwordDone && loginIdDone,
-    [emailDone, passwordDone, loginIdDone],
-  );
-
   const emailCodeCheckDone = useMemo(() => {
     return emailValid && codeValid && emailCodeChecked;
   }, [emailValid, codeValid, emailCodeChecked]);
+
+  const nextBtnAvailable = useMemo(() => emailCodeChecked, [emailCodeChecked]);
 
   const onNextBtnPressed = useCallback(() => {
     if (nextBtnAvailable && loginId && password && email) {
@@ -211,7 +193,7 @@ const SignupStep2Container = () => {
         alertMessage('인증번호 전송에 실패했습니다');
       }
     }
-  }, [onEmailDuplicatedCheck]);
+  }, [email, onEmailDuplicatedCheck]);
 
   const onCodeCheckPressed = useCallback(async () => {
     if (!email || !code || !emailValid || !codeValid) {
@@ -234,6 +216,11 @@ const SignupStep2Container = () => {
         setEmailInputDisabled({
           on: true,
           msg: email,
+        });
+
+        setEmailInputSuccess({
+          on: true,
+          msg: '이메일 인증이 완료 되었습니다',
         });
       }
     } else {

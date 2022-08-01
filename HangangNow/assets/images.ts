@@ -32,6 +32,7 @@ const images = {
       prev: require('./images/components/MyPage/ic-prev.png'),
       next: require('./images/components/MyPage/ic-next.png'),
       add: require('./images/components/MyPage/ic-add.png'),
+      checked: require('./images/components/MyPage/ic-checked.png'),
     },
   },
 } as const;

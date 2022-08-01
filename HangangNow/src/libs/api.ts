@@ -1,3 +1,7 @@
+import { AUTOLOGIN_STORAGE_KEY_VALUE } from '@hooks/storage/useAutoLogin';
+import { LOGIN_RESPONSE_STORAGE_KEY_VALUE } from '@hooks/storage/useLoginResponse';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LoginResponseBody } from '@typedef/components/Login/login.types';
 import axios, { AxiosError } from 'axios';
 
 export const API_ORIGIN =
@@ -29,9 +33,44 @@ axios.interceptors.request.use(
 );
 
 axios.interceptors.response.use(
-  (res) => {
+  async (res) => {
     if (process.env.NODE_ENV === 'development') {
       console.log('[AxiosResponse]', res);
+    }
+
+    if (res.status === 401) {
+      const loginResponse = await AsyncStorage.getItem(
+        LOGIN_RESPONSE_STORAGE_KEY_VALUE,
+      );
+
+      const autologin = await AsyncStorage.getItem(AUTOLOGIN_STORAGE_KEY_VALUE);
+
+      if (!loginResponse) {
+        return res;
+      }
+
+      const { accessToken, refreshToken } = JSON.parse(
+        loginResponse,
+      ) as LoginResponseBody;
+
+      const { data, config } = await requestPost<LoginResponseBody>(
+        apiRoute.auth.refresh,
+        {},
+        {
+          accessToken,
+          refreshToken,
+          autoLogin: JSON.parse(autologin ?? 'false'),
+        },
+      );
+
+      if (config.status === 200) {
+        await AsyncStorage.setItem(
+          LOGIN_RESPONSE_STORAGE_KEY_VALUE,
+          JSON.stringify(data),
+        );
+      } else {
+        await AsyncStorage.clear();
+      }
     }
 
     return res;
@@ -43,6 +82,9 @@ axios.interceptors.response.use(
 
     return err.response;
   },
+  {
+    synchronous: true,
+  },
 );
 
 export const apiRoute = {
@@ -51,6 +93,7 @@ export const apiRoute = {
     checkEmail: '/auth/dup/email',
     checkId: '/auth/dup/loginId',
     authCodeSend: '/auth/emailAuth',
+    checkCode: '/auth/emailAuth/code',
     login: '/auth/login',
     findId: '/auth/loginId',
     findPassword: 'auth/password',
@@ -58,8 +101,12 @@ export const apiRoute = {
     signup: '/auth/signup',
     kakao: '/auth/kakao?',
   },
+  member: {
+    loadProfile: '/members',
+  },
   memo: {
     loadMemo: '/memos',
+    addMemo: '/memos',
   },
 };
 

@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useCallback } from 'react';
 
-const AUTOLOGIN_STORAGE_KEY_VALUE = '@autologin';
+export const AUTOLOGIN_STORAGE_KEY_VALUE = '@autologin';
 
 export default function useAutoLogin() {
   const __getAutoLoginFromStorage = useCallback(async () => {

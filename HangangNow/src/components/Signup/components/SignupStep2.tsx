@@ -185,13 +185,15 @@ const SignupStep2 = ({
             placeHolder='예: ABC1234@naver.com'
             containerStyle={{ flex: 1 }}
           />
-          <View style={{ width: 80, marginLeft: 12 }}>
-            <CButton
-              label={emailValid && codeSendAvailable ? '재전송' : '인증 하기'}
-              disabled={!emailValid}
-              onPressed={onEmailCheckPressed}
-            />
-          </View>
+          {!emailCodeCheckDone && (
+            <View style={{ width: 80, marginLeft: 12 }}>
+              <CButton
+                label={emailValid && codeSendAvailable ? '재전송' : '인증 하기'}
+                disabled={!emailValid}
+                onPressed={onEmailCheckPressed}
+              />
+            </View>
+          )}
         </View>
         {!emailCodeCheckDone && (
           <View style={{ flexDirection: 'row', marginTop: 24 }}>
