@@ -1,6 +1,7 @@
-import { AUTOLOGIN_STORAGE_KEY_VALUE } from '@hooks/storage/useAutoLogin';
+import { store } from '@components/App';
 import { LOGIN_RESPONSE_STORAGE_KEY_VALUE } from '@hooks/storage/useLoginResponse';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { UPDATE_AUTH_ACTION_TYPE } from '@store/auth/modules/actionTypes';
 import { LoginResponseBody } from '@typedef/components/Login/login.types';
 import axios, { AxiosError } from 'axios';
 
@@ -39,37 +40,37 @@ axios.interceptors.response.use(
     }
 
     if (res.status === 401) {
-      const loginResponse = await AsyncStorage.getItem(
+      const stored = await AsyncStorage.getItem(
         LOGIN_RESPONSE_STORAGE_KEY_VALUE,
       );
 
-      const autologin = await AsyncStorage.getItem(AUTOLOGIN_STORAGE_KEY_VALUE);
-
-      if (!loginResponse) {
+      if (!stored) {
         return res;
       }
 
       const { accessToken, refreshToken } = JSON.parse(
-        loginResponse,
+        stored,
       ) as LoginResponseBody;
 
-      const { data, config } = await requestPost<LoginResponseBody>(
+      const { config, data } = await requestPost<LoginResponseBody>(
         apiRoute.auth.refresh,
         {},
         {
           accessToken,
           refreshToken,
-          autoLogin: JSON.parse(autologin ?? 'false'),
+          autoLogin: true,
         },
       );
 
       if (config.status === 200) {
-        await AsyncStorage.setItem(
+        store.dispatch({ type: UPDATE_AUTH_ACTION_TYPE, payload: data });
+
+        AsyncStorage.setItem(
           LOGIN_RESPONSE_STORAGE_KEY_VALUE,
           JSON.stringify(data),
         );
       } else {
-        await AsyncStorage.clear();
+        AsyncStorage.clear();
       }
     }
 
@@ -103,10 +104,22 @@ export const apiRoute = {
   },
   member: {
     loadProfile: '/members',
+    updateAlarm: '/members/agree/alarm',
+    updateMarketing: '/members/agree/marketing',
+    updateProfil: '/members/photos',
+    updatePassword: '/members/password',
+    deleteMember: '/members',
   },
   memo: {
     loadMemo: '/memos',
     addMemo: '/memos',
+  },
+  diary: {
+    loadDiary: '/diary',
+    loadDiaryDate: '/diary/date',
+  },
+  hangangNow: {
+    loadData: '/hangangnow',
   },
 };
 
@@ -379,39 +392,6 @@ export function requestSecurePatch<T>(
     .patch(url, body, {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-        ...header,
-      },
-    })
-    .then(
-      (res) =>
-        ({
-          data: res.data as T,
-          config: {
-            status: res.status,
-          },
-        } as BasicResponse<T>),
-    )
-    .catch((err: AxiosError) => {
-      return {
-        data: {} as T,
-        config: {
-          status: err.response?.status,
-        },
-      } as BasicResponse<T>;
-    });
-}
-
-export function requestMultipart<T>(
-  url: string,
-  header: object,
-  body: FormData,
-  token: string,
-): Promise<BasicResponse<T>> {
-  return axios
-    .post(url, body, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
         Authorization: `Bearer ${token}`,
         ...header,
       },

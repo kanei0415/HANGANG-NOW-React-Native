@@ -25,6 +25,9 @@ const images = {
     Diary: {
       triangle: require('./images/components/Diary/ic-tri.png'),
     },
+    HangangNow: {
+      char: require('./images/components/HangangNow/ic-char.png'),
+    },
     MyPage: {
       placeholder: require('./images/components/MyPage/ic-ph-profile.png'),
       rightArrow: require('./images/components/MyPage/ic-right-arrow.png'),
@@ -33,6 +36,14 @@ const images = {
       next: require('./images/components/MyPage/ic-next.png'),
       add: require('./images/components/MyPage/ic-add.png'),
       checked: require('./images/components/MyPage/ic-checked.png'),
+    },
+    Home: {
+      mainbanner: require('./images/components/Home/ic-home-banner.png'),
+      prev: require('./images/components/Home/ic-prev.png'),
+      next: require('./images/components/Home/ic-next.png'),
+    },
+    Leaflet: {
+      downArrow: require('./images/components/Leaflet/ic-down-arrow.png'),
     },
   },
 } as const;

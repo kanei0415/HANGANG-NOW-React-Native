@@ -1,4 +1,7 @@
-import { updateProfileAction } from '@store/profile/actions';
+import {
+  updatePartialProfileActionTypes,
+  updateProfileAction,
+} from '@store/profile/actions';
 import { RootState } from '@store/rootReducer';
 import { ProfileTypes } from '@typedef/components/common/common.types';
 import { useCallback } from 'react';
@@ -15,8 +18,15 @@ export default function useProfile() {
     [dispatch],
   );
 
+  const __updatePartialProfileFromHooks = useCallback(
+    (diff: Partial<ProfileTypes>) =>
+      dispatch(updatePartialProfileActionTypes(diff)),
+    [dispatch],
+  );
+
   return {
     profile,
     __updateProfileFromHooks,
+    __updatePartialProfileFromHooks,
   };
 }

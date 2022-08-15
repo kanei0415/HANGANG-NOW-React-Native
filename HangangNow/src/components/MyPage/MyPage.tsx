@@ -4,11 +4,13 @@ import images from '@assets/images';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import { formatDate } from '@libs/factory';
 import { ProfileTypes } from '@typedef/components/common/common.types';
+import { MemoTypes } from '@typedef/components/MyPage/mypage.types';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 type Props = {
+  memoList: MemoTypes[];
   date: Date;
   calendarList: Date[][];
   onSettingPressed: () => void;
@@ -16,9 +18,11 @@ type Props = {
   onNextMonthPressed: () => void;
   onDateItemPressed: (d: Date) => void;
   profile: ProfileTypes;
+  onDiaryPressed: () => void;
 };
 
 const MyPage = ({
+  memoList,
   date,
   calendarList,
   onSettingPressed,
@@ -26,6 +30,7 @@ const MyPage = ({
   onNextMonthPressed,
   onDateItemPressed,
   profile,
+  onDiaryPressed,
 }: Props) => {
   return (
     <KeyboardAwareScrollView
@@ -36,7 +41,14 @@ const MyPage = ({
       <CHeaderContainer title='마이페이지' showBackPress={false} />
       <View style={{ padding: 20 }}>
         <View style={{ flexDirection: 'row' }}>
-          <Image source={images.components.MyPage.placeholder} />
+          <Image
+            style={{ width: 56, height: 56, borderRadius: 56 }}
+            source={
+              profile.photoUrl
+                ? { uri: profile.photoUrl }
+                : images.components.MyPage.placeholder
+            }
+          />
           <View
             style={{
               flex: 1,
@@ -49,7 +61,7 @@ const MyPage = ({
                 NotoSans.f_18,
                 { color: colors.typo.black },
               ]}>
-              {'헛! 둘! 헛! 둘! 활동가 유형'}
+              {profile.memberMBTI || '검사를 통해 유형을 알아보세요'}
             </Text>
             <Text style={[NotoSans.Medium, NotoSans.f_18]}>
               <Text style={{ color: colors.main.primary }}>{profile.name}</Text>
@@ -203,23 +215,104 @@ const MyPage = ({
                   disabled={date.getMonth() !== d.getMonth()}
                   onPress={() => onDateItemPressed(d)}
                   style={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: 24,
+                    overflow: 'hidden',
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
                   }}>
-                  <Text
-                    style={[
-                      NotoSans.Medium,
-                      NotoSans.f_15,
-                      { color: colors.typo.black },
-                    ]}>
-                    {date.getMonth() === d.getMonth() ? d.getDate() + '' : ''}
-                  </Text>
+                  <View
+                    style={{
+                      width: 24,
+                      height: 24,
+                      borderRadius: 24,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: memoList.find(
+                        (val) => val.memoDate === formatDate(d, 'YYYY-MM-dd'),
+                      )?.color,
+                    }}>
+                    <Text
+                      style={[
+                        NotoSans.Medium,
+                        NotoSans.f_15,
+                        {
+                          color: memoList.find(
+                            (val) =>
+                              val.memoDate === formatDate(d, 'YYYY-MM-dd'),
+                          )
+                            ? colors.default.white
+                            : colors.typo.black,
+                        },
+                      ]}>
+                      {date.getMonth() === d.getMonth() ? d.getDate() + '' : ''}
+                    </Text>
+                  </View>
                 </TouchableOpacity>
               ))}
             </View>
           ))}
         </View>
+      </View>
+      <View
+        style={{
+          marginVertical: 14,
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          alignItems: 'center',
+        }}>
+        <TouchableOpacity style={{ alignItems: 'center' }}>
+          <View
+            style={{
+              width: 48,
+              height: 48,
+              backgroundColor: '#dbdbdb',
+            }}></View>
+          <Text
+            style={[
+              NotoSans.Medium,
+              NotoSans.f_13,
+              { color: colors.main.primary, marginTop: 4 },
+            ]}>
+            {'한강유형검사'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={onDiaryPressed}
+          style={{ alignItems: 'center' }}>
+          <View
+            style={{
+              width: 48,
+              height: 48,
+              backgroundColor: '#dbdbdb',
+            }}></View>
+          <Text
+            style={[
+              NotoSans.Medium,
+              NotoSans.f_13,
+              { color: colors.main.primary, marginTop: 4 },
+            ]}>
+            {'한강일기'}
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={{ alignItems: 'center' }}>
+          <View
+            style={{
+              width: 48,
+              height: 48,
+              backgroundColor: '#dbdbdb',
+            }}></View>
+          <Text
+            style={[
+              NotoSans.Medium,
+              NotoSans.f_13,
+              { color: colors.main.primary, marginTop: 4 },
+            ]}>
+            {'한강유형검사'}
+          </Text>
+        </TouchableOpacity>
       </View>
     </KeyboardAwareScrollView>
   );

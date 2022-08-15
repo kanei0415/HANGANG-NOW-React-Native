@@ -53,7 +53,6 @@
       "@routes/*": ["./src/routes/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@store/*": ["./src/store/*"],
-      "@machines/*": ["./src/machines/*"],
       "@assets/*": ["./assets/*"],
       "@typedef/*": ["./typedef/*"]
     },

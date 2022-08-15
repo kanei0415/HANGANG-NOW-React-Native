@@ -1,6 +1,9 @@
 import { ProfileTypes } from '@typedef/components/common/common.types';
 import { ProfileActionTypes } from './actions';
-import { UPDATE_PROFILE_ACTION_TYPES } from './modules/actionTypes';
+import {
+  UPDATE_PARTIAL_PROFILE_ACTION_TYPES,
+  UPDATE_PROFILE_ACTION_TYPES,
+} from './modules/actionTypes';
 
 export type ProfileStateType = {
   profile: ProfileTypes | null;
@@ -18,6 +21,12 @@ const profileReducer = (
     case UPDATE_PROFILE_ACTION_TYPES:
       return {
         profile: payload,
+      };
+
+    case UPDATE_PARTIAL_PROFILE_ACTION_TYPES:
+      return {
+        ...prev,
+        ...payload,
       };
 
     default:

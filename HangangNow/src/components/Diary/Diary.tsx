@@ -25,6 +25,7 @@ type Props = {
   onDateCanceled: () => void;
   onShowAllPressed: () => void;
   onPhotoSelectPressed: () => void;
+  mode: 'add' | 'show';
 };
 
 const Diary = ({
@@ -40,6 +41,7 @@ const Diary = ({
   onDateCanceled,
   onShowAllPressed,
   onPhotoSelectPressed,
+  mode,
 }: Props) => {
   return (
     <>
@@ -87,7 +89,7 @@ const Diary = ({
           </TouchableOpacity>
         </View>
         {selectedDate ? (
-          selectedDateDiary ? (
+          mode === 'show' ? (
             <View style={{ flex: 1, paddingHorizontal: 20 }}>
               <View
                 style={{

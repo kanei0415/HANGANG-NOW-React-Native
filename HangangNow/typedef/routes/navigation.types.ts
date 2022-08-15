@@ -1,5 +1,4 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { MbtiResultTypes } from '@typedef/components/Mbti/mbti.types';
 
 export type MainStackParamListTypes = {
   login: undefined;
@@ -26,12 +25,19 @@ export type MainStackParamListTypes = {
   setting: undefined;
   calendarDateDetail: {
     date: number;
-    prev: string;
   };
+  deleteAccount: undefined;
+  deleteAccountStep2: undefined;
+  leaflet: undefined;
+  hangangDetail: undefined;
+  partnersEnroll: undefined;
 };
 
 export type MainTabParamListTypes = {
+  hangangNow: undefined;
+  trip: undefined;
   home: undefined;
+  facility: undefined;
   mypage: undefined;
 };
 

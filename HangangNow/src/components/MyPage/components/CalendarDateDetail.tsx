@@ -5,7 +5,7 @@ import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import CInputContainer from '@components/common/CInput/containers/CInputContainer';
 import { formatDate } from '@libs/factory';
-import { TabTypes } from '@typedef/components/MyPage/mypage.types';
+import { MemoTypes, TabTypes } from '@typedef/components/MyPage/mypage.types';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -29,6 +29,7 @@ const COLOR_LIST_2 = [
 ];
 
 type Props = {
+  memos: MemoTypes[];
   date: Date;
   tab: TabTypes;
   onMemoAddPressed: () => void;
@@ -40,6 +41,7 @@ type Props = {
 };
 
 const CalendarDateDetail = ({
+  memos,
   date,
   tab,
   onMemoAddPressed,
@@ -54,8 +56,7 @@ const CalendarDateDetail = ({
       style={{
         flex: 1,
         backgroundColor: colors.default.white,
-      }}
-      contentContainerStyle={{ flex: 1 }}>
+      }}>
       <CHeaderContainer title={formatDate(date, 'YYYY년 MM월')} />
       <View style={{ flex: 1, padding: 20 }}>
         <Text
@@ -175,14 +176,41 @@ const CalendarDateDetail = ({
         )}
         {tab === 'show' && (
           <>
-            <View
-              style={{
-                borderRadius: 4,
-                backgroundColor: '#f1f1f1',
-                paddingVertical: 20,
-                paddingHorizontal: 12,
-                marginTop: 16,
-              }}></View>
+            {memos.length !== 0 && (
+              <View
+                style={{
+                  borderRadius: 4,
+                  backgroundColor: '#f1f1f1',
+                  paddingVertical: 20,
+                  paddingHorizontal: 12,
+                  marginTop: 16,
+                }}>
+                {memos.map((m, i) => (
+                  <View
+                    key={i}
+                    style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <View
+                      style={{
+                        width: 20,
+                        height: 20,
+                        backgroundColor: m.color,
+                        borderRadius: 10,
+                      }}></View>
+                    <Text
+                      style={[
+                        NotoSans.Medium,
+                        NotoSans.f_15,
+                        {
+                          color: m.color,
+                          marginLeft: 12,
+                        },
+                      ]}>
+                      {m.content}
+                    </Text>
+                  </View>
+                ))}
+              </View>
+            )}
             <TouchableOpacity
               onPress={onMemoAddPressed}
               style={{ alignItems: 'center', marginTop: 24 }}>

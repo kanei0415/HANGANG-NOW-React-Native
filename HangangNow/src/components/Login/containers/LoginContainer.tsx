@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native';
 import { MainStackNavigationTypes } from '@typedef/routes/navigation.types';
 import React, { useCallback, useState } from 'react';
 import Login from '../Login';
-import { login } from '@react-native-seoul/kakao-login';
+import { login, getProfile } from '@react-native-seoul/kakao-login';
 import { apiRoute, requestPost } from '@libs/api';
 import { LoginResponseBody } from '@typedef/components/Login/login.types';
 import useAutoLogin from '@hooks/storage/useAutoLogin';
@@ -10,6 +10,7 @@ import useLoginResponse from '@hooks/storage/useLoginResponse';
 import useLogin from '@hooks/store/useLogin';
 import useAuth from '@hooks/store/useAuth';
 import { alertMessage } from '@libs/alert';
+import useSignup from '@hooks/store/useSignup';
 
 const LoginContainer = () => {
   const navigation = useNavigation<MainStackNavigationTypes>();
@@ -19,6 +20,8 @@ const LoginContainer = () => {
 
   const { __setAutoLoginFromStorage } = useAutoLogin();
   const { __setLoginResponseFromStorage } = useLoginResponse();
+
+  const { __setupSignupTypeFromHooks } = useSignup();
 
   const [autoLoginChecked, setAutoLoginChecked] = useState(false);
 
@@ -63,16 +66,41 @@ const LoginContainer = () => {
   }, [navigation]);
 
   const onKakaoSignupPressed = useCallback(async () => {
-    const token = await login().catch((err) => {
+    const res = await login().catch((err) => {
       if (err + '' === 'Error: user cancelled.') {
         return null;
       }
     });
 
-    if (!token) {
+    if (!res) {
       return;
     }
-  }, []);
+
+    const { data, config } = await requestPost<LoginResponseBody>(
+      apiRoute.auth.kakao + `accessToken=${res.accessToken}&autoLogin=true`,
+      {},
+      {},
+    );
+
+    if (config.status === 200) {
+      __updateLoginResponseFromHooks(data);
+      __updateLoginFromHooks(true);
+
+      __setAutoLoginFromStorage(true);
+      __setLoginResponseFromStorage(data);
+
+      navigation.reset({
+        routes: [{ name: 'mainTab' }],
+      });
+    }
+  }, [
+    __updateLoginResponseFromHooks,
+    __updateLoginFromHooks,
+    __setAutoLoginFromStorage,
+    __setLoginResponseFromStorage,
+    __setupSignupTypeFromHooks,
+    navigation,
+  ]);
 
   const onFindIDPressed = useCallback(
     () => navigation.navigate('findID'),

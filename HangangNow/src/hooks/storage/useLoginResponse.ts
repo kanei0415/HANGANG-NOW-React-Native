@@ -12,7 +12,7 @@ export default function useLoginResponse() {
   }, []);
 
   const __setLoginResponseFromStorage = useCallback(
-    async (loginResponseBody: LoginResponseBody) => {
+    async (loginResponseBody: LoginResponseBody | null) => {
       await AsyncStorage.setItem(
         LOGIN_RESPONSE_STORAGE_KEY_VALUE,
         JSON.stringify(loginResponseBody),

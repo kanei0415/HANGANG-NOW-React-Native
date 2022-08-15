@@ -1,23 +1,32 @@
+import colors from '@assets/colors';
+import useLoginResponse from '@hooks/storage/useLoginResponse';
 import useAuth from '@hooks/store/useAuth';
+import useMemoList from '@hooks/store/useMemoList';
 import useProfile from '@hooks/store/useProfile';
-import { apiRoute, requestSecureGet } from '@libs/api';
+import { alertMessage } from '@libs/alert';
+import { apiRoute, requestPost, requestSecureGet } from '@libs/api';
 import { getCalendarDateList } from '@libs/calendar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import { LoginResponseBody } from '@typedef/components/Login/login.types';
 import { MemoTypes } from '@typedef/components/MyPage/mypage.types';
 import { MainStackNavigationTypes } from '@typedef/routes/navigation.types';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { Text, View } from 'react-native';
 import MyPage from '../MyPage';
 
 const MyPageContainer = () => {
   const navigation = useNavigation<MainStackNavigationTypes>();
 
-  const { loginResponse } = useAuth();
+  const { loginResponse, __updateLoginResponseFromHooks } = useAuth();
+  const { __setLoginResponseFromStorage } = useLoginResponse();
 
   const { profile } = useProfile();
 
-  const [date, setDate] = useState(new Date());
+  const { memoList, __updateMemoListFromHooks, __clearMemoListFromHooks } =
+    useMemoList();
 
-  const [memos, setMemos] = useState<MemoTypes[]>([]);
+  const [date, setDate] = useState(new Date());
 
   const calendarList = useMemo(() => getCalendarDateList(date), [date]);
 
@@ -50,31 +59,89 @@ const MyPageContainer = () => {
       return;
     }
 
-    const {} = await requestSecureGet<any>(
-      apiRoute.memo.loadMemo,
-      {},
-      loginResponse.accessToken,
-    );
-  }, [date]);
+    const { data, config } = await requestSecureGet<{
+      data: MemoTypes[];
+    }>(apiRoute.memo.loadMemo, {}, loginResponse.accessToken);
+
+    if (config.status === 200) {
+      __updateMemoListFromHooks(data.data);
+    } else if (config.status === 401) {
+      const { data, config } = await requestPost<LoginResponseBody>(
+        apiRoute.auth.refresh,
+        {},
+        {
+          accessToken: loginResponse.accessToken,
+          refreshToken: loginResponse.refreshToken,
+          autoLogin: true,
+        },
+      );
+
+      if (config.status === 200) {
+        __updateLoginResponseFromHooks(data);
+        __setLoginResponseFromStorage(data);
+
+        const {
+          data: { data: memos },
+          config,
+        } = await requestSecureGet<{
+          data: MemoTypes[];
+        }>(apiRoute.memo.loadMemo, {}, loginResponse.accessToken);
+
+        if (config.status === 200) {
+          __updateMemoListFromHooks(memos);
+        } else {
+          alertMessage('로그인이 만료되었습니다');
+          AsyncStorage.clear();
+          navigation.reset({
+            routes: [{ name: 'login' }],
+          });
+        }
+      } else {
+        alertMessage('로그인이 만료되었습니다');
+        AsyncStorage.clear();
+        navigation.reset({
+          routes: [{ name: 'login' }],
+        });
+      }
+    } else {
+      alertMessage('로그인이 만료되었습니다');
+      AsyncStorage.clear();
+      navigation.reset({
+        routes: [{ name: 'login' }],
+      });
+    }
+  }, [
+    loginResponse,
+    date,
+    __updateLoginResponseFromHooks,
+    __setLoginResponseFromStorage,
+    navigation,
+  ]);
 
   const onDateItemPressed = useCallback(
     (date: Date) => {
       navigation.navigate('calendarDateDetail', {
         date: date.getTime(),
-        prev: JSON.stringify(
-          memos.filter((item) => new Date(item.memoDate) === date),
-        ),
       });
     },
-    [navigation, memos],
+    [navigation, memoList],
   );
+
+  const onDiaryPressed = useCallback(() => {
+    navigation.navigate('diary');
+  }, [navigation]);
 
   useEffect(() => {
     loadMemos();
-  }, [loadMemos]);
+
+    return () => {
+      __clearMemoListFromHooks();
+    };
+  }, [loadMemos, __clearMemoListFromHooks]);
 
   return profile ? (
     <MyPage
+      memoList={memoList}
       date={date}
       calendarList={calendarList}
       onSettingPressed={onSettingPressed}
@@ -82,8 +149,19 @@ const MyPageContainer = () => {
       onNextMonthPressed={onNextMonthPressed}
       onDateItemPressed={onDateItemPressed}
       profile={profile}
+      onDiaryPressed={onDiaryPressed}
     />
-  ) : null;
+  ) : (
+    <View
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1,
+        backgroundColor: colors.default.white,
+      }}>
+      <Text>{'프로필을 불러오지 못했습니다'}</Text>
+    </View>
+  );
 };
 
 export default MyPageContainer;

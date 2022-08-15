@@ -22,8 +22,6 @@ const FindPWContainer = () => {
   const [emailDuplicatedChecked, setEmailDuplicatedCheck] = useState(false);
   const [emailDuplicated, setEmailDuplicated] = useState<boolean | null>(null);
 
-  const [answer, setAnswer] = useState<string | null>(null);
-
   const [code, setCode] = useState<string | null>(null);
   const [codeSended, setCodeSended] = useState(false);
   const [codeInputError, setCodeInputError] = useState<InputResultTypes | null>(
@@ -117,8 +115,6 @@ const FindPWContainer = () => {
         alertMessage('인증번호가 전송되었습니다');
 
         setCodeSended(true);
-
-        setAnswer(data.code);
       } else {
         alertMessage('인증번호 전송에 실패했습니다');
       }
@@ -126,12 +122,37 @@ const FindPWContainer = () => {
   }, [onEmailDuplicatedCheck]);
 
   const onCodeCheckPressed = useCallback(async () => {
-    if (!email || !code || !emailValid || !codeValid || !answer) {
+    if (!email || !code || !emailValid || !codeValid) {
       return;
     }
 
-    setEmailCodeChecked(code === answer);
-  }, [email, code, emailValid, codeValid, answer]);
+    const { data, config } = await requestPost<boolean>(
+      apiRoute.auth.checkCode,
+      {},
+      {
+        email,
+        code,
+      },
+    );
+
+    if (config.status === 200) {
+      setEmailCodeChecked(data);
+
+      if (data) {
+        setEmailInputDisabled({
+          on: true,
+          msg: email,
+        });
+
+        setEmailInputSuccess({
+          on: true,
+          msg: '이메일 인증이 완료 되었습니다',
+        });
+      }
+    } else {
+      alertMessage('인증번호 확인에 실패했습니다');
+    }
+  }, [email, code, emailValid, codeValid]);
 
   const onDonePressed = useCallback(() => {
     if (!email) {

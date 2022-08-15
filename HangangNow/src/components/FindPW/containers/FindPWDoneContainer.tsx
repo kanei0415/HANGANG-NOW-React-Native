@@ -1,3 +1,4 @@
+import { alertMessage } from '@libs/alert';
 import { apiRoute, requestPut } from '@libs/api';
 import { check, REGEX, VALIDATION_FAILURE_MESSAGE } from '@libs/validation';
 import { useNavigation } from '@react-navigation/native';
@@ -41,13 +42,13 @@ const FindPWDoneContainer = ({
 
   const passwordDone = useMemo(
     () => passwordValid && passwordMatched,
-    [passwordValid],
+    [passwordValid, passwordMatched],
   );
 
   const doneBtnActive = useMemo(() => passwordDone, [passwordDone]);
 
-  const onDonePressed = useCallback(() => {
-    const {} = requestPut(
+  const onDonePressed = useCallback(async () => {
+    const { data, config } = await requestPut(
       apiRoute.auth.findPassword,
       {},
       {
@@ -57,9 +58,13 @@ const FindPWDoneContainer = ({
       },
     );
 
-    navigation.reset({
-      routes: [{ name: 'login' }],
-    });
+    if (config.status === 200) {
+      navigation.reset({
+        routes: [{ name: 'login' }],
+      });
+    } else {
+      alertMessage('비밀번호 변경에 실패했습니다.');
+    }
   }, [email, password, navigation]);
 
   useEffect(() => {

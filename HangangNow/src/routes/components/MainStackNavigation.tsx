@@ -1,13 +1,18 @@
+import DeleteAccountContainer from '@components/DeleteAccount/containers/DeleteAccountContainer';
+import DeleteAccountStep2Container from '@components/DeleteAccount/containers/DeleteAccountStep2Container';
 import DiaryContainer from '@components/Diary/containers/DiaryContainer';
 import FindIDContainer from '@components/FindID/containers/FindIDContainer';
 import FindIDStep2Container from '@components/FindID/containers/FindIDStep2Container';
 import FindPWContainer from '@components/FindPW/containers/FindPWContainer';
 import FindPWDoneContainer from '@components/FindPW/containers/FindPWDoneContainer';
+import HangangDetailContainer from '@components/HangangDetail/containers/HangangDetailContainer';
+import LeafletContainer from '@components/Leaflet/containers/LeafletContainer';
 import LoginContainer from '@components/Login/containers/LoginContainer';
 import MbtiContainer from '@components/Mbti/containers/MbtiContainer';
 import MbtiInspectContaienr from '@components/Mbti/containers/MbtiInspectContainer';
 import MbtiResultCotainer from '@components/Mbti/containers/MbtiResultContainer';
 import CalendarDateDetailContainer from '@components/MyPage/containers/CalendarDateDetailContainer';
+import PartnersEnrollContainer from '@components/PartnersEnroll/containers/PartnersEnrollContainer';
 import SettingContainer from '@components/Setting/containers/SettingContainer';
 import SignupContainer from '@components/Signup/containers/SignupContainer';
 import SignupDoneContainer from '@components/Signup/containers/SignupDoneContainer';
@@ -51,6 +56,9 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
         }}
       />
       <Stack.Screen name='diary' component={DiaryContainer} />
+      <Stack.Screen name='leaflet' component={LeafletContainer} />
+      <Stack.Screen name='hangangDetail' component={HangangDetailContainer} />
+      <Stack.Screen name='partnersEnroll' component={PartnersEnrollContainer} />
 
       <Stack.Group>
         <Stack.Screen name='mbti' component={MbtiContainer} />
@@ -63,6 +71,14 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
         <Stack.Screen
           name='calendarDateDetail'
           component={CalendarDateDetailContainer}
+        />
+      </Stack.Group>
+
+      <Stack.Group>
+        <Stack.Screen name='deleteAccount' component={DeleteAccountContainer} />
+        <Stack.Screen
+          name='deleteAccountStep2'
+          component={DeleteAccountStep2Container}
         />
       </Stack.Group>
     </Stack.Navigator>

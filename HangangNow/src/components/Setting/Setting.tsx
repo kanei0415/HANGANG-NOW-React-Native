@@ -8,8 +8,50 @@ import CToggleContainer from '@components/common/CToggle/containers/CToggleConta
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { Image as ImageType } from 'react-native-image-crop-picker';
+import { InputResultTypes } from '@typedef/components/common/cinput.types';
 
-const Setting = () => {
+type Props = {
+  profileImage: string | ImageType | null;
+  name: string;
+  email: string;
+  marketing: boolean | null;
+  alarm: boolean | null;
+  onProfileImageSelectPressed: () => void;
+  onMarketingPressed: (checked: boolean) => void;
+  onAlarmPressed: (checked: boolean) => void;
+  setPassword: React.Dispatch<React.SetStateAction<string | null>>;
+  passwordInputError: InputResultTypes | null;
+  passwordInputSuccess: InputResultTypes | null;
+  setPasswordConfirm: React.Dispatch<React.SetStateAction<string | null>>;
+  passwordConfirmInputError: InputResultTypes | null;
+  passwordConfirmInputSuccess: InputResultTypes | null;
+  activePasswordChangeBtn: boolean;
+  onPasswordChangePressed: () => void;
+  onDeleteAccountPressed: () => void;
+  onLogoutPressed: () => void;
+};
+
+const Setting = ({
+  profileImage,
+  name,
+  email,
+  marketing,
+  alarm,
+  onProfileImageSelectPressed,
+  onMarketingPressed,
+  onAlarmPressed,
+  setPassword,
+  passwordInputError,
+  passwordInputSuccess,
+  setPasswordConfirm,
+  passwordConfirmInputError,
+  passwordConfirmInputSuccess,
+  activePasswordChangeBtn,
+  onPasswordChangePressed,
+  onDeleteAccountPressed,
+  onLogoutPressed,
+}: Props) => {
   return (
     <KeyboardAwareScrollView
       style={{
@@ -32,6 +74,7 @@ const Setting = () => {
           style={{ marginTop: 20, flexDirection: 'row', alignItems: 'center' }}>
           <View>
             <TouchableOpacity
+              onPress={onProfileImageSelectPressed}
               style={{
                 width: 54,
                 height: 54,
@@ -40,7 +83,19 @@ const Setting = () => {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Image source={images.components.MyPage.placeholder} />
+              <Image
+                style={{ width: 54, height: 54 }}
+                source={
+                  profileImage
+                    ? {
+                        uri:
+                          typeof profileImage === 'string'
+                            ? profileImage
+                            : (profileImage as ImageType).path,
+                      }
+                    : images.components.MyPage.placeholder
+                }
+              />
               <View
                 style={{
                   width: 54,
@@ -70,7 +125,7 @@ const Setting = () => {
                 NotoSans.f_16,
                 { color: colors.typo.black },
               ]}>
-              {'김민지 님'}
+              {`${name} 님`}
             </Text>
           </View>
         </View>
@@ -89,7 +144,7 @@ const Setting = () => {
               NotoSans.f_14,
               { color: colors.typo.gray.middle, marginTop: 12 },
             ]}>
-            {'asadasd@sadas.cas'}
+            {email}
           </Text>
           <View
             style={{
@@ -126,10 +181,12 @@ const Setting = () => {
             {'영문 · 숫자를 포함하여 8~15 자로 입력해주세요'}
           </Text>
           <CInputContainer
-            containerStyle={{ marginTop: 10 }}
+            onChange={setPassword}
+            error={passwordInputError}
+            success={passwordInputSuccess}
             placeHolder='예: abcd1234'
-            onChange={() => {}}
             inputType='password'
+            containerStyle={{ marginTop: 12 }}
           />
         </View>
         <View style={{ marginTop: 20 }}>
@@ -162,12 +219,18 @@ const Setting = () => {
           <View style={{ marginTop: 12, flexDirection: 'row' }}>
             <CInputContainer
               containerStyle={{ flex: 1 }}
+              onChange={setPasswordConfirm}
+              error={passwordConfirmInputError}
+              success={passwordConfirmInputSuccess}
               placeHolder='예: abcd1234'
-              onChange={() => {}}
               inputType='password'
             />
             <View style={{ width: 70, marginLeft: 12 }}>
-              <CButton label='변경하기' />
+              <CButton
+                disabled={!activePasswordChangeBtn}
+                label='변경하기'
+                onPressed={onPasswordChangePressed}
+              />
             </View>
           </View>
         </View>
@@ -203,7 +266,10 @@ const Setting = () => {
             </Text>
           </View>
           <View>
-            <CToggleContainer />
+            <CToggleContainer
+              initialState={marketing || undefined}
+              onCheckedChange={onMarketingPressed}
+            />
           </View>
         </View>
         <View
@@ -213,6 +279,7 @@ const Setting = () => {
             backgroundColor: colors.main.gray,
           }}></View>
         <TouchableOpacity
+          onPress={onDeleteAccountPressed}
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -253,7 +320,10 @@ const Setting = () => {
             ]}>
             {'알림 설정'}
           </Text>
-          <CToggleContainer />
+          <CToggleContainer
+            initialState={alarm || undefined}
+            onCheckedChange={onAlarmPressed}
+          />
         </View>
         <View
           style={{
@@ -383,6 +453,7 @@ const Setting = () => {
             backgroundColor: colors.main.gray,
           }}></View>
         <TouchableOpacity
+          onPress={onLogoutPressed}
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
