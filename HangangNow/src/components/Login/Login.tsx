@@ -16,6 +16,8 @@ import {
 } from 'react-native';
 
 type Props = {
+  setLoginId: React.Dispatch<React.SetStateAction<string>>;
+  setPassword: React.Dispatch<React.SetStateAction<string>>;
   onEmailSignupPressed: () => void;
   onKakaoSignupPressed: () => void;
   autoLoginChecked: boolean;
@@ -28,6 +30,8 @@ type Props = {
 const { width, height } = Dimensions.get('window');
 
 const Login = ({
+  setLoginId,
+  setPassword,
   onEmailSignupPressed,
   onKakaoSignupPressed,
   autoLoginChecked,
@@ -73,10 +77,14 @@ const Login = ({
         </View>
         <View style={{ marginTop: 32 }}>
           <View>
-            <CInputContainer placeHolder='아이디를 입력해주세요' />
+            <CInputContainer
+              onChange={setLoginId}
+              placeHolder='아이디를 입력해주세요'
+            />
           </View>
           <View style={{ marginTop: 12 }}>
             <CInputContainer
+              onChange={setPassword}
               placeHolder='비밀번호를 입력해주세요'
               inputType='password'
             />

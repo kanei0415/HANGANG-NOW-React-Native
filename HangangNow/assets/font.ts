@@ -22,6 +22,10 @@ type FontContainerTypes = {
   f_18: FontSizeTypes;
   f_19: FontSizeTypes;
   f_20: FontSizeTypes;
+  f_21: FontSizeTypes;
+  f_22: FontSizeTypes;
+  f_23: FontSizeTypes;
+  f_24: FontSizeTypes;
 };
 
 export const Roboto: FontContainerTypes = {
@@ -81,6 +85,22 @@ export const Roboto: FontContainerTypes = {
     { fontSize: 20 },
     Platform.OS === 'android' && { includeFontPadding: false },
   ],
+  f_21: [
+    { fontSize: 21 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_22: [
+    { fontSize: 22 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_23: [
+    { fontSize: 23 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_24: [
+    { fontSize: 24 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
 };
 
 const NotoSans: FontContainerTypes = {
@@ -138,6 +158,22 @@ const NotoSans: FontContainerTypes = {
   ],
   f_20: [
     { fontSize: 20 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_21: [
+    { fontSize: 21 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_22: [
+    { fontSize: 22 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_23: [
+    { fontSize: 23 },
+    Platform.OS === 'android' && { includeFontPadding: false },
+  ],
+  f_24: [
+    { fontSize: 24 },
     Platform.OS === 'android' && { includeFontPadding: false },
   ],
 };

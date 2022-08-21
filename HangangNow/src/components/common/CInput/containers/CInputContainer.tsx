@@ -1,3 +1,4 @@
+import { InputResultTypes } from '@typedef/components/common/cinput.types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { KeyboardType, StyleProp, TextInput, ViewStyle } from 'react-native';
 import CInput from '../CInput';
@@ -11,14 +12,9 @@ type Props = {
   label?: string;
   keyboardType?: KeyboardType;
   inputType?: 'default' | 'password' | 'datetime';
-  success?: {
-    on: boolean;
-    msg: string;
-  };
-  error?: {
-    on: boolean;
-    msg: string;
-  };
+  success?: InputResultTypes | null;
+  error?: InputResultTypes | null;
+  disabled?: InputResultTypes | null;
 };
 
 const CInputContainer = ({
@@ -30,14 +26,9 @@ const CInputContainer = ({
   label = '',
   keyboardType = 'default',
   inputType = 'default',
-  success = {
-    on: false,
-    msg: '',
-  },
-  error = {
-    on: false,
-    msg: '',
-  },
+  success,
+  error,
+  disabled,
 }: Props) => {
   const [input, setInput] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -76,6 +67,12 @@ const CInputContainer = ({
     onChange(input);
   }, [onChange, input]);
 
+  useEffect(() => {
+    if (disabled && disabled.on) {
+      setInput(disabled?.msg);
+    }
+  }, [disabled]);
+
   return (
     <CInput
       defaultValue={forceInput}
@@ -91,8 +88,24 @@ const CInputContainer = ({
       inputType={inputType}
       passwordVisible={passwordVisible}
       onPasswordIconPressed={onPasswordIconPressed}
-      success={success}
-      error={error}
+      success={
+        success || {
+          on: false,
+          msg: '',
+        }
+      }
+      error={
+        error || {
+          on: false,
+          msg: '',
+        }
+      }
+      disabled={
+        disabled || {
+          on: false,
+          msg: '',
+        }
+      }
     />
   );
 };

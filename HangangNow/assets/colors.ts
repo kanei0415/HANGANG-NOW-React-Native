@@ -1,6 +1,9 @@
 const colors = {
   background: {
     white: '#FFFFFF',
+    gray: {
+      light: '#f1f1f1',
+    },
   },
   main: {
     primary: '#3DC8E4',
@@ -17,6 +20,7 @@ const colors = {
     },
     white: '#FFFFFF',
     black: '#111111',
+    red: '#f85757',
   },
   default: {
     black: '#000000',

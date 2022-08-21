@@ -1,3 +1,5 @@
+const DAY_KOR = ['일', '월', '화', '수', '목', '금', '토'];
+
 export function formatDate(date: Date, format?: string) {
   let result = format ?? 'YYYY-MM-DD HH:mm:ss';
 
@@ -10,8 +12,14 @@ export function formatDate(date: Date, format?: string) {
     `${date.getMonth() + 1 < 10 ? 0 : ''}${date.getMonth() + 1}`,
   );
 
-  result = result.replace('DD', date.getDate() + '');
-  result = result.replace('dd', date.getDate() + '');
+  result = result.replace(
+    'DD',
+    `${date.getDate() < 10 ? 0 : ''}${date.getDate()}`,
+  );
+  result = result.replace(
+    'dd',
+    `${date.getDate() < 10 ? 0 : ''}${date.getDate()}`,
+  );
 
   result = result.replace('HH', date.getHours() + '');
   result = result.replace('hh', date.getHours() + '');
@@ -20,6 +28,8 @@ export function formatDate(date: Date, format?: string) {
 
   result = result.replace('SS', date.getSeconds() + '');
   result = result.replace('ss', date.getSeconds() + '');
+
+  result = result.replace('day', DAY_KOR[date.getDay()]);
 
   return result;
 }

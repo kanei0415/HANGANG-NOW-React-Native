@@ -22,16 +22,11 @@ import com.facebook.react.uimanager.ViewManagerRegistry;
 import com.hangangnow.BuildConfig;
 import com.hangangnow.newarchitecture.components.MainComponentsRegistry;
 import com.hangangnow.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.hangangnow.custom.CustomPackage;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A {@link ReactNativeHost} that helps you load everything needed for the New Architecture, both
- * TurboModule delegates and the Fabric Renderer.
- *
- * <p>Please note that this class is used ONLY if you opt-in for the New Architecture (see the
- * `newArchEnabled` property). Is ignored otherwise.
- */
 public class MainApplicationReactNativeHost extends ReactNativeHost {
   public MainApplicationReactNativeHost(Application application) {
     super(application);
@@ -45,12 +40,9 @@ public class MainApplicationReactNativeHost extends ReactNativeHost {
   @Override
   protected List<ReactPackage> getPackages() {
     List<ReactPackage> packages = new PackageList(this).getPackages();
-    // Packages that cannot be autolinked yet can be added manually here, for example:
-    //     packages.add(new MyReactNativePackage());
-    // TurboModules must also be loaded here providing a valid TurboReactPackage implementation:
-    //     packages.add(new TurboReactPackage() { ... });
-    // If you have custom Fabric Components, their ViewManagers should also be loaded here
-    // inside a ReactPackage.
+
+    packages.add(new CustomPackage());
+
     return packages;
   }
 
@@ -63,8 +55,6 @@ public class MainApplicationReactNativeHost extends ReactNativeHost {
   @Override
   protected ReactPackageTurboModuleManagerDelegate.Builder
       getReactPackageTurboModuleManagerDelegateBuilder() {
-    // Here we provide the ReactPackageTurboModuleManagerDelegate Builder. This is necessary
-    // for the new architecture and to use TurboModules correctly.
     return new MainApplicationTurboModuleManagerDelegate.Builder();
   }
 
@@ -77,8 +67,6 @@ public class MainApplicationReactNativeHost extends ReactNativeHost {
           final JavaScriptContextHolder jsContext) {
         final List<JSIModuleSpec> specs = new ArrayList<>();
 
-        // Here we provide a new JSIModuleSpec that will be responsible of providing the
-        // custom Fabric Components.
         specs.add(
             new JSIModuleSpec() {
               @Override
@@ -91,9 +79,6 @@ public class MainApplicationReactNativeHost extends ReactNativeHost {
                 final ComponentFactory componentFactory = new ComponentFactory();
                 CoreComponentsRegistry.register(componentFactory);
 
-                // Here we register a Components Registry.
-                // The one that is generated with the template contains no components
-                // and just provides you the one from React Native core.
                 MainComponentsRegistry.register(componentFactory);
 
                 final ReactInstanceManager reactInstanceManager = getReactInstanceManager();

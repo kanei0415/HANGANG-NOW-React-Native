@@ -1,7 +1,8 @@
 import colors from '@assets/colors';
-import NotoSans, { Roboto } from '@assets/font';
+import NotoSans from '@assets/font';
 import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
+import CDateInputContainer from '@components/common/CInput/containers/CDateInputContainer';
 import CInputContainer from '@components/common/CInput/containers/CInputContainer';
 import {
   FEMALE_TYPE,
@@ -9,15 +10,25 @@ import {
   MALE_TYPE,
 } from '@typedef/components/Signup/signup.types';
 import React from 'react';
-import { Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 type Props = {
   gender: GenderTypes | null;
   setGender: React.Dispatch<React.SetStateAction<GenderTypes | null>>;
   onDoneBtnPressed: () => void;
+  setBirth: React.Dispatch<React.SetStateAction<Date | null>>;
+  setName: React.Dispatch<React.SetStateAction<string | null>>;
+  doneBtnAvailable: boolean;
 };
 
-const SignupStep3 = ({ gender, setGender, onDoneBtnPressed }: Props) => {
+const SignupStep3 = ({
+  gender,
+  setGender,
+  onDoneBtnPressed,
+  setBirth,
+  setName,
+  doneBtnAvailable,
+}: Props) => {
   return (
     <KeyboardAwareScrollView
       style={{
@@ -26,7 +37,11 @@ const SignupStep3 = ({ gender, setGender, onDoneBtnPressed }: Props) => {
       }}>
       <CHeaderContainer title='회원가입' />
       <View style={{ paddingHorizontal: 20, marginTop: 40 }}>
-        <CInputContainer label='이름' placeHolder='이름을 입력해주세요' />
+        <CInputContainer
+          label='이름'
+          placeHolder='이름을 입력해주세요'
+          onChange={setName}
+        />
       </View>
       <View style={{ paddingHorizontal: 20, marginTop: 24 }}>
         <Text
@@ -51,98 +66,18 @@ const SignupStep3 = ({ gender, setGender, onDoneBtnPressed }: Props) => {
         </View>
       </View>
       <View style={{ paddingHorizontal: 20, marginTop: 24 }}>
-        <Text
-          style={[
-            NotoSans.Medium,
-            NotoSans.f_13,
-            { color: colors.typo.black },
-          ]}>
-          {'생년월일'}
-        </Text>
-        <View
-          style={{ flexDirection: 'row', alignItems: 'center', marginTop: 12 }}>
-          <TextInput
-            placeholder='YYYY'
-            keyboardType='number-pad'
-            maxLength={4}
-            style={[
-              Roboto.Medium,
-              Roboto.f_14,
-              {
-                minWidth: 80,
-                color: colors.typo.black,
-                textAlign: 'center',
-                textAlignVertical: 'center',
-                borderRadius: 4,
-                borderWidth: 1,
-                borderColor: '#a4a4a3',
-              },
-            ]}
-          />
-          <Text
-            style={[
-              NotoSans.Medium,
-              NotoSans.f_15,
-              { color: colors.typo.black, marginHorizontal: 12 },
-            ]}>
-            {'년'}
-          </Text>
-          <TextInput
-            placeholder='MM'
-            keyboardType='number-pad'
-            maxLength={4}
-            style={[
-              Roboto.Medium,
-              Roboto.f_14,
-              {
-                minWidth: 60,
-                color: colors.typo.black,
-                textAlign: 'center',
-                textAlignVertical: 'center',
-                borderRadius: 4,
-                borderWidth: 1,
-                borderColor: '#a4a4a3',
-              },
-            ]}
-          />
-          <Text
-            style={[
-              NotoSans.Medium,
-              NotoSans.f_15,
-              { color: colors.typo.black, marginHorizontal: 12 },
-            ]}>
-            {'년'}
-          </Text>
-          <TextInput
-            placeholder='DD'
-            keyboardType='number-pad'
-            maxLength={4}
-            style={[
-              Roboto.Medium,
-              Roboto.f_14,
-              {
-                minWidth: 60,
-                color: colors.typo.black,
-                textAlign: 'center',
-                textAlignVertical: 'center',
-                borderRadius: 4,
-                borderWidth: 1,
-                borderColor: '#a4a4a3',
-              },
-            ]}
-          />
-          <Text
-            style={[
-              NotoSans.Medium,
-              NotoSans.f_15,
-              { color: colors.typo.black, marginHorizontal: 12 },
-            ]}>
-            {'년'}
-          </Text>
-        </View>
+        <CDateInputContainer
+          onDateSelected={setBirth}
+          label='생년월일'
+          placeHolder='생년월일을 선택 해주세요'
+        />
       </View>
       <View style={{ marginTop: 40, paddingHorizontal: 20 }}>
-        <CButton label='완료하기' onPressed={onDoneBtnPressed} />
+        <CButton
+          label='완료하기'
+          onPressed={onDoneBtnPressed}
+          disabled={!doneBtnAvailable}
+        />
       </View>
     </KeyboardAwareScrollView>
   );
