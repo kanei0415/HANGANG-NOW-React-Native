@@ -2,8 +2,20 @@ import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 import images from '@assets/images';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
+import {
+  ParkTypes,
+  PARK_DATA_TABLE,
+  PARK_TABLE,
+} from '@typedef/components/Home/home.types';
 import React from 'react';
-import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { ScrollView } from 'react-native';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 
@@ -11,7 +23,7 @@ const { width } = Dimensions.get('screen');
 
 type Props = {
   onLeafetPressed: () => void;
-  onHangangDetailPressed: () => void;
+  onHangangDetailPressed: (item: ParkTypes) => void;
   index: number;
   setIndex: React.Dispatch<React.SetStateAction<number>>;
   maxSize: number;
@@ -157,6 +169,40 @@ const Home = ({
           ]}>
           {'한눈에 한강 파악하기'}
         </Text>
+        <FlatList
+          contentContainerStyle={{ marginTop: 20 }}
+          scrollEnabled={false}
+          numColumns={3}
+          data={Object.keys(PARK_TABLE)}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => onHangangDetailPressed(item as ParkTypes)}
+              style={{
+                width: (width - 80) / 3,
+                height: (width - 80) / 3,
+                borderRadius: 4,
+                backgroundColor: '#676767',
+                marginRight: 20,
+                marginBottom: 20,
+                justifyContent: 'center',
+                alignItems: 'center',
+                overflow: 'hidden',
+              }}>
+              <Image
+                style={{ position: 'absolute' }}
+                source={PARK_DATA_TABLE[PARK_TABLE[item as ParkTypes]].image}
+              />
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_18,
+                  { color: colors.default.white },
+                ]}>
+                {item.split('한')[0]}
+              </Text>
+            </TouchableOpacity>
+          )}
+        />
       </View>
     </ScrollView>
   );

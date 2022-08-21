@@ -1,4 +1,5 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { TripFindRequestBodyType } from '@typedef/components/Trip/trip.types';
 
 export type MainStackParamListTypes = {
   login: undefined;
@@ -29,8 +30,19 @@ export type MainStackParamListTypes = {
   deleteAccount: undefined;
   deleteAccountStep2: undefined;
   leaflet: undefined;
-  hangangDetail: undefined;
+  hangangDetail: {
+    park: string;
+  };
   partnersEnroll: undefined;
+  mapfind: undefined;
+  parkfind: undefined;
+  tripFind: undefined;
+  tripFindResult: {
+    body: TripFindRequestBodyType;
+  };
+  tripFindDetail: {
+    id: number;
+  };
 };
 
 export type MainTabParamListTypes = {

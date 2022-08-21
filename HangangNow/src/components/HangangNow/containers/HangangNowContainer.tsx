@@ -1,34 +1,39 @@
 import useAuth from '@hooks/store/useAuth';
 import { alertMessage } from '@libs/alert';
 import { apiRoute, requestSecureGet } from '@libs/api';
-import Geolocation from '@react-native-community/geolocation';
-import { updateCenterPosAction } from '@store/centerPos/actions';
-import { HangangNowDataTypes } from '@typedef/components/HangangNow/hangangnow.types';
-import React, { useCallback, useRef } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import {
+  HangangNowDataTypes,
+  skymodeToWeather,
+  temperatureToTemperature,
+  weatherTemperatureToLabelImage,
+} from '@typedef/components/HangangNow/hangangnow.types';
+import { MainStackNavigationTypes } from '@typedef/routes/navigation.types';
+import React, { useCallback, useMemo } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import WebView from 'react-native-webview';
 import HangangNow from '../HangangNow';
 
 const HangangNowContainer = () => {
+  const navigation = useNavigation<MainStackNavigationTypes>();
+
   const { loginResponse } = useAuth();
 
   const [hangangnowData, setHangangnowData] =
     useState<HangangNowDataTypes | null>(null);
 
-  const [sunRizeVisible, setSunRizeVisible] = useState(false);
+  const [moodInfoVisible, setMoodInfoVisible] = useState(false);
 
-  const webViewRef = useRef<WebView>(null);
-
-  const onCurrentPosPressed = useCallback(() => {
-    Geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-      webViewRef?.current?.postMessage(
-        JSON.stringify(
-          updateCenterPosAction({ lat: latitude, lng: longitude }),
-        ),
+  const labelImage = useMemo(() => {
+    if (hangangnowData) {
+      return weatherTemperatureToLabelImage(
+        skymodeToWeather(hangangnowData.weather.skyMode),
+        temperatureToTemperature(hangangnowData.temperature),
       );
-    });
-  }, [webViewRef]);
+    } else {
+      return null;
+    }
+  }, [hangangnowData]);
 
   const loadData = useCallback(async () => {
     if (!loginResponse) {
@@ -48,19 +53,28 @@ const HangangNowContainer = () => {
     }
   }, [loginResponse]);
 
+  const onMapFindPressed = useCallback(() => {
+    navigation.navigate('mapfind');
+  }, [navigation]);
+
+  const onParkFindPressed = useCallback(() => {
+    navigation.navigate('parkfind');
+  }, [navigation]);
+
   useEffect(() => {
     loadData();
   }, [loadData]);
 
-  return (
+  return hangangnowData && labelImage ? (
     <HangangNow
-      onCurrentPosPressed={onCurrentPosPressed}
-      webViewRef={webViewRef}
       hangangnowData={hangangnowData}
-      sunRizeVisible={sunRizeVisible}
-      setSunRizeVisible={setSunRizeVisible}
+      labelImage={labelImage}
+      moodInfoVisible={moodInfoVisible}
+      setMoodInfoVisible={setMoodInfoVisible}
+      onMapFindPressed={onMapFindPressed}
+      onParkFindPressed={onParkFindPressed}
     />
-  );
+  ) : null;
 };
 
 export default HangangNowContainer;

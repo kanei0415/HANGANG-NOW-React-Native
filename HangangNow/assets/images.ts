@@ -6,6 +6,9 @@ const images = {
       passwordHide: require('./images/components/common/ic-password-hide.png'),
       passwordShow: require('./images/components/common/ic-password-show.png'),
       unChecked: require('./images/components/common/ic-unchecked.png'),
+      close: require('./images/components/common/ic-close.png'),
+      like: require('./images/components/common/ic-like.png'),
+      unlike: require('./images/components/common/ic-unlike.png'),
     },
     Splash: {
       line: require('./images/components/Splash/ic-splash-line.png'),
@@ -26,7 +29,9 @@ const images = {
       triangle: require('./images/components/Diary/ic-tri.png'),
     },
     HangangNow: {
-      char: require('./images/components/HangangNow/ic-char.png'),
+      char1: require('./images/components/HangangNow/ic-char-1.png'),
+      char2: require('./images/components/HangangNow/ic-char-2.png'),
+      char3: require('./images/components/HangangNow/ic-char-3.png'),
     },
     MyPage: {
       placeholder: require('./images/components/MyPage/ic-ph-profile.png'),
@@ -44,6 +49,22 @@ const images = {
     },
     Leaflet: {
       downArrow: require('./images/components/Leaflet/ic-down-arrow.png'),
+    },
+    ParkDetail: {
+      image1: require('./images/components/ParkDetail/ic-park-1.png'),
+      image2: require('./images/components/ParkDetail/ic-park-2.png'),
+      image3: require('./images/components/ParkDetail/ic-park-3.png'),
+      image4: require('./images/components/ParkDetail/ic-park-4.png'),
+      image5: require('./images/components/ParkDetail/ic-park-5.png'),
+      image6: require('./images/components/ParkDetail/ic-park-6.png'),
+      image7: require('./images/components/ParkDetail/ic-park-7.png'),
+      image8: require('./images/components/ParkDetail/ic-park-8.png'),
+      image9: require('./images/components/ParkDetail/ic-park-9.png'),
+      image10: require('./images/components/ParkDetail/ic-park-10.png'),
+      image11: require('./images/components/ParkDetail/ic-park-11.png'),
+    },
+    Facility: {
+      line: require('./images/components/Facility/ic-line.png'),
     },
   },
 } as const;

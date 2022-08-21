@@ -121,6 +121,13 @@ export const apiRoute = {
   hangangNow: {
     loadData: '/hangangnow',
   },
+  parking: {
+    loadParkings: '/parkings',
+  },
+  picnic: {
+    loadFindResult: '/picnic/recom/course',
+    loadFindDetail: '/picnic/course/',
+  },
 };
 
 export type BasicResponse<T> = {

@@ -58,23 +58,8 @@ const MainStackNavigationContainer = () => {
 
         if (config.status === 200) {
           __updateProfileFromHooks(profileData);
-        } else {
-          alertMessage('로그인이 만료되었습니다');
-          AsyncStorage.clear(() => {
-            BackHandler.exitApp();
-          });
         }
-      } else {
-        alertMessage('로그인이 만료되었습니다');
-        AsyncStorage.clear(() => {
-          BackHandler.exitApp();
-        });
       }
-    } else {
-      alertMessage('로그인이 만료되었습니다');
-      AsyncStorage.clear(() => {
-        BackHandler.exitApp();
-      });
     }
   }, [loginResponse, __updateLoginResponseFromHooks, __updateProfileFromHooks]);
 

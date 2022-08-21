@@ -1,4 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
+import { ParkTypes } from '@typedef/components/Home/home.types';
 import {
   MainStackNavigationTypes,
   MainTabNavigationTypes,
@@ -17,9 +18,14 @@ const HomeContainer = () => {
     navigation.push('leaflet');
   }, [navigation]);
 
-  const onHangangDetailPressed = useCallback(() => {
-    navigation.push('hangangDetail');
-  }, [navigation]);
+  const onHangangDetailPressed = useCallback(
+    (item: ParkTypes) => {
+      navigation.push('hangangDetail', {
+        park: item,
+      });
+    },
+    [navigation],
+  );
 
   return (
     <Home
