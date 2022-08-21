@@ -128,6 +128,10 @@ export const apiRoute = {
     loadFindResult: '/picnic/recom/course',
     loadFindDetail: '/picnic/course/',
   },
+  event: {
+    loadEvent: '/events',
+    loadEventDetail: '/events/',
+  },
 };
 
 export type BasicResponse<T> = {

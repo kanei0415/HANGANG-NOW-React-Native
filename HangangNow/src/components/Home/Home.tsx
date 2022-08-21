@@ -3,6 +3,7 @@ import NotoSans from '@assets/font';
 import images from '@assets/images';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import {
+  EventType,
   ParkTypes,
   PARK_DATA_TABLE,
   PARK_TABLE,
@@ -24,17 +25,21 @@ const { width } = Dimensions.get('screen');
 type Props = {
   onLeafetPressed: () => void;
   onHangangDetailPressed: (item: ParkTypes) => void;
+  events: EventType[];
   index: number;
   setIndex: React.Dispatch<React.SetStateAction<number>>;
   maxSize: number;
+  onEventShowPressed: () => void;
 };
 
 const Home = ({
   onLeafetPressed,
   onHangangDetailPressed,
+  events,
   index,
   setIndex,
   maxSize,
+  onEventShowPressed,
 }: Props) => {
   return (
     <ScrollView style={{ flex: 1, backgroundColor: colors.default.white }}>
@@ -80,15 +85,12 @@ const Home = ({
         <SwiperFlatList
           index={index}
           onChangeIndex={(item) => setIndex(item.index)}
-          scrollEnabled={false}
-          style={{ flex: 1 }}
-          data={['', '', '']}
-          renderItem={({ item, index }) => (
-            <View
-              style={{
-                width,
-                backgroundColor: '#676767',
-              }}></View>
+          data={events}
+          renderItem={({ item }) => (
+            <Image
+              style={{ height: (width / 36) * 22, width }}
+              source={{ uri: (item as EventType).photoUrl }}
+            />
           )}
         />
         <TouchableOpacity
@@ -113,6 +115,7 @@ const Home = ({
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={onEventShowPressed}
           style={{
             position: 'absolute',
             width: 118,

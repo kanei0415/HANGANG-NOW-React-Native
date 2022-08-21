@@ -23,7 +23,6 @@
     "@types/react": "^18.0.14",
     "@types/react-native": "^0.67.3",
     "@types/react-redux": "^7.1.24",
-    "@xstate/react": "^3.0.0",
     "axios": "^0.27.2",
     "react": "17.0.2",
     "react-native": "0.68.0",
@@ -40,8 +39,7 @@
     "react-native-swiper-flatlist": "^3.0.17",
     "react-native-webview": "^11.23.0",
     "react-redux": "^8.0.1",
-    "redux": "^4.2.0",
-    "xstate": "^4.32.1"
+    "redux": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.5",

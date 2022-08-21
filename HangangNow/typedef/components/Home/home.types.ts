@@ -332,3 +332,21 @@ export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
     detail: '',
   },
 };
+
+export type EventType = {
+  address: string;
+  content: string;
+  endDate: string;
+  eventTime: string;
+  host: string;
+  id: number;
+  lastModifiedTime: string;
+  management: string;
+  photoUrl: string;
+  price: string;
+  startDate: string;
+  thumbnailUrl: string;
+  title: string;
+  x_pos: number;
+  y_pos: number;
+};

@@ -1,6 +1,8 @@
 import DeleteAccountContainer from '@components/DeleteAccount/containers/DeleteAccountContainer';
 import DeleteAccountStep2Container from '@components/DeleteAccount/containers/DeleteAccountStep2Container';
 import DiaryContainer from '@components/Diary/containers/DiaryContainer';
+import EventContainer from '@components/Event/containers/EventContainer';
+import EventDetailContainer from '@components/Event/containers/EventDetailContainer';
 import FindIDContainer from '@components/FindID/containers/FindIDContainer';
 import FindIDStep2Container from '@components/FindID/containers/FindIDStep2Container';
 import FindPWContainer from '@components/FindPW/containers/FindPWContainer';
@@ -100,6 +102,10 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
           name='tripFindDetail'
           component={TripFindDetailContainer}
         />
+      </Stack.Group>
+      <Stack.Group>
+        <Stack.Screen name='event' component={EventContainer} />
+        <Stack.Screen name='eventDetail' component={EventDetailContainer} />
       </Stack.Group>
     </Stack.Navigator>
   );

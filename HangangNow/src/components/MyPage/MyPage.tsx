@@ -215,10 +215,6 @@ const MyPage = ({
                   disabled={date.getMonth() !== d.getMonth()}
                   onPress={() => onDateItemPressed(d)}
                   style={{
-                    width: 24,
-                    height: 24,
-                    borderRadius: 24,
-                    overflow: 'hidden',
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center',
@@ -227,7 +223,7 @@ const MyPage = ({
                     style={{
                       width: 24,
                       height: 24,
-                      borderRadius: 24,
+                      borderRadius: 12,
                       justifyContent: 'center',
                       alignItems: 'center',
                       backgroundColor: memoList.find(

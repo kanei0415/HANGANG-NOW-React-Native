@@ -43,6 +43,10 @@ export type MainStackParamListTypes = {
   tripFindDetail: {
     id: number;
   };
+  event: undefined;
+  eventDetail: {
+    id: number;
+  };
 };
 
 export type MainTabParamListTypes = {
