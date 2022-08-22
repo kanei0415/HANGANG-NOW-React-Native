@@ -139,6 +139,14 @@ const MyPageContainer = () => {
     };
   }, [loadMemos, __clearMemoListFromHooks]);
 
+  useEffect(() => {
+    setDate(new Date('2000-01-01'));
+
+    setTimeout(() => {
+      setDate(new Date());
+    }, 200);
+  }, []);
+
   return profile ? (
     <MyPage
       memoList={memoList}

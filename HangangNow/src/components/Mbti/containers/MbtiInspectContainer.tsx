@@ -1,5 +1,4 @@
 import { useNavigation } from '@react-navigation/native';
-import { MbtiResultTypes } from '@typedef/components/Mbti/mbti.types';
 import { MainStackNavigationTypes } from '@typedef/routes/navigation.types';
 import React, { useEffect, useMemo } from 'react';
 import { useRef } from 'react';
@@ -8,8 +7,6 @@ import { useState } from 'react';
 import { BackHandler } from 'react-native';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import MbtiInspect from '../components/MbtiInspect';
-
-const dummyMbtiResult: MbtiResultTypes = {};
 
 const MbtiInspectContaienr = () => {
   const navigation = useNavigation<MainStackNavigationTypes>();
@@ -45,8 +42,7 @@ const MbtiInspectContaienr = () => {
             {
               name: 'mbtiResult',
               params: {
-                prevUid: null,
-                result: dummyMbtiResult,
+                result: 'INFLUENCER',
               },
             },
           ],

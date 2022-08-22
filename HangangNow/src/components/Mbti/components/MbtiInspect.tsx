@@ -2,13 +2,12 @@ import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
-import { MbtiQuestionItemTypes } from '@typedef/components/Mbti/mbti.types';
 import React, { RefObject } from 'react';
 import { Dimensions, Text, View } from 'react-native';
 import { View as AnimatableView } from 'react-native-animatable';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 
-const questionList: MbtiQuestionItemTypes[] = [
+const questionList = [
   {
     label: `날씨가 좋을 때
 |^가장 먼저 가고 싶은 곳|은?`,

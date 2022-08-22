@@ -209,45 +209,49 @@ const MyPage = ({
                 alignItems: 'center',
                 flexDirection: 'row',
               }}>
-              {w.map((d) => (
-                <TouchableOpacity
-                  key={d.getTime()}
-                  disabled={date.getMonth() !== d.getMonth()}
-                  onPress={() => onDateItemPressed(d)}
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <View
+              {w.map((d) =>
+                date.getMonth() === d.getMonth() ? (
+                  <TouchableOpacity
+                    key={d.getTime()}
+                    disabled={date.getMonth() !== d.getMonth()}
+                    onPress={() => onDateItemPressed(d)}
                     style={{
-                      width: 24,
-                      height: 24,
-                      borderRadius: 12,
+                      flex: 1,
                       justifyContent: 'center',
                       alignItems: 'center',
-                      backgroundColor: memoList.find(
-                        (val) => val.memoDate === formatDate(d, 'YYYY-MM-dd'),
-                      )?.color,
                     }}>
-                    <Text
-                      style={[
-                        NotoSans.Medium,
-                        NotoSans.f_15,
-                        {
-                          color: memoList.find(
-                            (val) =>
-                              val.memoDate === formatDate(d, 'YYYY-MM-dd'),
-                          )
-                            ? colors.default.white
-                            : colors.typo.black,
-                        },
-                      ]}>
-                      {date.getMonth() === d.getMonth() ? d.getDate() + '' : ''}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              ))}
+                    <View
+                      style={{
+                        width: 24,
+                        height: 24,
+                        borderRadius: 12,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: memoList.find(
+                          (val) => val.memoDate === formatDate(d, 'YYYY-MM-dd'),
+                        )?.color,
+                      }}>
+                      <Text
+                        style={[
+                          NotoSans.Medium,
+                          NotoSans.f_15,
+                          {
+                            color: memoList.find(
+                              (val) =>
+                                val.memoDate === formatDate(d, 'YYYY-MM-dd'),
+                            )
+                              ? colors.default.white
+                              : colors.typo.black,
+                          },
+                        ]}>
+                        {d.getDate()}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                ) : (
+                  <View key={d.getTime()} style={{ flex: 1 }} />
+                ),
+              )}
             </View>
           ))}
         </View>
@@ -306,7 +310,7 @@ const MyPage = ({
               NotoSans.f_13,
               { color: colors.main.primary, marginTop: 4 },
             ]}>
-            {'한강유형검사'}
+            {'스크랩 모아보기'}
           </Text>
         </TouchableOpacity>
       </View>

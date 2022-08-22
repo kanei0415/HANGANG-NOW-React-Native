@@ -132,6 +132,9 @@ export const apiRoute = {
     loadEvent: '/events',
     loadEventDetail: '/events/',
   },
+  flyer: {
+    loadFlyer: '/flyers',
+  },
 };
 
 export type BasicResponse<T> = {

@@ -1,7 +1,11 @@
-export type MbtiQuestionItemTypes = {
-  label: string;
-  option1: string;
-  option2: string;
-};
+export type MbtiTypes =
+  | 'INFLUENCER'
+  | 'EXCITED'
+  | 'ARTIST'
+  | 'SOCIAL_DISTANCING'
+  | 'ACTIVIST'
+  | 'PLANNER'
+  | 'EXPLORER'
+  | 'STARGAZER';
 
-export type MbtiResultTypes = {};
+export const MBTI_DATA_TABLE = {};

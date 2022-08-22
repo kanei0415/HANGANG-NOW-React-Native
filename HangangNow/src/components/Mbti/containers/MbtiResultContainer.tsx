@@ -1,5 +1,4 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { MbtiResultTypes } from '@typedef/components/Mbti/mbti.types';
 import {
   MainStackNavigationTypes,
   MainStackParamListTypes,
@@ -11,22 +10,12 @@ import dynamiclink from '@react-native-firebase/dynamic-links';
 import { getMbtiLinkConfig } from '@libs/link';
 import { useNavigation } from '@react-navigation/native';
 
-const dummyMbtiResult: MbtiResultTypes = {};
-
 const MbtiResultCotainer = ({
   route: {
-    params: { prevUid, result },
+    params: { result },
   },
 }: NativeStackScreenProps<MainStackParamListTypes, 'mbtiResult'>) => {
   const navigation = useNavigation<MainStackNavigationTypes>();
-
-  const [mbtiResult, setMbtiResult] = useState<MbtiResultTypes | null>(result);
-
-  const loadResult = useCallback(() => {
-    if (prevUid) {
-      setMbtiResult(dummyMbtiResult);
-    }
-  }, [prevUid]);
 
   const onSharePressed = useCallback(async () => {
     const link = await dynamiclink().buildShortLink(
@@ -41,10 +30,6 @@ const MbtiResultCotainer = ({
   const onRetryPressed = useCallback(() => {
     navigation.goBack();
   }, [navigation]);
-
-  useEffect(() => {
-    loadResult();
-  }, [loadResult]);
 
   return (
     <MbtiResult
