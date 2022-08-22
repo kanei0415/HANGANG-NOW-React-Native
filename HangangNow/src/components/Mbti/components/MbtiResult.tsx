@@ -2,10 +2,16 @@ import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
+import {
+  PARK_DATA_TABLE,
+  PARK_TABLE,
+} from '@typedef/components/Home/home.types';
+import { MbtiDataTypes } from '@typedef/components/Mbti/mbti.types';
 import React from 'react';
 import {
   Dimensions,
   FlatList,
+  Image,
   Text,
   TouchableOpacity,
   View,
@@ -15,11 +21,12 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 const { width } = Dimensions.get('screen');
 
 type Props = {
+  mbtiResult: MbtiDataTypes;
   onSharePressed: () => void;
   onRetryPressed: () => void;
 };
 
-const MbtiResult = ({ onSharePressed, onRetryPressed }: Props) => {
+const MbtiResult = ({ mbtiResult, onSharePressed, onRetryPressed }: Props) => {
   return (
     <KeyboardAwareScrollView
       style={{
@@ -34,7 +41,7 @@ const MbtiResult = ({ onSharePressed, onRetryPressed }: Props) => {
             NotoSans.f_17,
             { color: colors.typo.black },
           ]}>
-          {'내가 주인공이야~'}
+          {mbtiResult.label}
         </Text>
         <Text
           style={[
@@ -42,53 +49,17 @@ const MbtiResult = ({ onSharePressed, onRetryPressed }: Props) => {
             NotoSans.f_22,
             { color: colors.main.primary, marginTop: 12 },
           ]}>
-          {'인플루언서 유형'}
+          {mbtiResult.name}
         </Text>
         <View
           style={{
             marginTop: 20,
             width: 164,
             height: 164,
-            backgroundColor: '#676767',
             borderRadius: 4,
-          }}></View>
-      </View>
-      <View style={{ marginTop: 36, alignItems: 'center' }}>
-        <Text style={[NotoSans.Bold, NotoSans.f_15]}>
-          <Text style={{ color: colors.main.primary }}>
-            {'순간을 기록하고 사진찍는 것'}
-          </Text>
-          <Text style={{ color: colors.typo.black }}>
-            {'을 좋아하는 당신!'}
-          </Text>
-        </Text>
-      </View>
-      <View
-        style={{
-          marginHorizontal: 20,
-          marginTop: 36,
-          paddingVertical: 24,
-          paddingHorizontal: 16,
-          backgroundColor: colors.background.gray.light,
-          borderRadius: 8,
-        }}>
-        {[
-          '1. 내가 주인공이라 하고 싶은 것은 다 하고 살아야 해요.',
-          '2. 어딜 가도 기왕이면 예쁜 곳으로 가길 원해요',
-          '3. 단기 암기력이 높아 벼락치기를 꽤나 잘해요.',
-          '4. 눈치는 많이 보지만, 눈치 없이 행동해요!',
-        ].map((item, index) => (
-          <View style={{ marginVertical: 8 }} key={index}>
-            <Text
-              style={[
-                NotoSans.Medium,
-                NotoSans.f_14,
-                { color: colors.typo.black },
-              ]}>
-              {item}
-            </Text>
-          </View>
-        ))}
+          }}>
+          <Image source={mbtiResult.image} />
+        </View>
       </View>
       <View style={{ marginTop: 40, paddingHorizontal: 20 }}>
         <Text style={[NotoSans.Bold, NotoSans.f_18]}>
@@ -103,16 +74,17 @@ const MbtiResult = ({ onSharePressed, onRetryPressed }: Props) => {
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
-            data={['', '', '']}
+            data={mbtiResult.parks}
             renderItem={({ item }) => (
               <View style={{ alignItems: 'center', marginRight: 10 }}>
-                <View
+                <Image
+                  source={PARK_DATA_TABLE[PARK_TABLE[item]].image}
                   style={{
                     width: 100,
                     height: 100,
                     borderRadius: 4,
-                    backgroundColor: colors.background.gray.light,
-                  }}></View>
+                  }}
+                />
                 <View style={{ marginTop: 12 }}>
                   <Text
                     style={[
@@ -120,7 +92,10 @@ const MbtiResult = ({ onSharePressed, onRetryPressed }: Props) => {
                       NotoSans.f_16,
                       { color: colors.main.primary },
                     ]}>
-                    {'선유도'}
+                    {PARK_DATA_TABLE[PARK_TABLE[item]].name.replace(
+                      '한강공원',
+                      '',
+                    )}
                   </Text>
                 </View>
                 <View style={{ marginTop: 16 }}>
@@ -130,8 +105,7 @@ const MbtiResult = ({ onSharePressed, onRetryPressed }: Props) => {
                       NotoSans.f_13,
                       { textAlign: 'center' },
                     ]}>
-                    {`도심 속 감성 피크닉을 
-즐길 수 있는 곳`}
+                    {``}
                   </Text>
                 </View>
               </View>
@@ -140,9 +114,11 @@ const MbtiResult = ({ onSharePressed, onRetryPressed }: Props) => {
         </View>
       </View>
       <View style={{ marginTop: 24, paddingHorizontal: 20 }}>
-        <View>
-          <CButton type='secondary' label='한강 더 알아보기' />
-        </View>
+        {false && (
+          <View>
+            <CButton type='secondary' label='한강 더 알아보기' />
+          </View>
+        )}
         <View style={{ marginTop: 12 }}>
           <CButton
             onPressed={onRetryPressed}
@@ -152,6 +128,7 @@ const MbtiResult = ({ onSharePressed, onRetryPressed }: Props) => {
         </View>
       </View>
       <TouchableOpacity
+        disabled
         onPress={onSharePressed}
         style={{ marginTop: 40, alignItems: 'center' }}>
         <Text
@@ -160,7 +137,7 @@ const MbtiResult = ({ onSharePressed, onRetryPressed }: Props) => {
             NotoSans.f_13,
             { color: colors.typo.gray.dark },
           ]}>
-          {'친구에게 내 결과 공유하기'}
+          {''}
         </Text>
       </TouchableOpacity>
       <View style={{ height: 80 }} />

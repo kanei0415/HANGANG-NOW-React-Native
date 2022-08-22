@@ -147,6 +147,10 @@ const MyPageContainer = () => {
     }, 200);
   }, []);
 
+  const onMbtiPressed = useCallback(() => {
+    navigation.navigate('mbti');
+  }, [navigation]);
+
   return profile ? (
     <MyPage
       memoList={memoList}
@@ -158,6 +162,7 @@ const MyPageContainer = () => {
       onDateItemPressed={onDateItemPressed}
       profile={profile}
       onDiaryPressed={onDiaryPressed}
+      onMbtiPressed={onMbtiPressed}
     />
   ) : (
     <View

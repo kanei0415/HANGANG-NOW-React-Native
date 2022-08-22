@@ -44,6 +44,7 @@ const Mbti = ({ onBackPressed, onTestPressed, onSharePressed }: Props) => {
           <CButton label='테스트 하기' onPressed={onTestPressed} />
 
           <TouchableOpacity
+            disabled
             onPress={onSharePressed}
             style={{ marginTop: 24, alignItems: 'center' }}>
             <Text
@@ -52,7 +53,7 @@ const Mbti = ({ onBackPressed, onTestPressed, onSharePressed }: Props) => {
                 NotoSans.f_13,
                 { color: colors.typo.gray.dark },
               ]}>
-              {'친구와 함께하기'}
+              {''}
             </Text>
           </TouchableOpacity>
         </View>

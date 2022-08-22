@@ -1,5 +1,5 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { MBTITypes } from '@typedef/components/common/common.types';
+import { MbtiTypes } from '@typedef/components/Mbti/mbti.types';
 import { TripFindRequestBodyType } from '@typedef/components/Trip/trip.types';
 
 export type MainStackParamListTypes = {
@@ -21,7 +21,7 @@ export type MainStackParamListTypes = {
   mbti: undefined;
   mbtiInspect: undefined;
   mbtiResult: {
-    result: MBTITypes;
+    result: MbtiTypes;
   };
   setting: undefined;
   calendarDateDetail: {

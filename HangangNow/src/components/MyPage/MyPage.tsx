@@ -4,6 +4,7 @@ import images from '@assets/images';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import { formatDate } from '@libs/factory';
 import { ProfileTypes } from '@typedef/components/common/common.types';
+import { MBTI_LABEL_TABLE } from '@typedef/components/Mbti/mbti.types';
 import { MemoTypes } from '@typedef/components/MyPage/mypage.types';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
@@ -19,6 +20,7 @@ type Props = {
   onDateItemPressed: (d: Date) => void;
   profile: ProfileTypes;
   onDiaryPressed: () => void;
+  onMbtiPressed: () => void;
 };
 
 const MyPage = ({
@@ -31,6 +33,7 @@ const MyPage = ({
   onDateItemPressed,
   profile,
   onDiaryPressed,
+  onMbtiPressed,
 }: Props) => {
   return (
     <KeyboardAwareScrollView
@@ -61,7 +64,9 @@ const MyPage = ({
                 NotoSans.f_18,
                 { color: colors.typo.black },
               ]}>
-              {profile.memberMBTI || '검사를 통해 유형을 알아보세요'}
+              {profile.memberMBTI
+                ? MBTI_LABEL_TABLE[profile.memberMBTI]
+                : '검사를 통해 유형을 알아보세요'}
             </Text>
             <Text style={[NotoSans.Medium, NotoSans.f_18]}>
               <Text style={{ color: colors.main.primary }}>{profile.name}</Text>
@@ -263,7 +268,9 @@ const MyPage = ({
           justifyContent: 'space-evenly',
           alignItems: 'center',
         }}>
-        <TouchableOpacity style={{ alignItems: 'center' }}>
+        <TouchableOpacity
+          onPress={onMbtiPressed}
+          style={{ alignItems: 'center' }}>
           <View
             style={{
               width: 48,

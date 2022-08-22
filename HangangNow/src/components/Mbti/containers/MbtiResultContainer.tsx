@@ -9,6 +9,10 @@ import MbtiResult from '../components/MbtiResult';
 import dynamiclink from '@react-native-firebase/dynamic-links';
 import { getMbtiLinkConfig } from '@libs/link';
 import { useNavigation } from '@react-navigation/native';
+import {
+  MbtiTypes,
+  MBTI_DATA_TABLE,
+} from '@typedef/components/Mbti/mbti.types';
 
 const MbtiResultCotainer = ({
   route: {
@@ -16,6 +20,11 @@ const MbtiResultCotainer = ({
   },
 }: NativeStackScreenProps<MainStackParamListTypes, 'mbtiResult'>) => {
   const navigation = useNavigation<MainStackNavigationTypes>();
+
+  const mbtiResult = useMemo(
+    () => MBTI_DATA_TABLE[result as MbtiTypes],
+    [result],
+  );
 
   const onSharePressed = useCallback(async () => {
     const link = await dynamiclink().buildShortLink(
@@ -33,6 +42,7 @@ const MbtiResultCotainer = ({
 
   return (
     <MbtiResult
+      mbtiResult={mbtiResult}
       onSharePressed={onSharePressed}
       onRetryPressed={onRetryPressed}
     />

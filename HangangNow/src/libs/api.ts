@@ -109,6 +109,7 @@ export const apiRoute = {
     updateProfil: '/members/photos',
     updatePassword: '/members/password',
     deleteMember: '/members',
+    setMbti: '/members/mbti?mbti=',
   },
   memo: {
     loadMemo: '/memos',

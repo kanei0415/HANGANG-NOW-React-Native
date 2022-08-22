@@ -21,6 +21,11 @@ const questionList = [
     option2: '혼자 산책 후 귀가한다',
   },
   {
+    label: `자가격리 대상자가 되어버린 당신,,`,
+    option1: '오히려 좋아!',
+    option2: '창 밖만 말똥말똥',
+  },
+  {
     label: `멀리 여행을
 가게 되었다! |^당신은?|`,
     option1: '숙소, 항공권, 맛집, 코스를 모두 계획한다',
@@ -31,6 +36,12 @@ const questionList = [
 |^돗자리는?|`,
     option1: '이미 준비되어 있지! 내가 들고 간다',
     option2: '손은 편하게! 가서 빌린다',
+  },
+  {
+    label: `처음 가는 길을 나섰다!
+내가 하는 행동은?`,
+    option1: '지도의 루트를 따른다',
+    option2: '방향만 알면 된다',
   },
   {
     label: `|^지방에서 올라온 친구|가
@@ -45,6 +56,12 @@ const questionList = [
     option2: '나만의 휴가를 즐길 수 있는 호캉스',
   },
   {
+    label: `|^주말 데이트 약속|을 잡고 있다!
+당신이 검색 중인 것은?`,
+    option1: '전시회',
+    option2: '맛집',
+  },
+  {
     label: `|^해외여행이 풀린 지금!|
 먼저 가고 싶은 곳은?`,
     option1: '넓은 바다와 눈부신 햇살이 반기는 하와이',
@@ -57,16 +74,10 @@ const questionList = [
     option2: '서울 도시문화를 느낄 수 있는 자벌레',
   },
   {
-    label: `|^주말 데이트 약속|을 잡고 있다!
-당신이 검색 중인 것은?`,
-    option1: '전시회',
-    option2: '맛집',
-  },
-  {
-    label: `밤에 한강을 방문하게 된 당신!
-|^당신이 기다리는 것은?|`,
-    option1: '한강 버스킹',
-    option2: '친구와의 수다',
+    label: `일상에 치여 답답한 당신,
+떠나고 싶은 곳은?`,
+    option1: '피톤치드 가득한 숲',
+    option2: '예술작품이 가득한 미술관',
   },
 ];
 
@@ -98,7 +109,7 @@ const MbtiInspect = ({ index, scrollRef, onAnswerSelected }: Props) => {
           transition={'left'}
           style={{
             position: 'absolute',
-            left: ((width - 20) / 10) * index + 20,
+            left: ((width - 20) / 12) * index + 20,
             width: 20,
             height: 20,
             borderRadius: 10,

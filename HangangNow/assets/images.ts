@@ -24,6 +24,7 @@ const images = {
     Mbti: {
       back: require('./images/components/Mbti/ic-primary-back.png'),
       text: require('./images/components/Mbti/ic-text.png'),
+      icon1: require('./images/components/Mbti/ic-icon-1.png'),
     },
     Diary: {
       triangle: require('./images/components/Diary/ic-tri.png'),
