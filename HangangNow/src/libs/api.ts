@@ -125,6 +125,7 @@ export const apiRoute = {
   },
   parking: {
     loadParkings: '/parkings',
+    loadParkingMaps: '/parkings/map',
   },
   picnic: {
     loadFindResult: '/picnic/recom/course',
