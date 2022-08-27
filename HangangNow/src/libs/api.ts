@@ -118,6 +118,7 @@ export const apiRoute = {
   diary: {
     loadDiary: '/diary',
     loadDiaryDate: '/diary/date',
+    addDiary: '/diary',
   },
   hangangNow: {
     loadData: '/hangangnow',
@@ -135,6 +136,16 @@ export const apiRoute = {
   },
   flyer: {
     loadFlyer: '/flyers',
+  },
+  scrap: {
+    loadEvent: '/scraps/events',
+    addEvent: '/scraps/events/',
+    loadPlace: '/scraps/recomPlaces',
+    addPlace: '/scraps/recomPlaces/',
+    loadLeaflet: '/scraps/flyers',
+    addLeaflet: '/scraps/flyers/',
+    loadCource: '/scraps/recomCourses',
+    addCource: '/scraps/recomCourses/',
   },
 };
 
@@ -155,6 +166,7 @@ export function requestGet<T>(
         'Content-Type': 'application/json',
         ...header,
       },
+      transformRequest: (d) => d,
     })
     .then(
       (res) =>

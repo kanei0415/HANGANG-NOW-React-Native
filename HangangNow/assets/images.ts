@@ -28,6 +28,18 @@ const images = {
     },
     Diary: {
       triangle: require('./images/components/Diary/ic-tri.png'),
+      add: require('./images/components/Diary/ic-add.png'),
+      weather1: require('./images/components/Diary/ic-weather-1.png'),
+      weather2: require('./images/components/Diary/ic-weather-2.png'),
+      weather3: require('./images/components/Diary/ic-weather-3.png'),
+      weather4: require('./images/components/Diary/ic-weather-4.png'),
+      weather5: require('./images/components/Diary/ic-weather-5.png'),
+      emotion1: require('./images/components/Diary/ic-emotion-1.png'),
+      emotion2: require('./images/components/Diary/ic-emotion-2.png'),
+      emotion3: require('./images/components/Diary/ic-emotion-3.png'),
+      emotion4: require('./images/components/Diary/ic-emotion-4.png'),
+      emotion5: require('./images/components/Diary/ic-emotion-5.png'),
+      emotion6: require('./images/components/Diary/ic-emotion-6.png'),
     },
     HangangNow: {
       char1: require('./images/components/HangangNow/ic-char-1.png'),

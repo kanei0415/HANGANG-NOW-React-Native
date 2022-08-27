@@ -83,7 +83,8 @@ const TripFindDetail = ({ detail }: Props) => {
               NotoSans.Regular,
               NotoSans.f_13,
               { color: '#949090' },
-            ]}>{`•이동 경로 (약 ${detail.length}km)`}</Text>
+            ]}>{`•이동 경로 (약 ${detail.length}km)
+•출발지 : ${detail.startPlaceName}`}</Text>
         </View>
       </View>
     </ScrollView>

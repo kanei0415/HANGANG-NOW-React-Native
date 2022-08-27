@@ -47,6 +47,7 @@ export type MainStackParamListTypes = {
   eventDetail: {
     id: number;
   };
+  scrap: undefined;
 };
 
 export type MainTabParamListTypes = {

@@ -48,29 +48,33 @@ export type TripFindRequestBodyType = {
   y_pos: number | null;
 };
 
+export type CourseType = {
+  course: string[];
+  id: number;
+  length: number;
+  name: string;
+  startPlaceName: string;
+};
+
+export type PlaceType = {
+  address: {
+    detail: string;
+    gu: string;
+    sido: string;
+  };
+  id: number;
+  local: {
+    localname: string;
+    x_pos: number;
+    y_pos: number;
+  };
+  name: string;
+};
+
 export type TripFindResultTypes = {
-  courses: {
-    course: string[];
-    id: number;
-    length: number;
-    name: string;
-    startPlaceName: string;
-  }[];
+  courses: CourseType[];
   matchingSuccess: true;
-  places: {
-    address: {
-      detail: string;
-      gu: string;
-      sido: string;
-    };
-    id: number;
-    local: {
-      localname: string;
-      x_pos: number;
-      y_pos: number;
-    };
-    name: string;
-  }[];
+  places: PlaceType[];
 };
 
 export type TripFindDetailTypes = {

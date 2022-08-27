@@ -21,6 +21,7 @@ type Props = {
   profile: ProfileTypes;
   onDiaryPressed: () => void;
   onMbtiPressed: () => void;
+  onScrapPressed: () => void;
 };
 
 const MyPage = ({
@@ -34,6 +35,7 @@ const MyPage = ({
   profile,
   onDiaryPressed,
   onMbtiPressed,
+  onScrapPressed,
 }: Props) => {
   return (
     <KeyboardAwareScrollView
@@ -304,7 +306,9 @@ const MyPage = ({
             {'한강일기'}
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ alignItems: 'center' }}>
+        <TouchableOpacity
+          onPress={onScrapPressed}
+          style={{ alignItems: 'center' }}>
           <View
             style={{
               width: 48,

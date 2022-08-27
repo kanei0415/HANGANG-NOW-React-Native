@@ -151,6 +151,10 @@ const MyPageContainer = () => {
     navigation.navigate('mbti');
   }, [navigation]);
 
+  const onScrapPressed = useCallback(() => {
+    navigation.navigate('scrap');
+  }, [navigation]);
+
   return profile ? (
     <MyPage
       memoList={memoList}
@@ -163,6 +167,7 @@ const MyPageContainer = () => {
       profile={profile}
       onDiaryPressed={onDiaryPressed}
       onMbtiPressed={onMbtiPressed}
+      onScrapPressed={onScrapPressed}
     />
   ) : (
     <View

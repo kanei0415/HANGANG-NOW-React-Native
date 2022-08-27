@@ -2,11 +2,17 @@ import useAuth from '@hooks/store/useAuth';
 import { alertMessage } from '@libs/alert';
 import { apiRoute, requestSecureGet, requestSecurePost } from '@libs/api';
 import { formatDate } from '@libs/factory';
-import { DiaryType } from '@typedef/components/Diary/diary.types';
+import {
+  DiaryType,
+  EmotionTypes,
+  Weathertypes,
+} from '@typedef/components/Diary/diary.types';
 import React, { useEffect, useMemo } from 'react';
 import { useCallback } from 'react';
 import { useState } from 'react';
-import ImageCropPicker from 'react-native-image-crop-picker';
+import ImageCropPicker, {
+  Image as ImageType,
+} from 'react-native-image-crop-picker';
 import Diary from '../Diary';
 
 const DiaryContainer = () => {
@@ -27,6 +33,20 @@ const DiaryContainer = () => {
   const [index, setIndex] = useState(0);
 
   const [allTimeDiaryList, setAllTimeDiaryList] = useState<DiaryType[]>([]);
+
+  const [title, setTitle] = useState<string | null>(null);
+  const [photo, setphoto] = useState<ImageType | null>(null);
+  const [content, setContent] = useState<string | null>(null);
+  const [weatherVisible, setWeatherVisible] = useState(false);
+  const [weather, setWeather] = useState<Weathertypes | null>(null);
+  const [emotionVisible, setEmotionVisible] = useState(false);
+  const [emotion, setEmotion] = useState<EmotionTypes | null>(null);
+
+  const addBtnActive = useMemo<boolean>(() => {
+    return (
+      title !== null && content !== null && weather !== null && emotion != null
+    );
+  }, [title, content, weather, emotion]);
 
   const loadSelectedDateDiary = useCallback(async () => {
     if (!loginResponse?.accessToken) {
@@ -89,14 +109,65 @@ const DiaryContainer = () => {
   const onShowAllPressed = useCallback(() => setSelectedDate(null), []);
 
   const onPhotoSelectPressed = useCallback(async () => {
-    const photos = await ImageCropPicker.openPicker({
+    const photo = await ImageCropPicker.openPicker({
       mediaType: 'photo',
-      maxFiles: 3,
-      multiple: true,
+      maxFiles: 1,
+      multiple: false,
       width: 480,
       height: 240,
     });
+
+    if (photo) {
+      setphoto(photo);
+    }
   }, []);
+
+  const onAddBtnPressed = useCallback(async () => {
+    if (!loginResponse) {
+      return;
+    }
+
+    if (!selectedDate || !title || !content) {
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append(
+      'jsonData',
+      JSON.stringify({
+        title,
+        content,
+        diaryDate: formatDate(selectedDate, 'YYYY-MM-DD'),
+        emotion,
+        diaryWeather: weather,
+      }),
+    );
+
+    if (photo) {
+      formData.append('multipartData', {
+        ...photo,
+        type: photo.mime,
+        uri: photo.path,
+        name: photo.path.split('/').pop(),
+      });
+    }
+
+    const { data, config } = await requestSecurePost<DiaryType>(
+      apiRoute.diary.addDiary,
+      {
+        'Content-Type': 'multipart/form-data',
+      },
+      formData,
+      loginResponse.accessToken,
+    );
+
+    if (config.status === 200) {
+      setSelectedDateDiary(data);
+    } else {
+      alertMessage('일기 등록에 실패 했습니다');
+    }
+  }, [loginResponse, selectedDate, title, content, photo, weather, emotion]);
 
   useEffect(() => {
     loadSelectedDateDiary();
@@ -119,8 +190,21 @@ const DiaryContainer = () => {
       onDateSelected={onDateSelected}
       onDateCanceled={onDateCanceled}
       onShowAllPressed={onShowAllPressed}
-      onPhotoSelectPressed={onPhotoSelectPressed}
       mode={mode}
+      setTitle={setTitle}
+      photo={photo}
+      setContent={setContent}
+      onPhotoSelectPressed={onPhotoSelectPressed}
+      weatherVisible={weatherVisible}
+      setWeatherVisible={setWeatherVisible}
+      setWeather={setWeather}
+      weather={weather}
+      emotionVisible={emotionVisible}
+      setEmotionVisible={setEmotionVisible}
+      emotion={emotion}
+      setEmotion={setEmotion}
+      addBtnActive={addBtnActive}
+      onAddBtnPressed={onAddBtnPressed}
     />
   );
 };

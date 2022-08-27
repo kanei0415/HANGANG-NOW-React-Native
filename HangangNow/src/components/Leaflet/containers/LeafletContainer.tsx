@@ -1,6 +1,6 @@
 import useAuth from '@hooks/store/useAuth';
 import { alertMessage } from '@libs/alert';
-import { apiRoute, requestSecureGet } from '@libs/api';
+import { apiRoute, requestSecureGet, requestSecurePost } from '@libs/api';
 import { useNavigation } from '@react-navigation/native';
 import { LeafletTypes } from '@typedef/components/Leaflet/leaflet.types';
 import { MainStackNavigationTypes } from '@typedef/routes/navigation.types';
@@ -15,6 +15,7 @@ const LeafletContainer = () => {
   const { loginResponse } = useAuth();
 
   const [leaflets, setLeaflets] = useState<LeafletTypes[]>([]);
+  const [liked, setLiked] = useState<boolean[]>([]);
 
   const [selected, setSelected] = useState<LeafletTypes | null>(null);
 
@@ -31,6 +32,7 @@ const LeafletContainer = () => {
 
     if (config.status === 200) {
       setLeaflets(data.data);
+      setLiked(new Array(data.data.length).map((i) => false));
     } else {
       alertMessage('전단지 정보를 불러오지 못했습니다');
     }
@@ -54,6 +56,35 @@ const LeafletContainer = () => {
     }
   }, [selected]);
 
+  const onLikePressed = useCallback(
+    async (item: LeafletTypes, index: number) => {
+      if (!loginResponse) {
+        return;
+      }
+
+      const { data, config } = await requestSecurePost(
+        apiRoute.scrap.addLeaflet + item.id,
+        {},
+        {},
+        loginResponse.accessToken,
+      );
+
+      if (config.status === 200) {
+        alertMessage('스크랩 되었습니다');
+        setLiked((prev) => {
+          const clone = [...prev];
+
+          clone[index] = true;
+
+          return clone;
+        });
+      } else {
+        alertMessage('스크랩에 실패했습니다');
+      }
+    },
+    [loginResponse],
+  );
+
   useEffect(() => {
     loadLeaflet();
   }, [loadLeaflet]);
@@ -66,6 +97,8 @@ const LeafletContainer = () => {
       selected={selected}
       onBackPressed={onBackPressed}
       onTelPressed={onTelPressed}
+      liked={liked}
+      onLikePressed={onLikePressed}
     />
   );
 };

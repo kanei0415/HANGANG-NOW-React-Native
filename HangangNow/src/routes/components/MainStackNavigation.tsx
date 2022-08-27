@@ -17,6 +17,7 @@ import MbtiInspectContaienr from '@components/Mbti/containers/MbtiInspectContain
 import MbtiResultCotainer from '@components/Mbti/containers/MbtiResultContainer';
 import CalendarDateDetailContainer from '@components/MyPage/containers/CalendarDateDetailContainer';
 import PartnersEnrollContainer from '@components/PartnersEnroll/containers/PartnersEnrollContainer';
+import ScrapContainer from '@components/Scrap/containers/ScrapContainer';
 import SettingContainer from '@components/Setting/containers/SettingContainer';
 import SignupContainer from '@components/Signup/containers/SignupContainer';
 import SignupDoneContainer from '@components/Signup/containers/SignupDoneContainer';
@@ -80,7 +81,6 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
           component={CalendarDateDetailContainer}
         />
       </Stack.Group>
-
       <Stack.Group>
         <Stack.Screen name='deleteAccount' component={DeleteAccountContainer} />
         <Stack.Screen
@@ -107,6 +107,7 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
         <Stack.Screen name='event' component={EventContainer} />
         <Stack.Screen name='eventDetail' component={EventDetailContainer} />
       </Stack.Group>
+      <Stack.Screen name='scrap' component={ScrapContainer} />
     </Stack.Navigator>
   );
 };

@@ -25,6 +25,8 @@ type Props = {
   selected: LeafletTypes | null;
   onBackPressed: () => void;
   onTelPressed: () => void;
+  liked: boolean[];
+  onLikePressed: (item: LeafletTypes, index: number) => void;
 };
 
 const Leaflet = ({
@@ -34,12 +36,14 @@ const Leaflet = ({
   selected,
   onBackPressed,
   onTelPressed,
+  liked,
+  onLikePressed,
 }: Props) => {
   return (
     <>
       <ScrollView style={{ flex: 1, backgroundColor: colors.default.white }}>
         <CHeaderContainer title='전단지 모아보기' />
-        <View style={{ padding: 20 }}>
+        <View style={{ paddingLeft: 20 }}>
           <Text
             style={[
               NotoSans.Medium,
@@ -67,7 +71,7 @@ const Leaflet = ({
             numColumns={2}
             style={{ marginTop: 20 }}
             data={leaflets}
-            renderItem={({ item }) => (
+            renderItem={({ item, index }) => (
               <TouchableOpacity
                 onPress={() => onItemPressed(item)}
                 style={{ marginRight: 20, marginBottom: 20 }}>
@@ -78,6 +82,27 @@ const Leaflet = ({
                   }}
                   source={{ uri: item.photoUrl }}
                 />
+                <TouchableOpacity
+                  style={{
+                    padding: 6,
+                    backgroundColor: '#000000cc',
+                    borderRadius: 40,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    position: 'absolute',
+                    right: 12,
+                    bottom: 8,
+                  }}
+                  onPress={(e) => {
+                    onLikePressed(item, index);
+                    e.stopPropagation();
+                  }}>
+                  <Image
+                    source={
+                      images.components.common[liked[index] ? 'like' : 'unlike']
+                    }
+                  />
+                </TouchableOpacity>
               </TouchableOpacity>
             )}
           />

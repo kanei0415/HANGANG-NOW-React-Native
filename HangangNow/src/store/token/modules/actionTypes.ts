@@ -1,0 +1,1 @@
+export const UPDATE_TOKEN_ACTION_TYPE = 'UPDATE_TOKEN_ACTION_TYPE' as const;

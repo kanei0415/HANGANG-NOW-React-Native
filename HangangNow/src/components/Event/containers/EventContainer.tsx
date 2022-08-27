@@ -1,5 +1,6 @@
 import useAuth from '@hooks/store/useAuth';
-import { apiRoute, requestSecureGet } from '@libs/api';
+import { alertMessage } from '@libs/alert';
+import { apiRoute, requestSecureGet, requestSecurePost } from '@libs/api';
 import { useNavigation } from '@react-navigation/native';
 import { EventType } from '@typedef/components/Home/home.types';
 import { MainStackNavigationTypes } from '@typedef/routes/navigation.types';
@@ -12,6 +13,7 @@ const EventContainer = () => {
   const { loginResponse } = useAuth();
 
   const [events, setEvents] = useState<EventType[]>([]);
+  const [liked, setLiked] = useState<boolean[]>([]);
 
   const loadEvent = useCallback(async () => {
     if (!loginResponse) {
@@ -26,6 +28,7 @@ const EventContainer = () => {
 
     if (config.status === 200) {
       setEvents(data.data);
+      setLiked(new Array(data.data.length).map(() => false));
     } else {
     }
   }, [loginResponse]);
@@ -39,11 +42,47 @@ const EventContainer = () => {
     [navigation],
   );
 
+  const onLikePressed = useCallback(
+    async (item: EventType, index: number) => {
+      if (!loginResponse) {
+        return;
+      }
+
+      const { data, config } = await requestSecurePost(
+        apiRoute.scrap.addEvent + item.id,
+        {},
+        {},
+        loginResponse.accessToken,
+      );
+
+      if (config.status === 200) {
+        alertMessage('스크랩 되었습니다');
+        setLiked((prev) => {
+          const clone = [...prev];
+
+          clone[index] = true;
+
+          return clone;
+        });
+      } else {
+        alertMessage('스크랩에 실패했습니다');
+      }
+    },
+    [loginResponse],
+  );
+
   useEffect(() => {
     loadEvent();
   }, [loadEvent]);
 
-  return <Event events={events} onItemPressed={onItemPressed} />;
+  return (
+    <Event
+      events={events}
+      onItemPressed={onItemPressed}
+      liked={liked}
+      onLikePressed={onLikePressed}
+    />
+  );
 };
 
 export default EventContainer;
