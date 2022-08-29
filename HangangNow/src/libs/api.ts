@@ -148,6 +148,10 @@ export const apiRoute = {
     loadCource: '/scraps/recomCourses',
     addCource: '/scraps/recomCourses/',
   },
+  facility: {
+    loadFacility: '/facilities/',
+    loadDetail: '/facilities',
+  },
 };
 
 export type BasicResponse<T> = {

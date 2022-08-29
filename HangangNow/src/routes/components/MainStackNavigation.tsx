@@ -3,6 +3,7 @@ import DeleteAccountStep2Container from '@components/DeleteAccount/containers/De
 import DiaryContainer from '@components/Diary/containers/DiaryContainer';
 import EventContainer from '@components/Event/containers/EventContainer';
 import EventDetailContainer from '@components/Event/containers/EventDetailContainer';
+import FacilityMapContainer from '@components/Facility/containers/FacilityMapContainer';
 import FindIDContainer from '@components/FindID/containers/FindIDContainer';
 import FindIDStep2Container from '@components/FindID/containers/FindIDStep2Container';
 import FindPWContainer from '@components/FindPW/containers/FindPWContainer';
@@ -108,6 +109,7 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
         <Stack.Screen name='eventDetail' component={EventDetailContainer} />
       </Stack.Group>
       <Stack.Screen name='scrap' component={ScrapContainer} />
+      <Stack.Screen name='facilityMap' component={FacilityMapContainer} />
     </Stack.Navigator>
   );
 };

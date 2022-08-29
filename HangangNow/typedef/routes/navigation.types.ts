@@ -48,6 +48,10 @@ export type MainStackParamListTypes = {
     id: number;
   };
   scrap: undefined;
+  facilityMap: {
+    name: string;
+    id: number;
+  };
 };
 
 export type MainTabParamListTypes = {
