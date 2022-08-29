@@ -20,7 +20,11 @@ import {
 
 const { width } = Dimensions.get('window');
 
-const Facility = () => {
+type Props = {
+  onHangangPressed: (id: number, name: string) => void;
+};
+
+const Facility = ({ onHangangPressed }: Props) => {
   return (
     <ScrollView
       contentContainerStyle={{ padding: 20 }}
@@ -43,15 +47,19 @@ const Facility = () => {
         {'어디로 갈까요?'}
       </Text>
       <View style={{ marginTop: 20 }}>
-        <CButton label='가장 가까운 한강 공원으로 가기' />
+        <CButton
+          label='가장 가까운 한강 공원으로 가기'
+          onPressed={() => onHangangPressed(0, '광나루한강공원')}
+        />
       </View>
       <FlatList
         contentContainerStyle={{ marginTop: 20 }}
         scrollEnabled={false}
         numColumns={3}
         data={Object.keys(PARK_TABLE)}
-        renderItem={({ item }) => (
+        renderItem={({ item, index }) => (
           <TouchableOpacity
+            onPress={() => onHangangPressed(index + 1, item)}
             style={{
               width: (width - 80) / 3,
               height: (width - 80) / 3,

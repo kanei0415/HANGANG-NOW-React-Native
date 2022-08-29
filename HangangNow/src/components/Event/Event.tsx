@@ -1,5 +1,6 @@
 import colors from '@assets/colors';
 import NotoSans from '@assets/font';
+import images from '@assets/images';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import { EventType } from '@typedef/components/Home/home.types';
 import React from 'react';
@@ -18,9 +19,11 @@ const { width } = Dimensions.get('screen');
 type Props = {
   events: EventType[];
   onItemPressed: (id: number) => void;
+  liked: boolean[];
+  onLikePressed: (item: EventType, index: number) => void;
 };
 
-const Event = ({ events, onItemPressed }: Props) => {
+const Event = ({ events, onItemPressed, liked, onLikePressed }: Props) => {
   return (
     <ScrollView style={{ backgroundColor: colors.default.white }}>
       <CHeaderContainer title='이벤트 모아보기' />
@@ -36,7 +39,7 @@ const Event = ({ events, onItemPressed }: Props) => {
         <FlatList
           data={events}
           numColumns={2}
-          renderItem={({ item }) => (
+          renderItem={({ item, index }) => (
             <TouchableOpacity
               onPress={() => onItemPressed(item.id)}
               style={{ marginRight: 20, marginBottom: 20 }}>
@@ -47,6 +50,27 @@ const Event = ({ events, onItemPressed }: Props) => {
                 }}
                 source={{ uri: item.photoUrl }}
               />
+              <TouchableOpacity
+                style={{
+                  padding: 6,
+                  backgroundColor: '#000000cc',
+                  borderRadius: 40,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  position: 'absolute',
+                  right: 12,
+                  bottom: 8,
+                }}
+                onPress={(e) => {
+                  onLikePressed(item, index);
+                  e.stopPropagation();
+                }}>
+                <Image
+                  source={
+                    images.components.common[liked[index] ? 'like' : 'unlike']
+                  }
+                />
+              </TouchableOpacity>
             </TouchableOpacity>
           )}
         />

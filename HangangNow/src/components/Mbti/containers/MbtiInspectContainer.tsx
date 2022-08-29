@@ -1,5 +1,8 @@
+import useAuth from '@hooks/store/useAuth';
+import { alertMessage } from '@libs/alert';
+import { apiRoute, requestSecurePut } from '@libs/api';
 import { useNavigation } from '@react-navigation/native';
-import { MbtiResultTypes } from '@typedef/components/Mbti/mbti.types';
+import { calcMbti } from '@typedef/components/Mbti/mbti.types';
 import { MainStackNavigationTypes } from '@typedef/routes/navigation.types';
 import React, { useEffect, useMemo } from 'react';
 import { useRef } from 'react';
@@ -9,12 +12,14 @@ import { BackHandler } from 'react-native';
 import SwiperFlatList from 'react-native-swiper-flatlist';
 import MbtiInspect from '../components/MbtiInspect';
 
-const dummyMbtiResult: MbtiResultTypes = {};
-
 const MbtiInspectContaienr = () => {
   const navigation = useNavigation<MainStackNavigationTypes>();
 
   const [index, setIndex] = useState(0);
+
+  const [answer, setAnswer] = useState<(0 | 1)[]>(new Array(12).map((i) => 0));
+
+  const { loginResponse } = useAuth();
 
   const backPressHandler = useMemo(() => {
     return () => {
@@ -30,34 +35,56 @@ const MbtiInspectContaienr = () => {
   const scrollRef = useRef<SwiperFlatList>(null);
 
   const onAnswerSelected = useCallback(
-    (index: number, choice: 0 | 1) => {
-      if (index >= 9) {
+    async (index: number, choice: 0 | 1) => {
+      if (index >= 11) {
         BackHandler.removeEventListener('hardwareBackPress', backPressHandler);
 
-        navigation.reset({
-          routes: [
-            {
-              name: 'mainTab',
-            },
-            {
-              name: 'mbti',
-            },
-            {
-              name: 'mbtiResult',
-              params: {
-                prevUid: null,
-                result: dummyMbtiResult,
+        if (!loginResponse) {
+          return;
+        }
+
+        const { config } = await requestSecurePut(
+          apiRoute.member.setMbti + calcMbti(answer),
+          {},
+          {},
+          loginResponse.accessToken,
+        );
+
+        if (config.status === 200) {
+          navigation.reset({
+            routes: [
+              {
+                name: 'mainTab',
               },
-            },
-          ],
-        });
+              {
+                name: 'mbti',
+              },
+              {
+                name: 'mbtiResult',
+                params: {
+                  result: calcMbti(answer),
+                },
+              },
+            ],
+          });
+        } else {
+          alertMessage('유형검사 설정에 실패했습니다');
+        }
 
         return;
+      } else {
+        setAnswer((prev) => {
+          const clone = [...prev];
+
+          clone[index] = choice;
+
+          return clone;
+        });
       }
 
       setIndex(index + 1);
     },
-    [navigation, backPressHandler],
+    [navigation, answer, backPressHandler],
   );
 
   useEffect(() => {

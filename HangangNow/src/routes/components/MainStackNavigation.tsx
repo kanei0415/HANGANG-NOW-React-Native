@@ -3,6 +3,7 @@ import DeleteAccountStep2Container from '@components/DeleteAccount/containers/De
 import DiaryContainer from '@components/Diary/containers/DiaryContainer';
 import EventContainer from '@components/Event/containers/EventContainer';
 import EventDetailContainer from '@components/Event/containers/EventDetailContainer';
+import FacilityMapContainer from '@components/Facility/containers/FacilityMapContainer';
 import FindIDContainer from '@components/FindID/containers/FindIDContainer';
 import FindIDStep2Container from '@components/FindID/containers/FindIDStep2Container';
 import FindPWContainer from '@components/FindPW/containers/FindPWContainer';
@@ -17,6 +18,7 @@ import MbtiInspectContaienr from '@components/Mbti/containers/MbtiInspectContain
 import MbtiResultCotainer from '@components/Mbti/containers/MbtiResultContainer';
 import CalendarDateDetailContainer from '@components/MyPage/containers/CalendarDateDetailContainer';
 import PartnersEnrollContainer from '@components/PartnersEnroll/containers/PartnersEnrollContainer';
+import ScrapContainer from '@components/Scrap/containers/ScrapContainer';
 import SettingContainer from '@components/Setting/containers/SettingContainer';
 import SignupContainer from '@components/Signup/containers/SignupContainer';
 import SignupDoneContainer from '@components/Signup/containers/SignupDoneContainer';
@@ -80,7 +82,6 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
           component={CalendarDateDetailContainer}
         />
       </Stack.Group>
-
       <Stack.Group>
         <Stack.Screen name='deleteAccount' component={DeleteAccountContainer} />
         <Stack.Screen
@@ -107,6 +108,8 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
         <Stack.Screen name='event' component={EventContainer} />
         <Stack.Screen name='eventDetail' component={EventDetailContainer} />
       </Stack.Group>
+      <Stack.Screen name='scrap' component={ScrapContainer} />
+      <Stack.Screen name='facilityMap' component={FacilityMapContainer} />
     </Stack.Navigator>
   );
 };

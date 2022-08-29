@@ -4,11 +4,12 @@ import { MainTabParamListTypes } from '@typedef/routes/navigation.types';
 import HomeContainer from '@components/Home/containers/HomeContainer';
 import MyPageContainer from '@components/MyPage/containers/MyPageContainer';
 import HangangNowContainer from '@components/HangangNow/containers/HangangNowContainer';
-import { Text } from 'react-native';
+import { Image, Text } from 'react-native';
 import NotoSans from '@assets/font';
 import colors from '@assets/colors';
 import TripContainer from '@components/Trip/containers/TripContainer';
 import FacilityContainer from '@components/Facility/containers/FacilityContainer';
+import images from '@assets/images';
 
 const Tab = createBottomTabNavigator<MainTabParamListTypes>();
 
@@ -21,6 +22,15 @@ const MainTabNavigation = () => {
       }}>
       <Tab.Screen
         options={{
+          tabBarIcon({ focused }) {
+            return (
+              <Image
+                source={
+                  focused ? images.routes.selected1 : images.routes.unselected1
+                }
+              />
+            );
+          },
           tabBarLabel: ({ focused }) => (
             <Text
               style={[
@@ -41,6 +51,15 @@ const MainTabNavigation = () => {
       />
       <Tab.Screen
         options={{
+          tabBarIcon({ focused }) {
+            return (
+              <Image
+                source={
+                  focused ? images.routes.selected2 : images.routes.unselected2
+                }
+              />
+            );
+          },
           tabBarLabel: ({ focused }) => (
             <Text
               style={[
@@ -61,6 +80,15 @@ const MainTabNavigation = () => {
       />
       <Tab.Screen
         options={{
+          tabBarIcon({ focused }) {
+            return (
+              <Image
+                source={
+                  focused ? images.routes.selected3 : images.routes.unselected3
+                }
+              />
+            );
+          },
           tabBarLabel: ({ focused }) => (
             <Text
               style={[
@@ -81,6 +109,15 @@ const MainTabNavigation = () => {
       />
       <Tab.Screen
         options={{
+          tabBarIcon({ focused }) {
+            return (
+              <Image
+                source={
+                  focused ? images.routes.selected4 : images.routes.unselected4
+                }
+              />
+            );
+          },
           tabBarLabel: ({ focused }) => (
             <Text
               style={[
@@ -101,6 +138,15 @@ const MainTabNavigation = () => {
       />
       <Tab.Screen
         options={{
+          tabBarIcon({ focused }) {
+            return (
+              <Image
+                source={
+                  focused ? images.routes.selected5 : images.routes.unselected5
+                }
+              />
+            );
+          },
           tabBarLabel: ({ focused }) => (
             <Text
               style={[

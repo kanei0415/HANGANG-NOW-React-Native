@@ -109,3 +109,12 @@ export type ParkingTypes = {
   name: string;
   total_count: number;
 };
+
+export type ParkingMarkerTypes = {
+  id: number;
+  local: {
+    localname: string;
+    x_pos: number;
+    y_pos: number;
+  };
+};

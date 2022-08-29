@@ -139,6 +139,22 @@ const MyPageContainer = () => {
     };
   }, [loadMemos, __clearMemoListFromHooks]);
 
+  useEffect(() => {
+    setDate(new Date('2000-01-01'));
+
+    setTimeout(() => {
+      setDate(new Date());
+    }, 200);
+  }, []);
+
+  const onMbtiPressed = useCallback(() => {
+    navigation.navigate('mbti');
+  }, [navigation]);
+
+  const onScrapPressed = useCallback(() => {
+    navigation.navigate('scrap');
+  }, [navigation]);
+
   return profile ? (
     <MyPage
       memoList={memoList}
@@ -150,6 +166,8 @@ const MyPageContainer = () => {
       onDateItemPressed={onDateItemPressed}
       profile={profile}
       onDiaryPressed={onDiaryPressed}
+      onMbtiPressed={onMbtiPressed}
+      onScrapPressed={onScrapPressed}
     />
   ) : (
     <View

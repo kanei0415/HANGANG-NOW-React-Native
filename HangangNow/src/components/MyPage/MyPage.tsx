@@ -4,6 +4,7 @@ import images from '@assets/images';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import { formatDate } from '@libs/factory';
 import { ProfileTypes } from '@typedef/components/common/common.types';
+import { MBTI_LABEL_TABLE } from '@typedef/components/Mbti/mbti.types';
 import { MemoTypes } from '@typedef/components/MyPage/mypage.types';
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
@@ -19,6 +20,8 @@ type Props = {
   onDateItemPressed: (d: Date) => void;
   profile: ProfileTypes;
   onDiaryPressed: () => void;
+  onMbtiPressed: () => void;
+  onScrapPressed: () => void;
 };
 
 const MyPage = ({
@@ -31,6 +34,8 @@ const MyPage = ({
   onDateItemPressed,
   profile,
   onDiaryPressed,
+  onMbtiPressed,
+  onScrapPressed,
 }: Props) => {
   return (
     <KeyboardAwareScrollView
@@ -61,7 +66,9 @@ const MyPage = ({
                 NotoSans.f_18,
                 { color: colors.typo.black },
               ]}>
-              {profile.memberMBTI || '검사를 통해 유형을 알아보세요'}
+              {profile.memberMBTI
+                ? MBTI_LABEL_TABLE[profile.memberMBTI]
+                : '검사를 통해 유형을 알아보세요'}
             </Text>
             <Text style={[NotoSans.Medium, NotoSans.f_18]}>
               <Text style={{ color: colors.main.primary }}>{profile.name}</Text>
@@ -209,45 +216,49 @@ const MyPage = ({
                 alignItems: 'center',
                 flexDirection: 'row',
               }}>
-              {w.map((d) => (
-                <TouchableOpacity
-                  key={d.getTime()}
-                  disabled={date.getMonth() !== d.getMonth()}
-                  onPress={() => onDateItemPressed(d)}
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  }}>
-                  <View
+              {w.map((d) =>
+                date.getMonth() === d.getMonth() ? (
+                  <TouchableOpacity
+                    key={d.getTime()}
+                    disabled={date.getMonth() !== d.getMonth()}
+                    onPress={() => onDateItemPressed(d)}
                     style={{
-                      width: 24,
-                      height: 24,
-                      borderRadius: 12,
+                      flex: 1,
                       justifyContent: 'center',
                       alignItems: 'center',
-                      backgroundColor: memoList.find(
-                        (val) => val.memoDate === formatDate(d, 'YYYY-MM-dd'),
-                      )?.color,
                     }}>
-                    <Text
-                      style={[
-                        NotoSans.Medium,
-                        NotoSans.f_15,
-                        {
-                          color: memoList.find(
-                            (val) =>
-                              val.memoDate === formatDate(d, 'YYYY-MM-dd'),
-                          )
-                            ? colors.default.white
-                            : colors.typo.black,
-                        },
-                      ]}>
-                      {date.getMonth() === d.getMonth() ? d.getDate() + '' : ''}
-                    </Text>
-                  </View>
-                </TouchableOpacity>
-              ))}
+                    <View
+                      style={{
+                        width: 24,
+                        height: 24,
+                        borderRadius: 12,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: memoList.find(
+                          (val) => val.memoDate === formatDate(d, 'YYYY-MM-dd'),
+                        )?.color,
+                      }}>
+                      <Text
+                        style={[
+                          NotoSans.Medium,
+                          NotoSans.f_15,
+                          {
+                            color: memoList.find(
+                              (val) =>
+                                val.memoDate === formatDate(d, 'YYYY-MM-dd'),
+                            )
+                              ? colors.default.white
+                              : colors.typo.black,
+                          },
+                        ]}>
+                        {d.getDate()}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                ) : (
+                  <View key={d.getTime()} style={{ flex: 1 }} />
+                ),
+              )}
             </View>
           ))}
         </View>
@@ -259,7 +270,9 @@ const MyPage = ({
           justifyContent: 'space-evenly',
           alignItems: 'center',
         }}>
-        <TouchableOpacity style={{ alignItems: 'center' }}>
+        <TouchableOpacity
+          onPress={onMbtiPressed}
+          style={{ alignItems: 'center' }}>
           <View
             style={{
               width: 48,
@@ -293,7 +306,9 @@ const MyPage = ({
             {'한강일기'}
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ alignItems: 'center' }}>
+        <TouchableOpacity
+          onPress={onScrapPressed}
+          style={{ alignItems: 'center' }}>
           <View
             style={{
               width: 48,
@@ -306,7 +321,7 @@ const MyPage = ({
               NotoSans.f_13,
               { color: colors.main.primary, marginTop: 4 },
             ]}>
-            {'한강유형검사'}
+            {'스크랩 모아보기'}
           </Text>
         </TouchableOpacity>
       </View>

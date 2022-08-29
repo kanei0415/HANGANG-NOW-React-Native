@@ -1,14 +1,22 @@
 import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 import images from '@assets/images';
+import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
+import CInputContainer from '@components/common/CInput/containers/CInputContainer';
 import { formatDate } from '@libs/factory';
-import { DiaryType } from '@typedef/components/Diary/diary.types';
+import {
+  DiaryType,
+  EmotionTypes,
+  Weathertypes,
+} from '@typedef/components/Diary/diary.types';
 import React from 'react';
 import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import SwiperFlatList from 'react-native-swiper-flatlist';
+import { Image as ImageType } from 'react-native-image-crop-picker';
+import ReactNativeModal from 'react-native-modal';
 
 const { width } = Dimensions.get('screen');
 
@@ -24,8 +32,21 @@ type Props = {
   onDateSelected: (date: Date) => void;
   onDateCanceled: () => void;
   onShowAllPressed: () => void;
-  onPhotoSelectPressed: () => void;
   mode: 'add' | 'show';
+  setTitle: React.Dispatch<React.SetStateAction<string | null>>;
+  photo: ImageType | null;
+  setContent: React.Dispatch<React.SetStateAction<string | null>>;
+  onPhotoSelectPressed: () => void;
+  weatherVisible: boolean;
+  setWeatherVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setWeather: React.Dispatch<React.SetStateAction<Weathertypes | null>>;
+  weather: Weathertypes | null;
+  emotionVisible: boolean;
+  setEmotionVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setEmotion: React.Dispatch<React.SetStateAction<EmotionTypes | null>>;
+  emotion: EmotionTypes | null;
+  addBtnActive: boolean;
+  onAddBtnPressed: () => void;
 };
 
 const Diary = ({
@@ -40,7 +61,20 @@ const Diary = ({
   onDateSelected,
   onDateCanceled,
   onShowAllPressed,
+  setTitle,
+  photo,
+  setContent,
   onPhotoSelectPressed,
+  weatherVisible,
+  setWeather,
+  setWeatherVisible,
+  weather,
+  emotionVisible,
+  setEmotion,
+  setEmotionVisible,
+  emotion,
+  addBtnActive,
+  onAddBtnPressed,
   mode,
 }: Props) => {
   return (
@@ -104,7 +138,7 @@ const Diary = ({
                     NotoSans.f_17,
                     { color: colors.typo.black },
                   ]}>
-                  {'한강공원에서의 즐거운 하루'}
+                  {selectedDateDiary?.title}
                 </Text>
               </View>
               <View
@@ -116,11 +150,7 @@ const Diary = ({
                   onChangeIndex={({ index }) => setIndex(index)}
                   style={{ flex: 1 }}
                   horizontal
-                  data={[
-                    'https://biz.chosun.com/resizer/GY_xtxp9X-LHS9a39G5xPAgAjV8=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/AVOGQMXFV5CUZIUYDRBD6LQTAQ.jpg',
-                    'https://biz.chosun.com/resizer/GY_xtxp9X-LHS9a39G5xPAgAjV8=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/AVOGQMXFV5CUZIUYDRBD6LQTAQ.jpg',
-                    'https://biz.chosun.com/resizer/GY_xtxp9X-LHS9a39G5xPAgAjV8=/616x0/smart/cloudfront-ap-northeast-1.images.arcpublishing.com/chosunbiz/AVOGQMXFV5CUZIUYDRBD6LQTAQ.jpg',
-                  ]}
+                  data={[selectedDateDiary?.url]}
                   renderItem={({ item }) => (
                     <Image
                       style={{
@@ -132,27 +162,6 @@ const Diary = ({
                     />
                   )}
                 />
-                <View
-                  style={{
-                    width: 40,
-                    height: 24,
-                    opacity: 0.69,
-                    borderRadius: 4,
-                    backgroundColor: colors.default.black,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    position: 'absolute',
-                    right: 10,
-                    bottom: 8,
-                  }}>
-                  <Text
-                    style={[
-                      NotoSans.Bold,
-                      NotoSans.f_13,
-                      { color: colors.default.white },
-                    ]}>{`${index + 1}/3`}</Text>
-                </View>
               </View>
               <View
                 style={{
@@ -167,9 +176,9 @@ const Diary = ({
                     NotoSans.Medium,
                     NotoSans.f_13,
                     { color: colors.typo.black },
-                  ]}>{`늘 즐겨 찾곤 하는 한강공원에 오늘도 방문했다!
-퇴근하고 잠시 들렀더니, 항상 해가 떠있을 때 봤던 풍경이
-색다르게 느껴져서 새로웠던 하루 ㅎㅎ`}</Text>
+                  ]}>
+                  {selectedDateDiary?.content}
+                </Text>
               </View>
               <View
                 style={{
@@ -195,7 +204,23 @@ const Diary = ({
                       backgroundColor: colors.background.gray.light,
                       justifyContent: 'center',
                       alignItems: 'center',
-                    }}></View>
+                    }}>
+                    {selectedDateDiary?.diaryWeather === 'SUN' && (
+                      <Image source={images.components.Diary.weather1} />
+                    )}
+                    {selectedDateDiary?.diaryWeather === 'SUN_CLOUD' && (
+                      <Image source={images.components.Diary.weather2} />
+                    )}
+                    {selectedDateDiary?.diaryWeather === 'CLOUD' && (
+                      <Image source={images.components.Diary.weather3} />
+                    )}
+                    {selectedDateDiary?.diaryWeather === 'CLOUD_RAIN' && (
+                      <Image source={images.components.Diary.weather4} />
+                    )}
+                    {selectedDateDiary?.diaryWeather === 'CLOUD_SNOW' && (
+                      <Image source={images.components.Diary.weather5} />
+                    )}
+                  </View>
                 </View>
                 <View style={{ alignItems: 'center' }}>
                   <Text
@@ -215,7 +240,26 @@ const Diary = ({
                       backgroundColor: colors.background.gray.light,
                       justifyContent: 'center',
                       alignItems: 'center',
-                    }}></View>
+                    }}>
+                    {selectedDateDiary?.emotion === 'PEACEFUL' && (
+                      <Image source={images.components.Diary.emotion1} />
+                    )}
+                    {selectedDateDiary?.emotion === 'FUNNY' && (
+                      <Image source={images.components.Diary.emotion2} />
+                    )}
+                    {selectedDateDiary?.emotion === 'BIG_SMILE' && (
+                      <Image source={images.components.Diary.emotion3} />
+                    )}
+                    {selectedDateDiary?.emotion === 'SMILE' && (
+                      <Image source={images.components.Diary.emotion4} />
+                    )}
+                    {selectedDateDiary?.emotion === 'SAD' && (
+                      <Image source={images.components.Diary.emotion5} />
+                    )}
+                    {selectedDateDiary?.emotion === 'FROWNING' && (
+                      <Image source={images.components.Diary.emotion6} />
+                    )}
+                  </View>
                 </View>
               </View>
               <TouchableOpacity
@@ -244,7 +288,157 @@ const Diary = ({
               </TouchableOpacity>
             </View>
           ) : (
-            <View style={{ flex: 1 }}></View>
+            <View style={{ flex: 1, padding: 20 }}>
+              <CInputContainer
+                onChange={setTitle}
+                placeHolder='일기 제목을 입력해주세요'
+              />
+              <TouchableOpacity
+                onPress={onPhotoSelectPressed}
+                style={{
+                  width: width - 40,
+                  height: ((width - 40) / 32) * 14,
+                  backgroundColor: '#dbdbdb',
+                  borderRadius: 4,
+                  marginTop: 20,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                {photo ? (
+                  <Image
+                    style={{
+                      width: width - 40,
+                      height: ((width - 40) / 32) * 14,
+                    }}
+                    source={{ uri: photo.path }}
+                  />
+                ) : (
+                  <Text
+                    style={[
+                      NotoSans.Medium,
+                      NotoSans.f_14,
+                      { color: colors.typo.gray.middle },
+                    ]}>{`갤러리에서 
+이미지 첨부`}</Text>
+                )}
+              </TouchableOpacity>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_10,
+                  { color: colors.typo.gray.middle, marginTop: 12 },
+                ]}>{`이미지 첨부는 필수가 아닙니다`}</Text>
+              <CInputContainer
+                onChange={setContent}
+                placeHolder='일기 내용을 입력해주세요'
+                containerStyle={{ marginTop: 24 }}
+              />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  marginTop: 24,
+                  justifyContent: 'space-evenly',
+                }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setWeatherVisible(true);
+                  }}
+                  style={{ alignItems: 'center' }}>
+                  <Text
+                    style={[
+                      NotoSans.Medium,
+                      NotoSans.f_15,
+                      { color: colors.typo.main },
+                    ]}>
+                    {'오늘의 날씨'}
+                  </Text>
+                  <View
+                    style={{
+                      width: 68,
+                      height: 68,
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: '#a4a4a3',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: 12,
+                    }}>
+                    {weather === null && (
+                      <Image source={images.components.Diary.add} />
+                    )}
+                    {weather === 'SUN' && (
+                      <Image source={images.components.Diary.weather1} />
+                    )}
+                    {weather === 'SUN_CLOUD' && (
+                      <Image source={images.components.Diary.weather2} />
+                    )}
+                    {weather === 'CLOUD' && (
+                      <Image source={images.components.Diary.weather3} />
+                    )}
+                    {weather === 'CLOUD_RAIN' && (
+                      <Image source={images.components.Diary.weather4} />
+                    )}
+                    {weather === 'CLOUD_SNOW' && (
+                      <Image source={images.components.Diary.weather5} />
+                    )}
+                  </View>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setEmotionVisible(true);
+                  }}
+                  style={{ alignItems: 'center' }}>
+                  <Text
+                    style={[
+                      NotoSans.Medium,
+                      NotoSans.f_15,
+                      { color: colors.typo.main },
+                    ]}>
+                    {'오늘의 기분'}
+                  </Text>
+                  <View
+                    style={{
+                      width: 68,
+                      height: 68,
+                      borderRadius: 4,
+                      borderWidth: 1,
+                      borderColor: '#a4a4a3',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      marginTop: 12,
+                    }}>
+                    {emotion === null && (
+                      <Image source={images.components.Diary.add} />
+                    )}
+                    {emotion === 'PEACEFUL' && (
+                      <Image source={images.components.Diary.emotion1} />
+                    )}
+                    {emotion === 'FUNNY' && (
+                      <Image source={images.components.Diary.emotion2} />
+                    )}
+                    {emotion === 'BIG_SMILE' && (
+                      <Image source={images.components.Diary.emotion3} />
+                    )}
+                    {emotion === 'SMILE' && (
+                      <Image source={images.components.Diary.emotion4} />
+                    )}
+                    {emotion === 'SAD' && (
+                      <Image source={images.components.Diary.emotion5} />
+                    )}
+                    {emotion === 'FROWNING' && (
+                      <Image source={images.components.Diary.emotion6} />
+                    )}
+                  </View>
+                </TouchableOpacity>
+              </View>
+              <View style={{ marginTop: 40 }}>
+                <CButton
+                  disabled={!addBtnActive}
+                  onPressed={onAddBtnPressed}
+                  label='일기 저장'
+                />
+              </View>
+            </View>
           )
         ) : (
           <View style={{ paddingHorizontal: 20 }}>
@@ -300,7 +494,7 @@ const Diary = ({
                       NotoSans.f_15,
                       { color: colors.typo.black },
                     ]}>
-                    {'한강공원에서의 즐거운 하루'}
+                    {item.title}
                   </Text>
                   <TouchableOpacity onPress={() => onDetailPressed(new Date())}>
                     <Text style={[NotoSans.Regular, NotoSans.f_14]}>
@@ -308,13 +502,15 @@ const Diary = ({
                     </Text>
                   </TouchableOpacity>
                 </View>
-                <View
+                <Image
+                  source={{ uri: item.url }}
                   style={{
                     width: width - 64,
                     height: (width - 64) / 2,
                     borderRadius: 8,
                     backgroundColor: '#676767',
-                  }}></View>
+                  }}
+                />
               </View>
             ))}
           </View>
@@ -327,6 +523,351 @@ const Diary = ({
         onConfirm={onDateSelected}
         onCancel={onDateCanceled}
       />
+      <ReactNativeModal
+        onBackdropPress={() => setWeatherVisible(false)}
+        isVisible={weatherVisible}
+        style={{
+          padding: 0,
+          margin: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            width: width - 40,
+            padding: 20,
+            borderRadius: 4,
+            backgroundColor: colors.default.white,
+          }}>
+          <Text
+            style={[
+              NotoSans.Medium,
+              NotoSans.f_17,
+              { color: colors.typo.black },
+            ]}>
+            {'오늘의 날씨는?'}
+          </Text>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+            <TouchableOpacity
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                setWeather('SUN');
+                setWeatherVisible(false);
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={images.components.Diary.weather1} />
+              </View>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black, marginTop: 12 },
+                ]}>
+                {'맑음'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                setWeather('SUN_CLOUD');
+                setWeatherVisible(false);
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={images.components.Diary.weather2} />
+              </View>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black, marginTop: 12 },
+                ]}>
+                {'조금 흐림'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                setWeather('CLOUD');
+                setWeatherVisible(false);
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={images.components.Diary.weather3} />
+              </View>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black, marginTop: 12 },
+                ]}>
+                {'흐림'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              marginTop: 12,
+            }}>
+            <TouchableOpacity
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                setWeather('CLOUD_RAIN');
+                setWeatherVisible(false);
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={images.components.Diary.weather4} />
+              </View>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black, marginTop: 12 },
+                ]}>
+                {'비'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                setWeather('CLOUD_SNOW');
+                setWeatherVisible(false);
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={images.components.Diary.weather5} />
+              </View>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black, marginTop: 12 },
+                ]}>
+                {'눈'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity disabled>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}></View>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ReactNativeModal>
+      <ReactNativeModal
+        onBackdropPress={() => setEmotionVisible(false)}
+        isVisible={emotionVisible}
+        style={{
+          padding: 0,
+          margin: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            width: width - 40,
+            padding: 20,
+            borderRadius: 4,
+            backgroundColor: colors.default.white,
+          }}>
+          <Text
+            style={[
+              NotoSans.Medium,
+              NotoSans.f_17,
+              { color: colors.typo.black },
+            ]}>
+            {'오늘의 날씨는?'}
+          </Text>
+          <View
+            style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
+            <TouchableOpacity
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                setEmotion('PEACEFUL');
+                setEmotionVisible(false);
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={images.components.Diary.emotion1} />
+              </View>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black, marginTop: 12 },
+                ]}>
+                {'평온'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                setEmotion('FUNNY');
+                setEmotionVisible(false);
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={images.components.Diary.emotion2} />
+              </View>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black, marginTop: 12 },
+                ]}>
+                {'즐거움'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                setEmotion('BIG_SMILE');
+                setEmotionVisible(false);
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={images.components.Diary.emotion3} />
+              </View>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black, marginTop: 12 },
+                ]}>
+                {'행복'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              marginTop: 12,
+            }}>
+            <TouchableOpacity
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                setEmotion('SMILE');
+                setEmotionVisible(false);
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={images.components.Diary.emotion4} />
+              </View>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black, marginTop: 12 },
+                ]}>
+                {'그럭저럭'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                setEmotion('SAD');
+                setEmotionVisible(false);
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={images.components.Diary.emotion5} />
+              </View>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black, marginTop: 12 },
+                ]}>
+                {'슬픔'}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{ alignItems: 'center' }}
+              onPress={() => {
+                setEmotion('FROWNING');
+                setEmotionVisible(false);
+              }}>
+              <View
+                style={{
+                  width: 50,
+                  height: 50,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={images.components.Diary.emotion5} />
+              </View>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black, marginTop: 12 },
+                ]}>
+                {'당황'}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </ReactNativeModal>
     </>
   );
 };

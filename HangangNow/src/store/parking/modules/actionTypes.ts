@@ -1,0 +1,1 @@
+export const UPDATE_PARKING_TYPES = 'UPDATE_PARKING_TYPES' as const;
