@@ -1,8 +1,9 @@
 import colors from '@assets/colors';
 import NotoSans from '@assets/font';
+import images from '@assets/images';
 import CButton from '@components/common/CButton/CButton';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Image, Text, View } from 'react-native';
 
 type Props = {
   onTripFindPressed: () => void;
@@ -59,8 +60,9 @@ const Trip = ({ onTripFindPressed }: Props) => {
               style={{
                 width: 48,
                 height: 48,
-                backgroundColor: '#676767',
-              }}></View>
+              }}>
+              <Image source={images.components.Trip.ic1} />
+            </View>
             <Text
               style={[
                 NotoSans.Medium,
@@ -75,8 +77,9 @@ const Trip = ({ onTripFindPressed }: Props) => {
               style={{
                 width: 48,
                 height: 48,
-                backgroundColor: '#676767',
-              }}></View>
+              }}>
+              <Image source={images.components.Trip.ic2} />
+            </View>
             <Text
               style={[
                 NotoSans.Medium,
@@ -91,8 +94,9 @@ const Trip = ({ onTripFindPressed }: Props) => {
               style={{
                 width: 48,
                 height: 48,
-                backgroundColor: '#676767',
-              }}></View>
+              }}>
+              <Image source={images.components.Trip.ic3} />
+            </View>
             <Text
               style={[
                 NotoSans.Medium,

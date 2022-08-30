@@ -1,7 +1,9 @@
 import colors from '@assets/colors';
 import NotoSans from '@assets/font';
+import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import { WEB_VIEW_ORIGIN } from '@libs/webview';
+import { FacilityDataType } from '@store/facility/acitons';
 import {
   FacilityCategoryType,
   FACILITY_TABLE,
@@ -25,6 +27,11 @@ type Props = {
   onCategorySelectPressed: () => void;
   type: FacilityCategoryType;
   visible: boolean;
+  onMessage: (item: FacilityDataType) => void;
+  selected: FacilityDataType | null;
+  setSelected: React.Dispatch<React.SetStateAction<FacilityDataType | null>>;
+  onFindPathPressed: (item: FacilityDataType) => void;
+  onSharePressed: (item: FacilityDataType) => void;
 };
 
 const { width } = Dimensions.get('screen');
@@ -36,12 +43,20 @@ const FacilityMap = ({
   onCategorySelectPressed,
   type,
   visible,
+  onMessage,
+  selected,
+  setSelected,
+  onFindPathPressed,
+  onSharePressed,
 }: Props) => {
   return (
     <>
       <View style={{ flex: 1, backgroundColor: colors.default.white }}>
         <CHeaderContainer title={name} />
         <WebView
+          onMessage={(e) =>
+            onMessage(JSON.parse(e.nativeEvent.data) as FacilityDataType)
+          }
           ref={webViewRef}
           source={{ uri: WEB_VIEW_ORIGIN + '/facility' }}
         />
@@ -113,6 +128,56 @@ const FacilityMap = ({
               </TouchableOpacity>
             )}
           />
+        </View>
+      </ReactNativeModal>
+      <ReactNativeModal
+        onBackdropPress={() => setSelected(null)}
+        isVisible={selected !== null}
+        style={{
+          padding: 0,
+          margin: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            padding: 20,
+            width: width - 40,
+            backgroundColor: colors.default.white,
+            borderRadius: 4,
+          }}>
+          <Text
+            style={[
+              NotoSans.Medium,
+              NotoSans.f_17,
+              { color: colors.typo.black },
+            ]}>
+            {selected?.name}
+          </Text>
+          <Text
+            style={[
+              NotoSans.Medium,
+              NotoSans.f_13,
+              { color: colors.typo.gray.middle, marginTop: 8 },
+            ]}>
+            {selected?.address}
+          </Text>
+          <View style={{ marginTop: 12, flexDirection: 'row' }}>
+            <View style={{ flex: 1, marginRight: 20 }}>
+              <CButton
+                label='길찾기'
+                type='secondary'
+                onPressed={() => onFindPathPressed(selected!)}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <CButton
+                label='공유하기'
+                type='secondary'
+                onPressed={() => onSharePressed(selected!)}
+              />
+            </View>
+          </View>
         </View>
       </ReactNativeModal>
     </>

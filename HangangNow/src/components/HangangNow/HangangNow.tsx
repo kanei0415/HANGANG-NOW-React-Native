@@ -115,8 +115,32 @@ const HangangNow = ({
                   style={{
                     width: 34,
                     height: 34,
-                    backgroundColor: '#676767',
-                  }}></View>
+                  }}>
+                  {hangangnowData.weather.skyMode === 1 && (
+                    <Image source={images.components.Diary.weather1} />
+                  )}
+                  {hangangnowData.weather.skyMode === 2 && (
+                    <Image source={images.components.Diary.weather2} />
+                  )}
+                  {hangangnowData.weather.skyMode === 3 && (
+                    <Image source={images.components.Diary.weather3} />
+                  )}
+                  {hangangnowData.weather.skyMode === 4 && (
+                    <Image source={images.components.Diary.weather4} />
+                  )}
+                  {hangangnowData.weather.skyMode === 5 && (
+                    <Image source={images.components.Diary.weather4} />
+                  )}
+                  {hangangnowData.weather.skyMode === 6 && (
+                    <Image source={images.components.Diary.weather5} />
+                  )}
+                  {hangangnowData.weather.skyMode === 7 && (
+                    <Image source={images.components.Diary.weather5} />
+                  )}
+                  {hangangnowData.weather.skyMode === 8 && (
+                    <Image source={images.components.Diary.weather5} />
+                  )}
+                </View>
                 <Text
                   style={[
                     NotoSans.Medium,
@@ -264,8 +288,9 @@ ${Math.abs(
                 style={{
                   width: 48,
                   height: 48,
-                  backgroundColor: '#676767',
-                }}></View>
+                }}>
+                <Image source={images.components.HangangNow.map} />
+              </View>
               <Text
                 style={[
                   NotoSans.Medium,
@@ -289,8 +314,9 @@ ${Math.abs(
                 style={{
                   width: 48,
                   height: 48,
-                  backgroundColor: '#676767',
-                }}></View>
+                }}>
+                <Image source={images.components.HangangNow.car} />
+              </View>
               <Text
                 style={[
                   NotoSans.Medium,
