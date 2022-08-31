@@ -1,9 +1,18 @@
+import images from '@assets/images';
+
 export const TRIP_COMPANION_OPTIONS: TripFindCompanionType[] = [
   '가족',
   '친구',
   '연인',
   '혼자',
 ];
+
+export const TRIP_COMPANION_IMAGE_TABLE = {
+  가족: images.components.Trip.icFind1,
+  친구: images.components.Trip.icFind2,
+  연인: images.components.Trip.icFind2,
+  혼자: images.components.Trip.icFind4,
+};
 
 export type TripFindCompanionType = '가족' | '친구' | '연인' | '혼자';
 

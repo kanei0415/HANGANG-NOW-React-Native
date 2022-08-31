@@ -22,9 +22,10 @@ const { width } = Dimensions.get('window');
 
 type Props = {
   onHangangPressed: (id: number, name: string) => void;
+  onNearPressed: () => void;
 };
 
-const Facility = ({ onHangangPressed }: Props) => {
+const Facility = ({ onHangangPressed, onNearPressed }: Props) => {
   return (
     <ScrollView
       contentContainerStyle={{ padding: 20 }}
@@ -49,7 +50,7 @@ const Facility = ({ onHangangPressed }: Props) => {
       <View style={{ marginTop: 20 }}>
         <CButton
           label='가장 가까운 한강 공원으로 가기'
-          onPressed={() => onHangangPressed(0, '광나루한강공원')}
+          onPressed={onNearPressed}
         />
       </View>
       <FlatList

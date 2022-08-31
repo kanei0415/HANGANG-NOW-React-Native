@@ -24,6 +24,7 @@ import SignupContainer from '@components/Signup/containers/SignupContainer';
 import SignupDoneContainer from '@components/Signup/containers/SignupDoneContainer';
 import SignupStep2Container from '@components/Signup/containers/SignupStep2Container';
 import SignupStep3Container from '@components/Signup/containers/SignupStep3Container';
+import TermDetailContainer from '@components/TermDetail/containers/TermDetailContainer';
 import TripFindContainer from '@components/Trip/containers/TripFindContainer';
 import TripFindDetailContainer from '@components/Trip/containers/TripFindDetailContainer';
 import TripFindResultContainer from '@components/Trip/containers/TripFindResultContainer';
@@ -49,6 +50,7 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
         animation: 'slide_from_right',
       }}>
       <Stack.Screen name='login' component={LoginContainer} />
+      <Stack.Screen name='termDetail' component={TermDetailContainer} />
       <Stack.Screen name='signup' component={SignupContainer} />
       <Stack.Screen name='signupStep2' component={SignupStep2Container} />
       <Stack.Screen name='signupStep3' component={SignupStep3Container} />

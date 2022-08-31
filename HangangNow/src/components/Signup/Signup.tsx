@@ -15,10 +15,13 @@ type Props = {
   setCheck3: React.Dispatch<React.SetStateAction<boolean>>;
   check4: boolean;
   setCheck4: React.Dispatch<React.SetStateAction<boolean>>;
+  check5: boolean;
+  setCheck5: React.Dispatch<React.SetStateAction<boolean>>;
   allCheckActive: boolean;
   nextBtnActive: boolean;
   onAllCheckPressed: () => void;
   onNextBtnPressed: () => void;
+  onDetailPressed: () => void;
 };
 
 const Signup = ({
@@ -30,10 +33,13 @@ const Signup = ({
   setCheck3,
   check4,
   setCheck4,
+  check5,
+  setCheck5,
   allCheckActive,
   nextBtnActive,
   onAllCheckPressed,
   onNextBtnPressed,
+  onDetailPressed,
 }: Props) => {
   return (
     <View style={{ flex: 1, backgroundColor: colors.default.white }}>
@@ -54,6 +60,7 @@ const Signup = ({
             {'약관동의'}
           </Text>
           <TouchableOpacity
+            onPress={onDetailPressed}
             style={{
               borderBottomWidth: 1,
               borderBottomColor: colors.typo.gray.middle,
@@ -81,6 +88,13 @@ const Signup = ({
           alignType='row-reverse'
         />
         <CCheck
+          label='만 14세 이상 확인 (필수)'
+          checked={check5}
+          onPressed={() => setCheck5(!check5)}
+          containerStyle={{ marginTop: 20 }}
+          alignType='row-reverse'
+        />
+        <CCheck
           label='개인정보 취급방침 동의 (필수)'
           checked={check2}
           onPressed={() => setCheck2(!check2)}
@@ -95,7 +109,7 @@ const Signup = ({
           containerStyle={{ marginTop: 20 }}
         />
         <CCheck
-          label='이벤트 및 할인 혜택 안내 동의 (선택)'
+          label='마케팅 수신 동의 (선택)'
           checked={check4}
           onPressed={() => setCheck4(!check4)}
           alignType='row-reverse'

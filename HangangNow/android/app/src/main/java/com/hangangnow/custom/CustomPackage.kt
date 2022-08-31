@@ -9,7 +9,9 @@ import java.util.ArrayList
 class CustomPackage() : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
         val modules: MutableList<NativeModule> = ArrayList()
+
         modules.add(KakaoModule(reactContext))
+
         return modules
     }
 

@@ -78,7 +78,7 @@ const TripFindResult = ({
                   NotoSans.Regular,
                   NotoSans.f_13,
                   { color: colors.typo.black, marginTop: 12 },
-                ]}>{`출발지: ${item.startPlaceName}}`}</Text>
+                ]}>{`출발지: ${item.startPlaceName}`}</Text>
               <Text
                 style={[
                   NotoSans.Regular,

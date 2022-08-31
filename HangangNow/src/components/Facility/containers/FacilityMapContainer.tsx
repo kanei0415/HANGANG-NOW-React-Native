@@ -10,6 +10,7 @@ import {
 } from '@typedef/components/Facility/facility.types';
 import { MainStackParamListTypes } from '@typedef/routes/navigation.types';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { NativeModules, Share } from 'react-native';
 import WebView from 'react-native-webview';
 import FacilityMap from '../components/FacilityMap';
 
@@ -24,6 +25,8 @@ const FacilityMapContainer = ({
 
   const [data, setData] = useState<FacilityDataType[]>([]);
   const [type, setType] = useState<FacilityCategoryType>('TOILET');
+
+  const [selected, setSelected] = useState<FacilityDataType | null>(null);
 
   const webViewRef = useRef<WebView>(null);
 
@@ -60,9 +63,30 @@ const FacilityMapContainer = ({
     setVisible(false);
   }, []);
 
+  const onFindPathPressed = useCallback((item: FacilityDataType) => {
+    console.log(NativeModules.KakaoModule);
+
+    NativeModules.KakaoModule.openKakaoNavi(
+      item.address,
+      item.y_pos + '',
+      item.x_pos + '',
+    );
+  }, []);
+
+  const onSharePressed = useCallback((item: FacilityDataType) => {
+    Share.share({
+      title: item.name,
+      message: item.address,
+    });
+  }, []);
+
   useEffect(() => {
     loadData('TOILET');
   }, [loadData]);
+
+  const onMessage = useCallback((item: FacilityDataType) => {
+    setSelected(item);
+  }, []);
 
   useEffect(() => {
     webViewRef?.current?.postMessage(
@@ -86,6 +110,11 @@ const FacilityMapContainer = ({
       onCategorySelectPressed={onCategorySelectPressed}
       onCategoryPressed={onCategoryPressed}
       type={type}
+      onMessage={onMessage}
+      selected={selected}
+      setSelected={setSelected}
+      onFindPathPressed={onFindPathPressed}
+      onSharePressed={onSharePressed}
     />
   );
 };

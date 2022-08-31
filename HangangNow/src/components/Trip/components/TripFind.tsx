@@ -7,6 +7,7 @@ import {
   TripFindplaceType,
   TripFindRequestBodyType,
   TripThemeType,
+  TRIP_COMPANION_IMAGE_TABLE,
   TRIP_COMPANION_OPTIONS,
   TRIP_PLACE_OPTIONS,
   TRIP_THEME_OPTIONS,
@@ -15,6 +16,7 @@ import React from 'react';
 import {
   Dimensions,
   FlatList,
+  Image,
   ScrollView,
   Text,
   TouchableOpacity,
@@ -74,7 +76,11 @@ const TripFind = ({
                   borderRadius: 4,
                   backgroundColor:
                     body.companion === item ? '#3dc8e4' : '#dbdbdb',
-                }}></View>
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Image source={TRIP_COMPANION_IMAGE_TABLE[item]} />
+              </View>
               <Text
                 style={[
                   NotoSans.Medium,

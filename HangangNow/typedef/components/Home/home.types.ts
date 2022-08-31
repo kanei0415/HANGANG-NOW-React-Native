@@ -31,6 +31,22 @@ export type ParkDataType = {
   detail: string;
 };
 
+export type ParkContentType = {
+  address: string;
+  content: string;
+  facilities: string[];
+  funItems: {
+    additionalProp1: string[];
+    additionalProp2: string[];
+    additionalProp3: string[];
+  };
+  id: 0;
+  lastModifiedTime: string;
+  name: string;
+  photoUrls: string[];
+  summary: string;
+};
+
 export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
   '1': {
     name: '광나루한강공원',

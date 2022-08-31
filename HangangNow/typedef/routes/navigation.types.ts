@@ -4,6 +4,7 @@ import { TripFindRequestBodyType } from '@typedef/components/Trip/trip.types';
 
 export type MainStackParamListTypes = {
   login: undefined;
+  termDetail: undefined;
   signup: undefined;
   signupStep2: undefined;
   signupStep3: undefined;

@@ -45,6 +45,8 @@ const images = {
       char1: require('./images/components/HangangNow/ic-char-1.png'),
       char2: require('./images/components/HangangNow/ic-char-2.png'),
       char3: require('./images/components/HangangNow/ic-char-3.png'),
+      map: require('./images/components/HangangNow/ic-map.png'),
+      car: require('./images/components/HangangNow/ic-car.png'),
     },
     MyPage: {
       placeholder: require('./images/components/MyPage/ic-ph-profile.png'),
@@ -93,6 +95,14 @@ const images = {
       category13: require('./images/components/Facility/ic-category-13.png'),
       category14: require('./images/components/Facility/ic-category-14.png'),
       category15: require('./images/components/Facility/ic-category-15.png'),
+    },
+    Trip: {
+      ic1: require('./images/components/Trip/ic-1.png'),
+      ic2: require('./images/components/Trip/ic-2.png'),
+      ic3: require('./images/components/Trip/ic-3.png'),
+      icFind1: require('./images/components/Trip/ic-find-1.png'),
+      icFind2: require('./images/components/Trip/ic-find-2.png'),
+      icFind4: require('./images/components/Trip/ic-find-4.png'),
     },
   },
   routes: {

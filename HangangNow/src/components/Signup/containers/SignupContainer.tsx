@@ -10,19 +10,28 @@ const SignupContainer = () => {
   const [check2, setCheck2] = useState(false);
   const [check3, setCheck3] = useState(false);
   const [check4, setCheck4] = useState(false);
+  const [check5, setCheck5] = useState(false);
 
-  const nextBtnActive = useMemo(() => check1 && check2, [check1, check2]);
+  const nextBtnActive = useMemo(
+    () => check1 && check2 && check5,
+    [check1, check2, check5],
+  );
 
   const allCheckActive = useMemo(
-    () => check1 && check2 && check3 && check4,
-    [check1, check2, check3, check4],
+    () => check1 && check2 && check3 && check4 && check5,
+    [check1, check2, check3, check4, check5],
   );
+
+  const onDetailPressed = useCallback(() => {
+    navigation.navigate('termDetail');
+  }, [navigation]);
 
   const onAllCheckPressed = useCallback(() => {
     setCheck1(true);
     setCheck2(true);
     setCheck3(true);
     setCheck4(true);
+    setCheck5(true);
   }, []);
 
   const onNextBtnPressed = useCallback(
@@ -40,10 +49,13 @@ const SignupContainer = () => {
       setCheck3={setCheck3}
       check4={check4}
       setCheck4={setCheck4}
+      check5={check5}
+      setCheck5={setCheck5}
       allCheckActive={allCheckActive}
       nextBtnActive={nextBtnActive}
       onNextBtnPressed={onNextBtnPressed}
       onAllCheckPressed={onAllCheckPressed}
+      onDetailPressed={onDetailPressed}
     />
   );
 };

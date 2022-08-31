@@ -102,6 +102,10 @@ export const apiRoute = {
     signup: '/auth/signup',
     kakao: '/auth/kakao?',
   },
+  parks: {
+    loadDetail: '/parks/',
+    loadNear: '/parks/nearest',
+  },
   member: {
     loadProfile: '/members',
     updateAlarm: '/members/agree/alarm',
@@ -126,6 +130,7 @@ export const apiRoute = {
   parking: {
     loadParkings: '/parkings',
     loadParkingMaps: '/parkings/map',
+    loadParkingDetails: '/parkings/',
   },
   picnic: {
     loadFindResult: '/picnic/recom/course',
