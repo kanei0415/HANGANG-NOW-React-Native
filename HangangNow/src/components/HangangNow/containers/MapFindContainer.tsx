@@ -3,13 +3,18 @@ import { apiRoute, requestSecureGet } from '@libs/api';
 import { updateCenterPosAction } from '@store/centerPos/actions';
 import { updateParking } from '@store/parking/actions';
 import { updateToken } from '@store/token/actions';
-import { ParkingMarkerTypes } from '@typedef/components/HangangNow/hangangnow.types';
-import React, { useCallback, useRef } from 'react';
+import {
+  ParkingMarkerTypes,
+  ParkingTypes,
+} from '@typedef/components/HangangNow/hangangnow.types';
+import React, { useCallback, useRef, useState } from 'react';
 import WebView from 'react-native-webview';
 import MapFind from '../components/MapFind';
 
 const MapFindContainer = () => {
   const { loginResponse } = useAuth();
+
+  const [selected, setSelected] = useState<ParkingTypes | null>(null);
 
   const webviewRef = useRef<WebView>(null);
 
@@ -29,6 +34,25 @@ const MapFindContainer = () => {
     }
   }, [loginResponse]);
 
+  const onMessage = useCallback(
+    async (item: ParkingMarkerTypes) => {
+      if (!loginResponse) {
+        return;
+      }
+
+      const { data, config } = await requestSecureGet<ParkingTypes>(
+        apiRoute.parking.loadParkingDetails + item.id,
+        {},
+        loginResponse.accessToken,
+      );
+
+      if (config.status === 200) {
+        setSelected(data);
+      }
+    },
+    [loginResponse],
+  );
+
   const onLoadEnd = useCallback(async () => {
     if (loginResponse) {
       webviewRef?.current?.postMessage(
@@ -44,8 +68,8 @@ const MapFindContainer = () => {
         webviewRef?.current?.postMessage(
           JSON.stringify(
             updateCenterPosAction({
-              lat: data[0].local.y_pos,
-              lng: data[0].local.x_pos,
+              lat: 37.5107813,
+              lng: 126.9866362,
             }),
           ),
         );
@@ -53,7 +77,15 @@ const MapFindContainer = () => {
     }
   }, [loginResponse, webviewRef]);
 
-  return <MapFind webviewRef={webviewRef} onLoadEnd={onLoadEnd} />;
+  return (
+    <MapFind
+      webviewRef={webviewRef}
+      onLoadEnd={onLoadEnd}
+      onMessage={onMessage}
+      selected={selected}
+      setSelected={setSelected}
+    />
+  );
 };
 
 export default MapFindContainer;

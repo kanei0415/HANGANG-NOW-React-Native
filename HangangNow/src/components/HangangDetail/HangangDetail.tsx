@@ -2,7 +2,10 @@ import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 import images from '@assets/images';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
-import { ParkDataType } from '@typedef/components/Home/home.types';
+import {
+  ParkContentType,
+  ParkDataType,
+} from '@typedef/components/Home/home.types';
 import React from 'react';
 import {
   Dimensions,
@@ -13,6 +16,7 @@ import {
   View,
 } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
+import SwiperFlatList from 'react-native-swiper-flatlist';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -20,25 +24,42 @@ type Props = {
   data: ParkDataType;
   visible: boolean;
   setVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  contents: ParkContentType | null;
 };
 
-const HangangDetail = ({ data, visible, setVisible }: Props) => {
+const HangangDetail = ({ data, visible, setVisible, contents }: Props) => {
   return (
     <>
       <ScrollView style={{ backgroundColor: colors.default.white }}>
         <CHeaderContainer title={`${data.name} 파악하기`} />
         <View style={{ padding: 20 }}>
-          <Image
-            style={{ borderRadius: 4, width: width - 40 }}
-            source={data.image}
-          />
+          {contents?.photoUrls[0] ? (
+            <SwiperFlatList
+              data={contents.photoUrls}
+              renderItem={({ item }) => (
+                <Image
+                  style={{ height: (width / 36) * 22, width: width - 40 }}
+                  source={{ uri: item }}
+                />
+              )}
+            />
+          ) : (
+            <Image
+              style={{
+                borderRadius: 4,
+                width: width - 40,
+                height: (width - 40) / 2,
+              }}
+              source={data.image}
+            />
+          )}
           <Text
             style={[
               NotoSans.Medium,
               NotoSans.f_18,
               { color: colors.typo.black, marginTop: 24 },
             ]}>
-            {data.h1}
+            {contents?.summary || data.h1}
           </Text>
           <View style={{ alignItems: 'flex-end' }}>
             <TouchableOpacity
@@ -72,7 +93,7 @@ const HangangDetail = ({ data, visible, setVisible }: Props) => {
               NotoSans.f_13,
               { color: '#949090', marginTop: 8 },
             ]}>
-            {data.address}
+            {contents?.address || data.address}
           </Text>
           <Text
             style={[
