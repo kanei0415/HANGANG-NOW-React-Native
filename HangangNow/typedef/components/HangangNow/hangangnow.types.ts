@@ -23,8 +23,6 @@ export type HangangNowDataTypes = {
 
 export type WeatherType = 'sun' | 'rain' | 'snow';
 
-export type TemperatureType = 'hot' | 'normal' | 'cold';
-
 export const skymodeToWeather = (skyMode: number): WeatherType => {
   switch (skyMode) {
     case 1:
@@ -42,61 +40,47 @@ export const skymodeToWeather = (skyMode: number): WeatherType => {
   }
 };
 
-export const temperatureToTemperature = (
-  temperature: number,
-): TemperatureType => {
-  if (temperature >= 29) {
-    return 'hot';
+export const getLabelImage = (temp: number): [string, ImageSourcePropType] => {
+  if (temp < 5) {
+    return [
+      '핫팩은 챙기셨나요? 한강의 칼바람에 대비해요!',
+      images.components.HangangNow.char1,
+    ];
   }
 
-  if (temperature >= 11) {
-    return 'normal';
+  if (temp < 15) {
+    return [
+      '한강에서 야외운동하기 좋은 날이에요.',
+      images.components.HangangNow.char2,
+    ];
   }
 
-  return 'cold';
+  if (temp < 20) {
+    return [
+      '시원한 바람과 함께 한강 산책 어때요?',
+      images.components.HangangNow.char3,
+    ];
+  }
+
+  if (temp < 25) {
+    return [
+      '한강 피크닉하기 너무 좋은 날이에요!',
+      images.components.HangangNow.char4,
+    ];
+  }
+
+  if (temp < 30) {
+    return [
+      '한강을 바라보며 시원한 음료 한 잔하기 좋은 날이에요',
+      images.components.HangangNow.char5,
+    ];
+  }
+
+  return [
+    '선크림은 챙기셨나요? 한강의 그늘을 사수하세요!',
+    images.components.HangangNow.char6,
+  ];
 };
-
-export const weatherTemperatureToLabelImage = (
-  skyMode: WeatherType,
-  temperature: TemperatureType,
-): [string, ImageSourcePropType] => {
-  if (temperature === 'hot') {
-    if (skyMode === 'sun') {
-      return [SKY_MODE_LABEL[0], SKY_MODE_IMAGE[0]];
-    } else {
-      return [SKY_MODE_LABEL[1], SKY_MODE_IMAGE[0]];
-    }
-  }
-
-  if (temperature === 'normal') {
-    if (skyMode === 'sun') {
-      return [SKY_MODE_LABEL[1], SKY_MODE_IMAGE[1]];
-    } else {
-      return [SKY_MODE_LABEL[2], SKY_MODE_IMAGE[1]];
-    }
-  }
-
-  if (skyMode === 'sun') {
-    return [SKY_MODE_LABEL[3], SKY_MODE_IMAGE[2]];
-  } else {
-    return [SKY_MODE_LABEL[4], SKY_MODE_IMAGE[2]];
-  }
-};
-
-export const SKY_MODE_LABEL = [
-  '선크림은 챙기셨나요? 한강의 그늘을 사수하세요',
-  '후덥지근한 날! 한강 카페로 가요',
-  '한강피크닉하기 너무 좋은 날이에요',
-  '날씨만 좋아지면, 바로 돗자리 챙기고 피크닉가요',
-  '핫팩은 챙기셨나요? 한강의 칼바람에 대비해요',
-  '흰 눈이 내리는 한강으로 가요',
-];
-
-export const SKY_MODE_IMAGE = [
-  images.components.HangangNow.char1,
-  images.components.HangangNow.char2,
-  images.components.HangangNow.char3,
-];
 
 export type ParkingTypes = {
   address: { sido: string; gu: string; detail: string };

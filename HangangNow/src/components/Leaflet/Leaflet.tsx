@@ -3,6 +3,7 @@ import NotoSans from '@assets/font';
 import images from '@assets/images';
 import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
+import { ParkTypes, PARK_TABLE } from '@typedef/components/Home/home.types';
 import { LeafletTypes } from '@typedef/components/Leaflet/leaflet.types';
 import React from 'react';
 import {
@@ -27,6 +28,13 @@ type Props = {
   onTelPressed: () => void;
   liked: boolean[];
   onLikePressed: (item: LeafletTypes, index: number) => void;
+  visible: boolean;
+  selectedPark: ParkTypes | null;
+  onParkPressed: (park: ParkTypes) => void;
+  onParkSelectPressed: () => void;
+  onParkBackPressed: () => void;
+  contentVisible: boolean;
+  setContentVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const Leaflet = ({
@@ -38,6 +46,13 @@ const Leaflet = ({
   onTelPressed,
   liked,
   onLikePressed,
+  visible,
+  selectedPark,
+  onParkPressed,
+  onParkSelectPressed,
+  onParkBackPressed,
+  contentVisible,
+  setContentVisible,
 }: Props) => {
   return (
     <>
@@ -52,6 +67,7 @@ const Leaflet = ({
             ]}>{`종이 전단지를 한 손에서 보고
 수수료 없이 전화 주문하세요!`}</Text>
           <TouchableOpacity
+            onPress={onParkSelectPressed}
             style={{
               marginTop: 20,
               flexDirection: 'row',
@@ -63,7 +79,7 @@ const Leaflet = ({
                 NotoSans.f_15,
                 { color: colors.typo.black, marginRight: 16 },
               ]}>
-              {'한강별 보기'}
+              {selectedPark || '한강별 보기'}
             </Text>
             <Image source={images.components.Leaflet.downArrow} />
           </TouchableOpacity>
@@ -134,20 +150,86 @@ const Leaflet = ({
         }}
         isVisible={selected !== null}>
         <View style={{ width: width - 40 }}>
-          <Image
-            style={{ width: width - 40, height: ((width - 40) / 3) * 4 }}
-            source={{ uri: selected?.photoUrl }}
-          />
-          <View style={{ marginTop: 20 }}>
-            <CButton
-              type='secondary'
-              label='전화 주문하기'
-              onPressed={onTelPressed}
+          {contentVisible ? (
+            <View
+              style={{
+                width: width - 40,
+                height: ((width - 40) / 3) * 4,
+                padding: 20,
+                backgroundColor: colors.default.white,
+                borderRadius: 4,
+              }}>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_14,
+                  { color: colors.typo.black },
+                ]}>
+                {selected?.content}
+              </Text>
+            </View>
+          ) : (
+            <Image
+              style={{ width: width - 40, height: ((width - 40) / 3) * 4 }}
+              source={{ uri: selected?.photoUrl }}
             />
+          )}
+          <View style={{ marginTop: 20, flexDirection: 'row' }}>
+            <View style={{ flex: 1, marginRight: 20 }}>
+              <CButton
+                type='secondary'
+                label='전화 주문하기'
+                onPressed={onTelPressed}
+              />
+            </View>
+            <View style={{ flex: 1 }}>
+              <CButton
+                type='secondary'
+                label={contentVisible ? '전단지 보기' : '상세내용 보기'}
+                onPressed={() => setContentVisible((prev) => !prev)}
+              />
+            </View>
           </View>
           <View style={{ marginTop: 20 }}>
             <CButton label='확인' onPressed={onBackPressed} />
           </View>
+        </View>
+      </ReactNativeModal>
+      <ReactNativeModal
+        onBackdropPress={onParkBackPressed}
+        isVisible={visible}
+        style={{
+          padding: 0,
+          margin: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            width: width - 40,
+            borderRadius: 4,
+            backgroundColor: '#ffffff',
+            paddingBottom: 20,
+            paddingLeft: 20,
+          }}>
+          <FlatList
+            numColumns={3}
+            data={Object.keys(PARK_TABLE)}
+            renderItem={({ item }) => (
+              <View
+                style={{
+                  width: (width - 120) / 3,
+                  marginRight: 20,
+                  marginTop: 20,
+                }}>
+                <CButton
+                  type='secondary'
+                  label={item.replace('한강공원', '')}
+                  onPressed={() => onParkPressed(item as ParkTypes)}
+                />
+              </View>
+            )}
+          />
         </View>
       </ReactNativeModal>
     </>

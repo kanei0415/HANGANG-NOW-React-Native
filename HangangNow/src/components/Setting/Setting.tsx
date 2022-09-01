@@ -30,6 +30,7 @@ type Props = {
   onPasswordChangePressed: () => void;
   onDeleteAccountPressed: () => void;
   onLogoutPressed: () => void;
+  onTermPressed: (term: 0 | 1 | 2) => void;
 };
 
 const Setting = ({
@@ -51,6 +52,7 @@ const Setting = ({
   onPasswordChangePressed,
   onDeleteAccountPressed,
   onLogoutPressed,
+  onTermPressed,
 }: Props) => {
   return (
     <KeyboardAwareScrollView
@@ -385,6 +387,7 @@ const Setting = ({
             {'약관 내역'}
           </Text>
           <TouchableOpacity
+            onPress={() => onTermPressed(0)}
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
@@ -406,6 +409,7 @@ const Setting = ({
             />
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => onTermPressed(1)}
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
@@ -426,6 +430,7 @@ const Setting = ({
             />
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => onTermPressed(2)}
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',

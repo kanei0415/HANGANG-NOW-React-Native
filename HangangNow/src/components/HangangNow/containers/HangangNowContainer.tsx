@@ -4,9 +4,7 @@ import { apiRoute, requestSecureGet } from '@libs/api';
 import { useNavigation } from '@react-navigation/native';
 import {
   HangangNowDataTypes,
-  skymodeToWeather,
-  temperatureToTemperature,
-  weatherTemperatureToLabelImage,
+  getLabelImage,
 } from '@typedef/components/HangangNow/hangangnow.types';
 import { MainStackNavigationTypes } from '@typedef/routes/navigation.types';
 import React, { useCallback, useMemo } from 'react';
@@ -26,10 +24,7 @@ const HangangNowContainer = () => {
 
   const labelImage = useMemo(() => {
     if (hangangnowData) {
-      return weatherTemperatureToLabelImage(
-        skymodeToWeather(hangangnowData.weather.skyMode),
-        temperatureToTemperature(hangangnowData.temperature),
-      );
+      return getLabelImage(hangangnowData.temperature);
     } else {
       return null;
     }

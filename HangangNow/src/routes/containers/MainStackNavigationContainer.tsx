@@ -3,14 +3,11 @@ import useLoginResponse from '@hooks/storage/useLoginResponse';
 import useAuth from '@hooks/store/useAuth';
 import useLogin from '@hooks/store/useLogin';
 import useProfile from '@hooks/store/useProfile';
-import { alertMessage } from '@libs/alert';
 import { apiRoute, requestPost, requestSecureGet } from '@libs/api';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import MainStackNavigation from '@routes/components/MainStackNavigation';
 import { ProfileTypes } from '@typedef/components/common/common.types';
 import { LoginResponseBody } from '@typedef/components/Login/login.types';
 import React, { useCallback, useEffect } from 'react';
-import { BackHandler } from 'react-native';
 
 const MainStackNavigationContainer = () => {
   const { login } = useLogin();

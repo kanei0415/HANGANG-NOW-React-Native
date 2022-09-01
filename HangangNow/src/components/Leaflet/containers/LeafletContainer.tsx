@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { useCallback } from 'react';
 import Leaflet from '../Leaflet';
 import { Linking } from 'react-native';
+import { ParkTypes, PARK_TABLE } from '@typedef/components/Home/home.types';
 
 const LeafletContainer = () => {
   const navigation = useNavigation<MainStackNavigationTypes>();
@@ -19,24 +20,58 @@ const LeafletContainer = () => {
 
   const [selected, setSelected] = useState<LeafletTypes | null>(null);
 
+  const [visible, setVisible] = useState(false);
+
+  const [selectedPark, setSelectedPark] = useState<ParkTypes | null>(null);
+
+  const [contentVisible, setContentVisible] = useState(false);
+
+  const onParkPressed = useCallback((park: ParkTypes) => {
+    setSelectedPark(park);
+    setVisible(false);
+  }, []);
+
+  const onParkSelectPressed = useCallback(() => {
+    setVisible(true);
+  }, []);
+
+  const onParkBackPressed = useCallback(() => {
+    setVisible(false);
+  }, []);
+
   const loadLeaflet = useCallback(async () => {
     if (!loginResponse) {
       return;
     }
 
-    const { data, config } = await requestSecureGet<{ data: LeafletTypes[] }>(
-      apiRoute.flyer.loadFlyer,
-      {},
-      loginResponse.accessToken,
-    );
+    if (selectedPark) {
+      const { data, config } = await requestSecureGet<{ data: LeafletTypes[] }>(
+        apiRoute.flyer.loadFlyerWithParks + PARK_TABLE[selectedPark],
+        {},
+        loginResponse.accessToken,
+      );
 
-    if (config.status === 200) {
-      setLeaflets(data.data);
-      setLiked(new Array(data.data.length).map((i) => false));
+      if (config.status === 200) {
+        setLeaflets(data.data);
+        setLiked(new Array(data.data.length).map((i) => false));
+      } else {
+        alertMessage('전단지 정보를 불러오지 못했습니다');
+      }
     } else {
-      alertMessage('전단지 정보를 불러오지 못했습니다');
+      const { data, config } = await requestSecureGet<{ data: LeafletTypes[] }>(
+        apiRoute.flyer.loadFlyer,
+        {},
+        loginResponse.accessToken,
+      );
+
+      if (config.status === 200) {
+        setLeaflets(data.data);
+        setLiked(new Array(data.data.length).map((i) => false));
+      } else {
+        alertMessage('전단지 정보를 불러오지 못했습니다');
+      }
     }
-  }, [loginResponse]);
+  }, [loginResponse, selectedPark]);
 
   const onPartnersEnrollPressed = useCallback(() => {
     navigation.navigate('partnersEnroll');
@@ -99,6 +134,13 @@ const LeafletContainer = () => {
       onTelPressed={onTelPressed}
       liked={liked}
       onLikePressed={onLikePressed}
+      visible={visible}
+      selectedPark={selectedPark}
+      onParkPressed={onParkPressed}
+      onParkSelectPressed={onParkSelectPressed}
+      onParkBackPressed={onParkBackPressed}
+      contentVisible={contentVisible}
+      setContentVisible={setContentVisible}
     />
   );
 };

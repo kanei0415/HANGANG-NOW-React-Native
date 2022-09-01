@@ -47,6 +47,7 @@ type Props = {
   emotion: EmotionTypes | null;
   addBtnActive: boolean;
   onAddBtnPressed: () => void;
+  onItemPressed: (date: Date) => void;
 };
 
 const Diary = ({
@@ -76,6 +77,7 @@ const Diary = ({
   addBtnActive,
   onAddBtnPressed,
   mode,
+  onItemPressed,
 }: Props) => {
   return (
     <>
@@ -443,7 +445,8 @@ const Diary = ({
         ) : (
           <View style={{ paddingHorizontal: 20 }}>
             {allTimeDiaryList.map((item, index) => (
-              <View
+              <TouchableOpacity
+                onPress={() => onItemPressed(new Date(item.diaryDate))}
                 key={index}
                 style={{
                   padding: 12,
@@ -467,7 +470,7 @@ const Diary = ({
                         NotoSans.f_18,
                         { color: colors.default.white },
                       ]}>
-                      {new Date().getDate() + ''}
+                      {item.diaryDate.split('-').pop()}
                     </Text>
                   </View>
                   <View style={{ marginLeft: 8 }}>
@@ -477,7 +480,9 @@ const Diary = ({
                         NotoSans.f_16,
                         { color: colors.main.primary },
                       ]}>
-                      {formatDate(new Date(), 'YYYY년 MM월')}
+                      {`${item.diaryDate.split('-')[0]}년 ${
+                        item.diaryDate.split('-')[1]
+                      }월`}
                     </Text>
                   </View>
                 </View>
@@ -511,7 +516,7 @@ const Diary = ({
                     backgroundColor: '#676767',
                   }}
                 />
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
         )}

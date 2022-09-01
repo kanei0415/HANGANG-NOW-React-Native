@@ -5,6 +5,7 @@ import { MainStackNavigationTypes } from '@typedef/routes/navigation.types';
 import React, { useCallback, useEffect } from 'react';
 import dynamiclinks from '@react-native-firebase/dynamic-links';
 import { Linking } from 'react-native';
+import { MbtiTypes } from '@typedef/components/Mbti/mbti.types';
 
 const MainTabNavigationContainer = () => {
   const navigation = useNavigation<MainStackNavigationTypes>();
@@ -15,28 +16,13 @@ const MainTabNavigationContainer = () => {
         .getInitialLink()
         .then((dl) => dl?.url)) || (await Linking.getInitialURL());
 
-    const result = parseMbtiLink(initialUrl);
+    const mbti = parseMbtiLink(initialUrl);
 
-    if (result) {
-      const { type, uid } = result;
-
-      switch (type) {
-        case 'result': {
-          navigation.navigate('mbti');
-          return;
-        }
-
-        case 'result': {
-          navigation.navigate('mbtiResult', {
-            prevUid: uid,
-            result: null,
-          });
-          return;
-        }
-
-        default:
-          return;
-      }
+    if (mbti) {
+      navigation.navigate('mbtiResult', {
+        result: mbti as MbtiTypes,
+        type: 'shared',
+      });
     }
   }, [navigation]);
 

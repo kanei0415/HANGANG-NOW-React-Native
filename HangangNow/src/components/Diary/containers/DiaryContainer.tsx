@@ -122,6 +122,10 @@ const DiaryContainer = () => {
     }
   }, []);
 
+  const onItemPressed = useCallback((date: Date) => {
+    setSelectedDate(date);
+  }, []);
+
   const onAddBtnPressed = useCallback(async () => {
     if (!loginResponse) {
       return;
@@ -205,6 +209,7 @@ const DiaryContainer = () => {
       setEmotion={setEmotion}
       addBtnActive={addBtnActive}
       onAddBtnPressed={onAddBtnPressed}
+      onItemPressed={onItemPressed}
     />
   );
 };

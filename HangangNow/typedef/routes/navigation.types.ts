@@ -23,6 +23,7 @@ export type MainStackParamListTypes = {
   mbtiInspect: undefined;
   mbtiResult: {
     result: MbtiTypes;
+    type: 'result' | 'shared';
   };
   setting: undefined;
   calendarDateDetail: {
@@ -52,6 +53,10 @@ export type MainStackParamListTypes = {
   facilityMap: {
     name: string;
     id: number;
+  };
+  term: {
+    title: string;
+    content: string;
   };
 };
 

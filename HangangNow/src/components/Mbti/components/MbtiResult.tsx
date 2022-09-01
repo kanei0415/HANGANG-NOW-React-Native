@@ -3,6 +3,7 @@ import NotoSans from '@assets/font';
 import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import {
+  ParkTypes,
   PARK_DATA_TABLE,
   PARK_TABLE,
 } from '@typedef/components/Home/home.types';
@@ -24,9 +25,17 @@ type Props = {
   mbtiResult: MbtiDataTypes;
   onSharePressed: () => void;
   onRetryPressed: () => void;
+  onParkPressed: (park: ParkTypes) => void;
+  type: 'result' | 'shared';
 };
 
-const MbtiResult = ({ mbtiResult, onSharePressed, onRetryPressed }: Props) => {
+const MbtiResult = ({
+  mbtiResult,
+  onSharePressed,
+  onRetryPressed,
+  onParkPressed,
+  type,
+}: Props) => {
   return (
     <KeyboardAwareScrollView
       style={{
@@ -76,7 +85,9 @@ const MbtiResult = ({ mbtiResult, onSharePressed, onRetryPressed }: Props) => {
             showsHorizontalScrollIndicator={false}
             data={mbtiResult.parks}
             renderItem={({ item }) => (
-              <View style={{ alignItems: 'center', marginRight: 10 }}>
+              <TouchableOpacity
+                onPress={() => onParkPressed(item)}
+                style={{ alignItems: 'center', marginRight: 10 }}>
                 <Image
                   source={PARK_DATA_TABLE[PARK_TABLE[item]].image}
                   style={{
@@ -108,7 +119,7 @@ const MbtiResult = ({ mbtiResult, onSharePressed, onRetryPressed }: Props) => {
                     {``}
                   </Text>
                 </View>
-              </View>
+              </TouchableOpacity>
             )}
           />
         </View>
@@ -123,12 +134,11 @@ const MbtiResult = ({ mbtiResult, onSharePressed, onRetryPressed }: Props) => {
           <CButton
             onPressed={onRetryPressed}
             type='secondary'
-            label='테스트 다시하기'
+            label={type === 'result' ? '테스트 다시하기' : '테스트 하기'}
           />
         </View>
       </View>
       <TouchableOpacity
-        disabled
         onPress={onSharePressed}
         style={{ marginTop: 40, alignItems: 'center' }}>
         <Text
@@ -137,7 +147,7 @@ const MbtiResult = ({ mbtiResult, onSharePressed, onRetryPressed }: Props) => {
             NotoSans.f_13,
             { color: colors.typo.gray.dark },
           ]}>
-          {''}
+          {'공유하기'}
         </Text>
       </TouchableOpacity>
       <View style={{ height: 80 }} />

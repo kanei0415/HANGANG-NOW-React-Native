@@ -43,8 +43,12 @@ const MbtiInspectContaienr = () => {
           return;
         }
 
+        const clone = [...answer];
+
+        clone[11] = choice;
+
         const { config } = await requestSecurePut(
-          apiRoute.member.setMbti + calcMbti(answer),
+          apiRoute.member.setMbti + calcMbti(clone),
           {},
           {},
           loginResponse.accessToken,
@@ -62,7 +66,7 @@ const MbtiInspectContaienr = () => {
               {
                 name: 'mbtiResult',
                 params: {
-                  result: calcMbti(answer),
+                  result: calcMbti(clone),
                 },
               },
             ],

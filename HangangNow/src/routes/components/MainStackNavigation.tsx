@@ -20,6 +20,7 @@ import CalendarDateDetailContainer from '@components/MyPage/containers/CalendarD
 import PartnersEnrollContainer from '@components/PartnersEnroll/containers/PartnersEnrollContainer';
 import ScrapContainer from '@components/Scrap/containers/ScrapContainer';
 import SettingContainer from '@components/Setting/containers/SettingContainer';
+import TermContainer from '@components/Setting/containers/TermContainer';
 import SignupContainer from '@components/Signup/containers/SignupContainer';
 import SignupDoneContainer from '@components/Signup/containers/SignupDoneContainer';
 import SignupStep2Container from '@components/Signup/containers/SignupStep2Container';
@@ -112,6 +113,7 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
       </Stack.Group>
       <Stack.Screen name='scrap' component={ScrapContainer} />
       <Stack.Screen name='facilityMap' component={FacilityMapContainer} />
+      <Stack.Screen name='term' component={TermContainer} />
     </Stack.Navigator>
   );
 };

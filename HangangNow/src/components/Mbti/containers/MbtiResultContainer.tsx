@@ -3,8 +3,8 @@ import {
   MainStackNavigationTypes,
   MainStackParamListTypes,
 } from '@typedef/routes/navigation.types';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { BackHandler, Share } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { Share } from 'react-native';
 import MbtiResult from '../components/MbtiResult';
 import dynamiclink from '@react-native-firebase/dynamic-links';
 import { getMbtiLinkConfig } from '@libs/link';
@@ -13,10 +13,11 @@ import {
   MbtiTypes,
   MBTI_DATA_TABLE,
 } from '@typedef/components/Mbti/mbti.types';
+import { ParkTypes } from '@typedef/components/Home/home.types';
 
 const MbtiResultCotainer = ({
   route: {
-    params: { result },
+    params: { result, type },
   },
 }: NativeStackScreenProps<MainStackParamListTypes, 'mbtiResult'>) => {
   const navigation = useNavigation<MainStackNavigationTypes>();
@@ -27,9 +28,7 @@ const MbtiResultCotainer = ({
   );
 
   const onSharePressed = useCallback(async () => {
-    const link = await dynamiclink().buildShortLink(
-      getMbtiLinkConfig('MBTI_RESULT_UID_FROM_RESULT'),
-    );
+    const link = await dynamiclink().buildShortLink(getMbtiLinkConfig(result));
 
     Share.share({
       message: link,
@@ -37,14 +36,31 @@ const MbtiResultCotainer = ({
   }, [result]);
 
   const onRetryPressed = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
+    if (type === 'result') {
+      navigation.goBack();
+    } else {
+      navigation.reset({
+        routes: [{ name: 'mainTab' }, { name: 'mbtiInspect' }],
+      });
+    }
+  }, [navigation, type]);
+
+  const onParkPressed = useCallback(
+    (park: ParkTypes) => {
+      navigation.navigate('hangangDetail', {
+        park,
+      });
+    },
+    [navigation],
+  );
 
   return (
     <MbtiResult
       mbtiResult={mbtiResult}
       onSharePressed={onSharePressed}
       onRetryPressed={onRetryPressed}
+      onParkPressed={onParkPressed}
+      type={type}
     />
   );
 };

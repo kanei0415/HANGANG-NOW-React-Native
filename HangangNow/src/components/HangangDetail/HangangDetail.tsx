@@ -197,7 +197,7 @@ const HangangDetail = ({ data, visible, setVisible, contents }: Props) => {
               NotoSans.f_18,
               { color: colors.typo.black, marginTop: 12 },
             ]}>
-            {data.name}
+            {contents?.name || data.name}
           </Text>
           <Text
             style={[
@@ -205,7 +205,7 @@ const HangangDetail = ({ data, visible, setVisible, contents }: Props) => {
               NotoSans.f_14,
               { color: colors.typo.black, marginTop: 16 },
             ]}>
-            {data.detail}
+            {contents?.content || data.detail}
           </Text>
           <View style={{ alignItems: 'flex-end' }}>
             <Text

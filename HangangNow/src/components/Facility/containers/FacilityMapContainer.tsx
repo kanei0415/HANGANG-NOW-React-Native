@@ -1,6 +1,7 @@
 import useAuth from '@hooks/store/useAuth';
 import { alertMessage } from '@libs/alert';
 import { apiRoute, requestSecureGet } from '@libs/api';
+import Geolocation from '@react-native-community/geolocation';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { updateCenterPosAction } from '@store/centerPos/actions';
 import { updateFacilityDataAction } from '@store/facility/acitons';
@@ -80,6 +81,16 @@ const FacilityMapContainer = ({
     });
   }, []);
 
+  const onLoad = useCallback(() => {
+    Geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
+      webViewRef?.current?.postMessage(
+        JSON.stringify(
+          updateCenterPosAction({ lat: latitude, lng: longitude }),
+        ),
+      );
+    });
+  }, []);
+
   useEffect(() => {
     loadData('TOILET');
   }, [loadData]);
@@ -115,6 +126,7 @@ const FacilityMapContainer = ({
       setSelected={setSelected}
       onFindPathPressed={onFindPathPressed}
       onSharePressed={onSharePressed}
+      onLoad={onLoad}
     />
   );
 };

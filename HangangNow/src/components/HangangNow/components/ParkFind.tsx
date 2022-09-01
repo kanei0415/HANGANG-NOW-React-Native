@@ -1,11 +1,14 @@
 import colors from '@assets/colors';
 import NotoSans from '@assets/font';
 import images from '@assets/images';
+import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
 import { ParkingTypes } from '@typedef/components/HangangNow/hangangnow.types';
+import { ParkTypes, PARK_TABLE } from '@typedef/components/Home/home.types';
 import React from 'react';
 import {
   Dimensions,
+  FlatList,
   Image,
   ScrollView,
   Text,
@@ -20,12 +23,29 @@ type Props = {
   parkings: ParkingTypes[];
   selectedParking: ParkingTypes | null;
   setSelectedParking: React.Dispatch<React.SetStateAction<ParkingTypes | null>>;
+  selected: ParkTypes | null;
+  visible: boolean;
+  onSelectPressed: () => void;
+  onBackPressed: () => void;
+  onItemPressed: (item: ParkTypes) => void;
 };
 
-const ParkFind = ({ parkings, selectedParking, setSelectedParking }: Props) => {
+const ParkFind = ({
+  parkings,
+  selectedParking,
+  setSelectedParking,
+  selected,
+  visible,
+  onSelectPressed,
+  onBackPressed,
+  onItemPressed,
+}: Props) => {
   return (
     <>
       <ScrollView
+        style={{
+          backgroundColor: colors.default.white,
+        }}
         contentContainerStyle={{
           backgroundColor: colors.default.white,
         }}>
@@ -39,6 +59,7 @@ const ParkFind = ({ parkings, selectedParking, setSelectedParking }: Props) => {
             ]}>{`한강공원별 주차장 정보를
 한눈에 확인하세요!`}</Text>
           <TouchableOpacity
+            onPress={onSelectPressed}
             style={{
               marginTop: 20,
               flexDirection: 'row',
@@ -50,7 +71,7 @@ const ParkFind = ({ parkings, selectedParking, setSelectedParking }: Props) => {
                 NotoSans.f_15,
                 { color: colors.typo.black, marginRight: 16 },
               ]}>
-              {'한강별 보기'}
+              {selected || '한강별 보기'}
             </Text>
             <Image source={images.components.Leaflet.downArrow} />
           </TouchableOpacity>
@@ -222,6 +243,43 @@ const ParkFind = ({ parkings, selectedParking, setSelectedParking }: Props) => {
             style={{ position: 'absolute', top: 16, right: 16 }}>
             <Image source={images.components.common.close} />
           </TouchableOpacity>
+        </View>
+      </ReactNativeModal>
+      <ReactNativeModal
+        onBackdropPress={onBackPressed}
+        isVisible={visible}
+        style={{
+          padding: 0,
+          margin: 0,
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}>
+        <View
+          style={{
+            width: width - 40,
+            borderRadius: 4,
+            backgroundColor: '#ffffff',
+            paddingBottom: 20,
+            paddingLeft: 20,
+          }}>
+          <FlatList
+            numColumns={3}
+            data={Object.keys(PARK_TABLE)}
+            renderItem={({ item }) => (
+              <View
+                style={{
+                  width: (width - 120) / 3,
+                  marginRight: 20,
+                  marginTop: 20,
+                }}>
+                <CButton
+                  type='secondary'
+                  label={item.replace('한강공원', '')}
+                  onPressed={() => onItemPressed(item as ParkTypes)}
+                />
+              </View>
+            )}
+          />
         </View>
       </ReactNativeModal>
     </>

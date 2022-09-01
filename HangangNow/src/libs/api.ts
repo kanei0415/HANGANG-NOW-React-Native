@@ -131,6 +131,7 @@ export const apiRoute = {
     loadParkings: '/parkings',
     loadParkingMaps: '/parkings/map',
     loadParkingDetails: '/parkings/',
+    loadParkingWithPark: '/parkings/parks/',
   },
   picnic: {
     loadFindResult: '/picnic/recom/course',
@@ -142,6 +143,7 @@ export const apiRoute = {
   },
   flyer: {
     loadFlyer: '/flyers',
+    loadFlyerWithParks: '/flyers/parks/',
   },
   scrap: {
     loadEvent: '/scraps/events',

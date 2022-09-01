@@ -32,6 +32,7 @@ type Props = {
   setSelected: React.Dispatch<React.SetStateAction<FacilityDataType | null>>;
   onFindPathPressed: (item: FacilityDataType) => void;
   onSharePressed: (item: FacilityDataType) => void;
+  onLoad: () => void;
 };
 
 const { width } = Dimensions.get('screen');
@@ -48,12 +49,14 @@ const FacilityMap = ({
   setSelected,
   onFindPathPressed,
   onSharePressed,
+  onLoad,
 }: Props) => {
   return (
     <>
       <View style={{ flex: 1, backgroundColor: colors.default.white }}>
         <CHeaderContainer title={name} />
         <WebView
+          onLoad={onLoad}
           onMessage={(e) =>
             onMessage(JSON.parse(e.nativeEvent.data) as FacilityDataType)
           }

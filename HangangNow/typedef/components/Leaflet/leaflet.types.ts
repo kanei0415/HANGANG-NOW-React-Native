@@ -5,4 +5,5 @@ export type LeafletTypes = {
   name: string;
   parkName: string;
   photoUrl: string;
+  content: string;
 };
