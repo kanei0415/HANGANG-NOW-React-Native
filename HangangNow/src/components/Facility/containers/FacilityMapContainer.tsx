@@ -82,14 +82,94 @@ const FacilityMapContainer = ({
   }, []);
 
   const onLoad = useCallback(() => {
-    Geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
-      webViewRef?.current?.postMessage(
-        JSON.stringify(
-          updateCenterPosAction({ lat: latitude, lng: longitude }),
-        ),
-      );
-    });
-  }, []);
+    // Geolocation.getCurrentPosition(({ coords: { latitude, longitude } }) => {
+    //   webViewRef?.current?.postMessage(
+    //     JSON.stringify(
+    //       updateCenterPosAction({ lat: latitude, lng: longitude }),
+    //     ),
+    //   );
+    // });
+
+    switch (id) {
+      case 1:
+        webViewRef?.current?.postMessage(
+          JSON.stringify(
+            updateCenterPosAction({ lat: 37.549969869, lng: 127.1222583979 }),
+          ),
+        );
+        break;
+      case 2:
+        webViewRef?.current?.postMessage(
+          JSON.stringify(
+            updateCenterPosAction({ lat: 37.5210783227, lng: 127.0969170819 }),
+          ),
+        );
+        break;
+      case 3:
+        webViewRef?.current?.postMessage(
+          JSON.stringify(
+            updateCenterPosAction({ lat: 37.5294074983, lng: 127.0739744885 }),
+          ),
+        );
+        break;
+      case 4:
+        webViewRef?.current?.postMessage(
+          JSON.stringify(
+            updateCenterPosAction({ lat: 37.5207129541, lng: 127.0122664645 }),
+          ),
+        );
+        break;
+      case 5:
+        webViewRef?.current?.postMessage(
+          JSON.stringify(
+            updateCenterPosAction({ lat: 37.5077391108, lng: 126.9927658294 }),
+          ),
+        );
+        break;
+      case 6:
+        webViewRef?.current?.postMessage(
+          JSON.stringify(
+            updateCenterPosAction({ lat: 37.5178208785, lng: 126.970759215 }),
+          ),
+        );
+        break;
+      case 7:
+        webViewRef?.current?.postMessage(
+          JSON.stringify(
+            updateCenterPosAction({ lat: 37.552398926, lng: 126.8999035848 }),
+          ),
+        );
+        break;
+      case 8:
+        webViewRef?.current?.postMessage(
+          JSON.stringify(
+            updateCenterPosAction({ lat: 37.5263886632, lng: 126.933612357 }),
+          ),
+        );
+        break;
+      case 9:
+        webViewRef?.current?.postMessage(
+          JSON.stringify(
+            updateCenterPosAction({ lat: 37.562819678, lng: 126.8854129455 }),
+          ),
+        );
+        break;
+      case 10:
+        webViewRef?.current?.postMessage(
+          JSON.stringify(
+            updateCenterPosAction({ lat: 37.5860879769, lng: 126.8171490732 }),
+          ),
+        );
+        break;
+      case 11:
+        webViewRef?.current?.postMessage(
+          JSON.stringify(
+            updateCenterPosAction({ lat: 37.5383867083, lng: 126.9022732082 }),
+          ),
+        );
+        break;
+    }
+  }, [id]);
 
   useEffect(() => {
     loadData('TOILET');

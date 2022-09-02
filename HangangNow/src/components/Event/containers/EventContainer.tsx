@@ -74,6 +74,10 @@ const EventContainer = () => {
     [loginResponse],
   );
 
+  const onEnrollPressed = useCallback(() => {
+    navigation.navigate('eventEnroll');
+  }, [navigation]);
+
   useEffect(() => {
     loadEvent();
   }, [loadEvent]);
@@ -84,6 +88,7 @@ const EventContainer = () => {
       onItemPressed={onItemPressed}
       liked={liked}
       onLikePressed={onLikePressed}
+      onEnrollPressed={onEnrollPressed}
     />
   );
 };

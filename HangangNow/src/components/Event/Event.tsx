@@ -21,9 +21,16 @@ type Props = {
   onItemPressed: (id: number) => void;
   liked: boolean[];
   onLikePressed: (item: EventType, index: number) => void;
+  onEnrollPressed: () => void;
 };
 
-const Event = ({ events, onItemPressed, liked, onLikePressed }: Props) => {
+const Event = ({
+  events,
+  onItemPressed,
+  liked,
+  onLikePressed,
+  onEnrollPressed,
+}: Props) => {
   return (
     <ScrollView style={{ backgroundColor: colors.default.white }}>
       <CHeaderContainer title='이벤트 모아보기' />
@@ -75,6 +82,23 @@ const Event = ({ events, onItemPressed, liked, onLikePressed }: Props) => {
           )}
         />
       </View>
+      <TouchableOpacity
+        onPress={onEnrollPressed}
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          paddingRight: 20,
+        }}>
+        <Text
+          style={[
+            NotoSans.Medium,
+            NotoSans.f_14,
+            { color: colors.typo.gray.middle },
+          ]}>
+          {'행사정보 등록 · 수정 요청'}
+        </Text>
+      </TouchableOpacity>
+      <View style={{ height: 80 }}></View>
     </ScrollView>
   );
 };

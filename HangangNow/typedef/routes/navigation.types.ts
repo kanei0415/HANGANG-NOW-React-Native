@@ -6,6 +6,7 @@ export type MainStackParamListTypes = {
   login: undefined;
   preview: undefined;
   termDetail: undefined;
+  eventEnroll: undefined;
   signup: undefined;
   signupStep2: undefined;
   signupStep3: undefined;

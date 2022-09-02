@@ -60,7 +60,6 @@ const Leaflet = ({
         style={{
           flex: 1,
           backgroundColor: colors.default.white,
-          paddingBottom: 80,
         }}>
         <CHeaderContainer title='전단지 모아보기' />
         <View style={{ paddingLeft: 20 }}>
@@ -144,6 +143,7 @@ const Leaflet = ({
             {'업체정보 등록 · 수정 요청'}
           </Text>
         </TouchableOpacity>
+        <View style={{ height: 80 }}></View>
       </ScrollView>
       <ReactNativeModal
         onBackdropPress={onBackPressed}
