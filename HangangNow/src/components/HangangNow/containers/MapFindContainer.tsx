@@ -22,15 +22,15 @@ const MapFindContainer = () => {
       return 'empty';
     }
 
-    if (selected.total_count / selected.available_count < 10) {
-      return 'full';
+    if ((selected.available_count / selected.total_count) * 100 > 90) {
+      return 'empty';
     }
 
-    if (selected.total_count / selected.available_count < 40) {
+    if ((selected.available_count / selected.total_count) * 100 > 40) {
       return 'normal';
     }
 
-    return 'empty';
+    return 'full';
   }, [selected]);
 
   const webviewRef = useRef<WebView>(null);

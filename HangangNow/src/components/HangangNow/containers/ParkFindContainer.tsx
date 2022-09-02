@@ -27,15 +27,21 @@ const ParkFindContainer = () => {
       return 'empty';
     }
 
-    if (selectedParking.total_count / selectedParking.available_count < 10) {
-      return 'full';
+    if (
+      (selectedParking.available_count / selectedParking.total_count) * 100 >
+      90
+    ) {
+      return 'empty';
     }
 
-    if (selectedParking.total_count / selectedParking.available_count < 40) {
+    if (
+      (selectedParking.available_count / selectedParking.total_count) * 100 >
+      40
+    ) {
       return 'normal';
     }
 
-    return 'empty';
+    return 'full';
   }, [selectedParking]);
 
   const loadParking = useCallback(async () => {
