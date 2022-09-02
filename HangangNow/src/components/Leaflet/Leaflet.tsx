@@ -56,7 +56,12 @@ const Leaflet = ({
 }: Props) => {
   return (
     <>
-      <ScrollView style={{ flex: 1, backgroundColor: colors.default.white }}>
+      <ScrollView
+        style={{
+          flex: 1,
+          backgroundColor: colors.default.white,
+          paddingBottom: 80,
+        }}>
         <CHeaderContainer title='전단지 모아보기' />
         <View style={{ paddingLeft: 20 }}>
           <Text
@@ -93,8 +98,8 @@ const Leaflet = ({
                 style={{ marginRight: 20, marginBottom: 20 }}>
                 <Image
                   style={{
-                    width: (width - 40) / 2,
-                    height: ((width - 40) * 2) / 3,
+                    width: (width - 60) / 2,
+                    height: ((width - 60) / 2 / 600) * 867,
                   }}
                   source={{ uri: item.photoUrl }}
                 />
@@ -154,7 +159,7 @@ const Leaflet = ({
             <View
               style={{
                 width: width - 40,
-                height: ((width - 40) / 3) * 4,
+                height: ((width - 40) / 600) * 867,
                 padding: 20,
                 backgroundColor: colors.default.white,
                 borderRadius: 4,
@@ -171,7 +176,7 @@ ${selected?.content}`}
             </View>
           ) : (
             <Image
-              style={{ width: width - 40, height: ((width - 40) / 3) * 4 }}
+              style={{ width: width - 40, height: ((width - 40) / 600) * 867 }}
               source={{ uri: selected?.photoUrl }}
             />
           )}
