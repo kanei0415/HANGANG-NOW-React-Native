@@ -216,6 +216,46 @@ const HangangNow = ({
                 )}
               </View>
             </View>
+            <View
+              style={{
+                justifyContent: 'space-evenly',
+                alignItems: 'center',
+              }}>
+              <Text
+                style={[
+                  NotoSans.Medium,
+                  NotoSans.f_15,
+                  { color: colors.typo.black },
+                ]}>
+                {'강수확률'}
+              </Text>
+              <View
+                style={{
+                  width: 68,
+                  height: 68,
+                  marginTop: 8,
+                  borderRadius: 4,
+                  backgroundColor: colors.background.gray.light,
+                  justifyContent: 'space-evenly',
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={{
+                    width: 34,
+                    height: 34,
+                  }}>
+                  <Image source={images.components.HangangNow.rain} />
+                </View>
+                <Text
+                  style={[
+                    NotoSans.Medium,
+                    NotoSans.f_14,
+                    { color: colors.typo.black },
+                  ]}>
+                  {`${hangangnowData.weather.maxRainPercent}%`}
+                </Text>
+              </View>
+            </View>
           </View>
         </View>
         <View style={{ padding: 20 }}>
@@ -234,12 +274,29 @@ const HangangNow = ({
               borderRadius: 4,
               backgroundColor: '#f1f1f1',
               marginTop: 12,
+              width: width - 40,
+              height: ((width - 40) / 32) * 10,
             }}>
+            <Image
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: width - 40,
+                height: ((width - 40) / 32) * 10,
+              }}
+              source={
+                new Date().getHours() <
+                parseInt(hangangnowData.sunMoonRiseSet.sunSet.split(':')[0])
+                  ? images.components.HangangNow.light
+                  : images.components.HangangNow.dark
+              }
+            />
             <Text
               style={[
                 NotoSans.Regular,
                 NotoSans.f_13,
-                { color: colors.typo.black },
+                { color: colors.default.white },
               ]}>{`다채로운 하늘을 만끽하고 계신가요?
 ${Math.abs(
   parseInt(hangangnowData.sunMoonRiseSet.sunSet.split(':')[0]) -

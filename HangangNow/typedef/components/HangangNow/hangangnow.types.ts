@@ -42,44 +42,59 @@ export const skymodeToWeather = (skyMode: number): WeatherType => {
   }
 };
 
-export const getLabelImage = (temp: number): [string, ImageSourcePropType] => {
+export const getLabelImage = (
+  weather: WeatherType,
+  temp: number,
+): [string, ImageSourcePropType] => {
   if (temp < 5) {
     return [
-      '핫팩은 챙기셨나요? 한강의 칼바람에 대비해요!',
+      weather === 'sun'
+        ? '핫팩은 챙기셨나요? 한강의 칼바람에 대비해요!'
+        : '흰 눈이 내리는 한강으로 가요~',
       images.components.HangangNow.char1,
     ];
   }
 
   if (temp < 15) {
     return [
-      '한강에서 야외운동하기 좋은 날이에요.',
+      weather === 'sun'
+        ? '한강에서 야외운동하기 좋은 날이에요.'
+        : '비에 젖어 감기 걸리지않게 유의하세요!',
       images.components.HangangNow.char2,
     ];
   }
 
   if (temp < 20) {
     return [
-      '시원한 바람과 함께 한강 산책 어때요?',
+      weather === 'sun'
+        ? '시원한 바람과 함께 한강 산책 어때요?'
+        : '한강 바람에 날리는 비에 젖지 않게 조심하세요!',
       images.components.HangangNow.char3,
     ];
   }
 
   if (temp < 25) {
     return [
-      '한강 피크닉하기 너무 좋은 날이에요!',
+      weather === 'sun'
+        ? '한강 피크닉하기 너무 좋은 날이에요!'
+        : '날씨만 좋아지면, 바로 돗자리 챙기고 피크닉가요!',
       images.components.HangangNow.char4,
     ];
   }
 
   if (temp < 30) {
     return [
-      '한강을 바라보며 시원한 음료 한 잔하기 좋은 날이에요',
+      weather === 'sun'
+        ? '한강을 바라보며 시원한 음료 한 잔하기 좋은 날이에요'
+        : '오늘같이 습한 날씨에는 한강쉼터 방문은 어때요?',
       images.components.HangangNow.char5,
     ];
   }
 
   return [
-    '선크림은 챙기셨나요? 한강의 그늘을 사수하세요!',
+    weather === 'sun'
+      ? '선크림은 챙기셨나요? 한강의 그늘을 사수하세요!'
+      : '오늘같이 습한 날씨에는 한강쉼터 방문은 어때요?',
     images.components.HangangNow.char6,
   ];
 };

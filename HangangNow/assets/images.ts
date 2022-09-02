@@ -60,6 +60,9 @@ const images = {
       char6: require('./images/components/HangangNow/ic-char-6.png'),
       map: require('./images/components/HangangNow/ic-map.png'),
       car: require('./images/components/HangangNow/ic-car.png'),
+      rain: require('./images/components/HangangNow/ic-rain.png'),
+      light: require('./images/components/HangangNow/ic-light.png'),
+      dark: require('./images/components/HangangNow/ic-dark.png'),
     },
     MyPage: {
       placeholder: require('./images/components/MyPage/ic-ph-profile.png'),
