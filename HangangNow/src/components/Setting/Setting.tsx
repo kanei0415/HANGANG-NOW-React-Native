@@ -348,7 +348,12 @@ const Setting = ({
             ]}>
             {'문의'}
           </Text>
-          <Text style={[NotoSans.Regular, NotoSans.f_13, { color: '#a4a4a3' }]}>
+          <Text
+            style={[
+              NotoSans.Regular,
+              NotoSans.f_13,
+              { color: '#a4a4a3', textDecorationLine: 'underline' },
+            ]}>
             {'hangangnow@naver.com'}
           </Text>
         </View>
