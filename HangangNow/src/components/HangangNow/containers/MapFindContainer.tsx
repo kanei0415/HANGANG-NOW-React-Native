@@ -5,9 +5,10 @@ import { updateParking } from '@store/parking/actions';
 import { updateToken } from '@store/token/actions';
 import {
   ParkingMarkerTypes,
+  ParkingStateType,
   ParkingTypes,
 } from '@typedef/components/HangangNow/hangangnow.types';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import WebView from 'react-native-webview';
 import MapFind from '../components/MapFind';
 
@@ -15,6 +16,22 @@ const MapFindContainer = () => {
   const { loginResponse } = useAuth();
 
   const [selected, setSelected] = useState<ParkingTypes | null>(null);
+
+  const state = useMemo<ParkingStateType>(() => {
+    if (!selected) {
+      return 'empty';
+    }
+
+    if (selected.total_count / selected.available_count < 10) {
+      return 'full';
+    }
+
+    if (selected.total_count / selected.available_count < 40) {
+      return 'normal';
+    }
+
+    return 'empty';
+  }, [selected]);
 
   const webviewRef = useRef<WebView>(null);
 
@@ -84,6 +101,7 @@ const MapFindContainer = () => {
       onMessage={onMessage}
       selected={selected}
       setSelected={setSelected}
+      state={state}
     />
   );
 };

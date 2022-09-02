@@ -6,4 +6,5 @@ export type LeafletTypes = {
   parkName: string;
   photoUrl: string;
   content: string;
+  isScrap: boolean;
 };

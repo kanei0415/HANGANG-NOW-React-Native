@@ -28,7 +28,7 @@ const EventContainer = () => {
 
     if (config.status === 200) {
       setEvents(data.data);
-      setLiked(new Array(data.data.length).map(() => false));
+      setLiked(data.data.map((e) => e.isScrap));
     } else {
     }
   }, [loginResponse]);
@@ -56,11 +56,14 @@ const EventContainer = () => {
       );
 
       if (config.status === 200) {
-        alertMessage('스크랩 되었습니다');
         setLiked((prev) => {
+          alertMessage(
+            prev[index] ? '스크랩해제 되었습니다' : '스크랩 되었습니다',
+          );
+
           const clone = [...prev];
 
-          clone[index] = true;
+          clone[index] = !prev[index];
 
           return clone;
         });

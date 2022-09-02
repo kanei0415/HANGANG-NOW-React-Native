@@ -24,7 +24,7 @@ const COLOR_LIST_2 = [
   '#106DC9',
   '#BA2CFF',
   '#FF2CE3',
-  '#FFFFFF',
+  '#676767',
   '#111111',
 ];
 

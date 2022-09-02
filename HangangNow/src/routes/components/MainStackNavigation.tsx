@@ -18,6 +18,7 @@ import MbtiInspectContaienr from '@components/Mbti/containers/MbtiInspectContain
 import MbtiResultCotainer from '@components/Mbti/containers/MbtiResultContainer';
 import CalendarDateDetailContainer from '@components/MyPage/containers/CalendarDateDetailContainer';
 import PartnersEnrollContainer from '@components/PartnersEnroll/containers/PartnersEnrollContainer';
+import PreviewContainer from '@components/Preview/containers/PreviewContainer';
 import ScrapContainer from '@components/Scrap/containers/ScrapContainer';
 import SettingContainer from '@components/Setting/containers/SettingContainer';
 import TermContainer from '@components/Setting/containers/TermContainer';
@@ -51,6 +52,7 @@ const MainStackNavigation = ({ login, loginResponse }: Props) => {
         animation: 'slide_from_right',
       }}>
       <Stack.Screen name='login' component={LoginContainer} />
+      <Stack.Screen name='preview' component={PreviewContainer} />
       <Stack.Screen name='termDetail' component={TermDetailContainer} />
       <Stack.Screen name='signup' component={SignupContainer} />
       <Stack.Screen name='signupStep2' component={SignupStep2Container} />

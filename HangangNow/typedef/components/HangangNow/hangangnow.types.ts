@@ -21,6 +21,8 @@ export type HangangNowDataTypes = {
   };
 };
 
+export type ParkingStateType = 'full' | 'normal' | 'empty';
+
 export type WeatherType = 'sun' | 'rain' | 'snow';
 
 export const skymodeToWeather = (skyMode: number): WeatherType => {

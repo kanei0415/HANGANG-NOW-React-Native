@@ -63,6 +63,7 @@ export type CourseType = {
   length: number;
   name: string;
   startPlaceName: string;
+  isScrap: boolean;
 };
 
 export type PlaceType = {
@@ -77,6 +78,7 @@ export type PlaceType = {
     x_pos: number;
     y_pos: number;
   };
+  isScrap: boolean;
   name: string;
 };
 

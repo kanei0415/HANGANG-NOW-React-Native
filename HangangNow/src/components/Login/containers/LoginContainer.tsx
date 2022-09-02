@@ -112,6 +112,10 @@ const LoginContainer = () => {
     [navigation],
   );
 
+  const onPreviewPressed = useCallback(() => {
+    navigation.navigate('preview');
+  }, [navigation]);
+
   return (
     <Login
       setLoginId={setLoginId}
@@ -123,6 +127,7 @@ const LoginContainer = () => {
       onFindIDPressed={onFindIDPressed}
       onFindPWPressed={onFindPWPressed}
       onLoginPressed={onLoginPressed}
+      onPreviewPressed={onPreviewPressed}
     />
   );
 };

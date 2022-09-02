@@ -21,6 +21,9 @@ const images = {
     Signup: {
       done: require('./images/components/Signup/ic-done.png'),
     },
+    Preview: {
+      icon: require('./images/components/Preview/icon.png'),
+    },
     Mbti: {
       back: require('./images/components/Mbti/ic-primary-back.png'),
       text: require('./images/components/Mbti/ic-text.png'),
@@ -66,6 +69,9 @@ const images = {
       next: require('./images/components/MyPage/ic-next.png'),
       add: require('./images/components/MyPage/ic-add.png'),
       checked: require('./images/components/MyPage/ic-checked.png'),
+      ic1: require('./images/components/MyPage/ic-1.png'),
+      ic2: require('./images/components/MyPage/ic-2.png'),
+      ic3: require('./images/components/MyPage/ic-3.png'),
     },
     Home: {
       mainbanner: require('./images/components/Home/ic-home-banner.png'),

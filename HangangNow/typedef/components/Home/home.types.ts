@@ -29,6 +29,7 @@ export type ParkDataType = {
     tag: string[];
   }[];
   detail: string;
+  summury: string;
 };
 
 export type ParkContentType = {
@@ -49,6 +50,8 @@ export type ParkContentType = {
 
 export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
   '1': {
+    summury: `자연과 맞닿아
+있는 곳`,
     name: '광나루한강공원',
     image: images.components.ParkDetail.image1,
     h1: `광나루 한강공원은 철새들의 서식처이기도 하며, 
@@ -77,18 +80,19 @@ export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
         tag: ['#레이싱경기장', '#사계절'],
       },
     ],
-    detail: `양화한강공원은 여의도 샛강 하구에서 강서구 가양대교
-까지로 한강남단에 위치하고 있다. 둔치에 넓게 조성된 
-잔디밭에서 바라보는 탁 트인 전망을 자랑하고 있다. 
-여의도 샛강 하구에서 가양대교까지 연결된 자전거도로
-가 있으며, 선유교 아래의 무성하게 우거진 가량의 물 
-억새길을 만날 수 있다. 뿐만 아니라 자전거도로변에는 
-매년 5월이면 초록 잔디밭을 붉게 물들이며 꽃피우는 
-아름다운 장미꽃이 유명하여 친구, 연인이나 가족과 
-함께 사진 찍기에 좋은 곳이다. 
+    detail: `잠실, 뚝섬, 잠원 등 총 12개의 지구로 구성된 
+한강시민공원은 다양한 문화레포츠 시설과 생태공원이 
+조성되어 있어 연간 4천 만 명 이상이 찾는 대표적인 
+휴식공원이다. 강동대교에서 잠실철교 사이에 있는 
+광나루 한강공원은 한강 상류로부터 유입된 토사가 퇴적
+되어 자연스럽게 형성된 모래톱과 대규모 갈대군락지로 
+자연 그대로의 한강의 모습을 가장 잘 유지하고 있는 
+곳으로 철새들의 서식처이기도 하다. 
 `,
   },
   '2': {
+    summury: `송리단길의
+감성 카페가 있는 곳`,
     name: '잠실한강공원',
     image: images.components.ParkDetail.image2,
     h1: `잠실 한강공원은 스포츠 및 여러 문화시설과 
@@ -132,6 +136,8 @@ export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
 `,
   },
   '3': {
+    summury: `인근의 서울숲에서
+감성을 느끼는 장소`,
     name: '뚝섬한강공원',
     image: images.components.ParkDetail.image3,
     h1: `뚝섬 한강공원은 복합문화공간과 
@@ -159,9 +165,29 @@ export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
         tag: ['#주말벼룩시장', '#오전11시부터', '#오후4시까지'],
       },
     ],
-    detail: '',
+    detail: `뚝섬한강공원은 한강공원으로 새단장하기 이전부터 
+강변유원지로 유명했던 곳이다. 공원 내에는 수변광장, 
+장미정원, 자연학습장, 어린이 놀이터 등으로 조성되어 
+있다. 뚝섬한강공원에는 몸은 가늘고 긴 원통형인 '자벌레' 
+형태의 길이 243m 규모의 예술과 휴식이 함께하는 
+복합 전망문화콤플렉스가 있다. 뚝섬유원지역에서 연결
+되어 있어 누구나 이곳을 통해 편리하게 공원으로 진입할 
+수 있으며 '자벌레' 통로에는 카페, 찻집, 기프트숍은 물론 
+미디어아트 작가들의 작품전시 감상을 할 수 있다.  
+여름에는 시원한 바람을 맞으며 낭만과 젊음을 만끽할 수 
+있는  윈드서핑, 수상스키, 모터보트 등 수상스포츠가 
+활발하게 이루어진다. 봄과 가을에는 카페테리아와 계절 
+꽃전시장으로, 겨울철에는 눈썰매장과 스케이트장으로 
+사계절 내내 시민들에게 보다 많은 볼거리와 즐길거리를 
+제공한다. 뚝섬한강공원에는 이 외에도 X게임장, 인공
+암벽장, 유람선 선착장, 토요 나눔장터 운영, 수유실, 
+여성전용쉼터 등의 시설들로 시민들의 많은 사랑을 
+받고 있다. 
+`,
   },
   '4': {
+    summury: `강남 인근의
+핫플이 많은 곳`,
     name: '잠원한강공원',
     image: images.components.ParkDetail.image4,
     h1: `잠원 한강공원은 일상 체육시설과 수상레저스포츠의 
@@ -199,6 +225,8 @@ export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
 낭만적인 수상스포츠를 즐기는 사람들이 많다.`,
   },
   '5': {
+    summury: `다양한 구경 코스를
+계획할 수 있는 곳`,
     name: '반포한강공원',
     image: images.components.ParkDetail.image5,
     h1: `반포 한강공원은 강변 빌딩숲과 자연을 
@@ -247,6 +275,8 @@ export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
 `,
   },
   '6': {
+    summury: `다양한 개인 운동을
+하기 좋은 장소`,
     name: '이촌한강공원',
     image: images.components.ParkDetail.image6,
     h1: `이촌 한강공원은 여가 및 레포츠 체험, 
@@ -283,6 +313,8 @@ export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
 축구교실, 노들섬 등의 볼거리와 즐길거리가 많다.`,
   },
   '7': {
+    summury: `망리단길을 둘러보며
+여유를 즐길 수 있는 곳`,
     name: '망원한강공원',
     image: images.components.ParkDetail.image2,
     h1: `망원 한강공원은 각종 수상레저 스포츠와 
@@ -315,6 +347,8 @@ export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
 성지(切頭山 聖地) 등의 문화유적지가 있다. `,
   },
   '8': {
+    summury: `다양한 시설이 있어
+돌아보기 좋은 곳`,
     name: '여의도한강공원',
     image: images.components.ParkDetail.image8,
     h1: `여의도 한강공원은 다양한 행사와 볼거리가 
@@ -342,9 +376,24 @@ export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
         tag: ['#벚꽃축제', '#세계불꽃축제', '#마라톤'],
       },
     ],
-    detail: '',
+    detail: `여의도한강공원은 정치, 금융, 언론의 중심지인 여의도
+에 자리하고 있으며, 지하철ㆍ버스 등 대중교통으로 
+접근성이 좋아 직장인과 일반시민들이 즐겨찾는 명소
+이다. 특히, 여의도 한강공원에서는 봄에는 벚꽃축제가, 
+가을에는 세계불꽃축제 및 각종 공연과 마라톤행사 등 
+다양한 행사가 이어져 볼거리와 즐길거리가 풍부한 
+휴식공간이다. 또한, 밤섬, 여의도 샛강 등이 비교적 
+자연그대로 보존되어 있어 생태학습장 및 자연친화형 
+공원으로 조성되어 있다. 뿐만 아니라 한강르네상스 
+특화사업으로 물빛광장, 수상무대 및 수상분수, 빛의 
+폭포, 피아노물길, 페스티발랜드, 요트마리나 등의 
+시설물들이 새로 조성되어 시민들에게 더 많은 
+사랑을 받고 있다.
+`,
   },
   '9': {
+    summury: `감성 캠핑이
+가능한 곳`,
     name: '난지한강공원',
     image: images.components.ParkDetail.image9,
     h1: `난지 한강공원은 캠핑장 및 자연학습장으로도 
@@ -399,6 +448,8 @@ export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
 `,
   },
   '10': {
+    summury: `생태공원을 직접
+둘러볼 수 있는 곳`,
     name: '강서한강공원',
     image: images.components.ParkDetail.image10,
     h1: `강서 한강공원은, 생태 체험과 
@@ -439,6 +490,8 @@ export const PARK_DATA_TABLE: { [k: string]: ParkDataType } = {
 여가활동과 스포츠 공간으로써의 기능을 하고 있다.`,
   },
   '11': {
+    summury: `자전거 및 기타
+운동이 가능한 곳`,
     name: '양화한강공원',
     image: images.components.ParkDetail.image11,
     h1: `양화 한강공원은 선유도 공원과 인접해 있으며, 
@@ -488,4 +541,5 @@ export type EventType = {
   title: string;
   x_pos: number;
   y_pos: number;
+  isScrap: boolean;
 };

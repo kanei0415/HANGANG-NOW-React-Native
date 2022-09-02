@@ -3,7 +3,10 @@ import NotoSans from '@assets/font';
 import images from '@assets/images';
 import CButton from '@components/common/CButton/CButton';
 import CHeaderContainer from '@components/common/CHeader/containers/CHeaderContainer';
-import { ParkingTypes } from '@typedef/components/HangangNow/hangangnow.types';
+import {
+  ParkingStateType,
+  ParkingTypes,
+} from '@typedef/components/HangangNow/hangangnow.types';
 import { ParkTypes, PARK_TABLE } from '@typedef/components/Home/home.types';
 import React from 'react';
 import {
@@ -28,6 +31,7 @@ type Props = {
   onSelectPressed: () => void;
   onBackPressed: () => void;
   onItemPressed: (item: ParkTypes) => void;
+  state: ParkingStateType;
 };
 
 const ParkFind = ({
@@ -39,6 +43,7 @@ const ParkFind = ({
   onSelectPressed,
   onBackPressed,
   onItemPressed,
+  state,
 }: Props) => {
   return (
     <>
@@ -228,6 +233,54 @@ const ParkFind = ({
               } 대`}
             </Text>
           </View>
+          {state === 'empty' && (
+            <View style={{ marginTop: 8, flexDirection: 'row' }}>
+              <View
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: 12,
+                  marginRight: 12,
+                  backgroundColor: '#06B500',
+                }}></View>
+              <Text
+                style={[NotoSans.Medium, NotoSans.f_15, { color: '#06B500' }]}>
+                {'여유'}
+              </Text>
+            </View>
+          )}
+          {state === 'normal' && (
+            <View style={{ marginTop: 8, flexDirection: 'row' }}>
+              <View
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: 12,
+                  marginRight: 12,
+                  backgroundColor: '#FFDD00',
+                }}></View>
+              <Text
+                style={[NotoSans.Medium, NotoSans.f_15, { color: '#FFDD00' }]}>
+                {'보통'}
+              </Text>
+            </View>
+          )}
+          {state === 'full' && (
+            <View style={{ marginTop: 8, flexDirection: 'row' }}>
+              <View
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: 12,
+                  marginRight: 12,
+                  backgroundColor: '#FC5C5C',
+                }}></View>
+              <Text
+                style={[NotoSans.Medium, NotoSans.f_15, { color: '#FC5C5C' }]}>
+                {'혼잡'}
+              </Text>
+            </View>
+          )}
           <Text
             style={[
               NotoSans.Regular,

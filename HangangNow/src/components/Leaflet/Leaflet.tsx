@@ -165,7 +165,8 @@ const Leaflet = ({
                   NotoSans.f_14,
                   { color: colors.typo.black },
                 ]}>
-                {selected?.content}
+                {`${selected?.address}
+${selected?.content}`}
               </Text>
             </View>
           ) : (

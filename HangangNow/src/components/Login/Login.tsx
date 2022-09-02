@@ -25,6 +25,7 @@ type Props = {
   onFindIDPressed: () => void;
   onFindPWPressed: () => void;
   onLoginPressed: () => void;
+  onPreviewPressed: () => void;
 };
 
 const { width, height } = Dimensions.get('window');
@@ -39,6 +40,7 @@ const Login = ({
   onFindIDPressed,
   onFindPWPressed,
   onLoginPressed,
+  onPreviewPressed,
 }: Props) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -56,6 +58,7 @@ const Login = ({
             marginTop: 24,
           }}>
           <TouchableOpacity
+            onPress={onPreviewPressed}
             style={{
               paddingHorizontal: 12,
               paddingVertical: 8,

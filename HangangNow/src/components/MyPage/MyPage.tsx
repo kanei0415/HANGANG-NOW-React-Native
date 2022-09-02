@@ -275,10 +275,15 @@ const MyPage = ({
           style={{ alignItems: 'center' }}>
           <View
             style={{
-              width: 48,
-              height: 48,
-              backgroundColor: '#dbdbdb',
-            }}></View>
+              width: 80,
+              height: 44,
+              borderRadius: 4,
+              backgroundColor: '#d1f0f6',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Image source={images.components.MyPage.ic1} />
+          </View>
           <Text
             style={[
               NotoSans.Medium,
@@ -293,10 +298,15 @@ const MyPage = ({
           style={{ alignItems: 'center' }}>
           <View
             style={{
-              width: 48,
-              height: 48,
-              backgroundColor: '#dbdbdb',
-            }}></View>
+              width: 80,
+              height: 44,
+              borderRadius: 4,
+              backgroundColor: '#d1f0f6',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Image source={images.components.MyPage.ic2} />
+          </View>
           <Text
             style={[
               NotoSans.Medium,
@@ -311,10 +321,15 @@ const MyPage = ({
           style={{ alignItems: 'center' }}>
           <View
             style={{
-              width: 48,
-              height: 48,
-              backgroundColor: '#dbdbdb',
-            }}></View>
+              width: 80,
+              height: 44,
+              borderRadius: 4,
+              backgroundColor: '#d1f0f6',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Image source={images.components.MyPage.ic3} />
+          </View>
           <Text
             style={[
               NotoSans.Medium,

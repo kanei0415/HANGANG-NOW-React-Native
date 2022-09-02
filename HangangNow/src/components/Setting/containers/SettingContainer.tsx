@@ -457,7 +457,7 @@ const SettingContainer = () => {
     } else {
       alertMessage('비밀번호 변경에 실패 했습니다');
     }
-  }, [loginResponse, navigation]);
+  }, [loginResponse, navigation, password]);
 
   const onDeleteAccountPressed = useCallback(() => {
     navigation.push('deleteAccount');

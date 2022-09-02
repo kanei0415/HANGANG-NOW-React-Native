@@ -1,9 +1,12 @@
 import useAuth from '@hooks/store/useAuth';
 import { alertMessage } from '@libs/alert';
 import { apiRoute, requestSecureGet } from '@libs/api';
-import { ParkingTypes } from '@typedef/components/HangangNow/hangangnow.types';
+import {
+  ParkingStateType,
+  ParkingTypes,
+} from '@typedef/components/HangangNow/hangangnow.types';
 import { ParkTypes, PARK_TABLE } from '@typedef/components/Home/home.types';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import ParkFind from '../components/ParkFind';
 
 const ParkFindContainer = () => {
@@ -18,6 +21,22 @@ const ParkFindContainer = () => {
   const [visible, setVisible] = useState(false);
 
   const [selected, setSelected] = useState<ParkTypes | null>(null);
+
+  const state = useMemo<ParkingStateType>(() => {
+    if (!selectedParking) {
+      return 'empty';
+    }
+
+    if (selectedParking.total_count / selectedParking.available_count < 10) {
+      return 'full';
+    }
+
+    if (selectedParking.total_count / selectedParking.available_count < 40) {
+      return 'normal';
+    }
+
+    return 'empty';
+  }, [selectedParking]);
 
   const loadParking = useCallback(async () => {
     if (!loginResponse) {
@@ -78,6 +97,7 @@ const ParkFindContainer = () => {
       onSelectPressed={onSelectPressed}
       onBackPressed={onBackPressed}
       onItemPressed={onItemPressed}
+      state={state}
     />
   );
 };

@@ -53,7 +53,7 @@ const LeafletContainer = () => {
 
       if (config.status === 200) {
         setLeaflets(data.data);
-        setLiked(new Array(data.data.length).map((i) => false));
+        setLiked(data.data.map((l) => l.isScrap));
       } else {
         alertMessage('전단지 정보를 불러오지 못했습니다');
       }
@@ -66,7 +66,7 @@ const LeafletContainer = () => {
 
       if (config.status === 200) {
         setLeaflets(data.data);
-        setLiked(new Array(data.data.length).map((i) => false));
+        setLiked(data.data.map((l) => l.isScrap));
       } else {
         alertMessage('전단지 정보를 불러오지 못했습니다');
       }
@@ -105,11 +105,14 @@ const LeafletContainer = () => {
       );
 
       if (config.status === 200) {
-        alertMessage('스크랩 되었습니다');
         setLiked((prev) => {
+          alertMessage(
+            prev[index] ? '스크랩해제 되었습니다' : '스크랩 되었습니다',
+          );
+
           const clone = [...prev];
 
-          clone[index] = true;
+          clone[index] = !prev[index];
 
           return clone;
         });

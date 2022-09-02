@@ -187,9 +187,10 @@ const HangangDetail = ({ data, visible, setVisible, contents }: Props) => {
         <View
           style={{
             width: width - 40,
-            maxHeight: height - 40,
+            maxHeight: height - 80,
             padding: 20,
             backgroundColor: colors.default.white,
+            overflow: 'scroll',
           }}>
           <Text
             style={[

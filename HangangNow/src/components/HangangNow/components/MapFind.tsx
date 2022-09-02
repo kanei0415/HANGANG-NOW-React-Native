@@ -5,6 +5,7 @@ import CHeaderContainer from '@components/common/CHeader/containers/CHeaderConta
 import { WEB_VIEW_ORIGIN } from '@libs/webview';
 import {
   ParkingMarkerTypes,
+  ParkingStateType,
   ParkingTypes,
 } from '@typedef/components/HangangNow/hangangnow.types';
 import React, { RefObject } from 'react';
@@ -19,6 +20,7 @@ type Props = {
   onLoadEnd: () => void;
   onMessage: (item: ParkingMarkerTypes) => void;
   selected: ParkingTypes | null;
+  state: ParkingStateType;
   setSelected: React.Dispatch<React.SetStateAction<ParkingTypes | null>>;
 };
 
@@ -28,6 +30,7 @@ const MapFind = ({
   onMessage,
   selected,
   setSelected,
+  state,
 }: Props) => {
   return (
     <>
@@ -183,6 +186,54 @@ const MapFind = ({
               } 대`}
             </Text>
           </View>
+          {state === 'empty' && (
+            <View style={{ marginTop: 8, flexDirection: 'row' }}>
+              <View
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: 12,
+                  marginRight: 12,
+                  backgroundColor: '#06B500',
+                }}></View>
+              <Text
+                style={[NotoSans.Medium, NotoSans.f_15, { color: '#06B500' }]}>
+                {'여유'}
+              </Text>
+            </View>
+          )}
+          {state === 'normal' && (
+            <View style={{ marginTop: 8, flexDirection: 'row' }}>
+              <View
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: 12,
+                  marginRight: 12,
+                  backgroundColor: '#FFDD00',
+                }}></View>
+              <Text
+                style={[NotoSans.Medium, NotoSans.f_15, { color: '#FFDD00' }]}>
+                {'보통'}
+              </Text>
+            </View>
+          )}
+          {state === 'full' && (
+            <View style={{ marginTop: 8, flexDirection: 'row' }}>
+              <View
+                style={{
+                  width: 24,
+                  height: 24,
+                  borderRadius: 12,
+                  marginRight: 12,
+                  backgroundColor: '#FC5C5C',
+                }}></View>
+              <Text
+                style={[NotoSans.Medium, NotoSans.f_15, { color: '#FC5C5C' }]}>
+                {'혼잡'}
+              </Text>
+            </View>
+          )}
           <Text
             style={[
               NotoSans.Regular,

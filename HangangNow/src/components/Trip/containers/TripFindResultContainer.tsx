@@ -44,8 +44,8 @@ const TripFindResultContainer = ({
     if (config.status === 200) {
       setResult(data);
 
-      setCourseLiked(new Array(data.courses.length).map(() => false));
-      setPlaceLiked(new Array(data.places.length).map(() => false));
+      setCourseLiked(data.courses.map((c) => c.isScrap));
+      setPlaceLiked(data.places.map((p) => p.isScrap));
     }
   }, [body, loginResponse]);
 
@@ -73,14 +73,16 @@ const TripFindResultContainer = ({
 
       if (config.status === 200) {
         setPlaceLiked((prev) => {
+          alertMessage(
+            prev[index] ? '스크랩해제 되었습니다' : '스크랩 되었습니다',
+          );
+
           const clone = [...prev];
 
-          clone[index] = true;
+          clone[index] = !prev[index];
 
           return clone;
         });
-
-        alertMessage('스크랩 되었습니다');
       } else {
         alertMessage('스크랩에 실패했습니다');
       }
@@ -103,14 +105,16 @@ const TripFindResultContainer = ({
 
       if (config.status === 200) {
         setCourseLiked((prev) => {
+          alertMessage(
+            prev[index] ? '스크랩해제 되었습니다' : '스크랩 되었습니다',
+          );
+
           const clone = [...prev];
 
-          clone[index] = true;
+          clone[index] = !prev[index];
 
           return clone;
         });
-
-        alertMessage('스크랩 되었습니다');
       } else {
         alertMessage('스크랩에 실패했습니다');
       }

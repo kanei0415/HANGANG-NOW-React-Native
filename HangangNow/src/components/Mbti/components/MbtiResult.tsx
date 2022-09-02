@@ -70,6 +70,35 @@ const MbtiResult = ({
           <Image source={mbtiResult.image} />
         </View>
       </View>
+      <View style={{ alignItems: 'center', marginTop: 60 }}>
+        <Text
+          style={[NotoSans.Bold, NotoSans.f_15, { color: colors.typo.black }]}>
+          {mbtiResult.subLabel}
+        </Text>
+      </View>
+      <View
+        style={{
+          width: width - 40,
+          marginLeft: 20,
+          marginTop: 24,
+          paddingTop: 28,
+          paddingHorizontal: 16,
+          paddingBottom: 12,
+          backgroundColor: '#f1f1f1',
+          borderRadius: 4,
+        }}>
+        {mbtiResult.chars.map((c, i) => (
+          <Text
+            key={i}
+            style={[
+              NotoSans.Regular,
+              NotoSans.f_15,
+              { color: colors.typo.black, marginBottom: 16 },
+            ]}>
+            {c}
+          </Text>
+        ))}
+      </View>
       <View style={{ marginTop: 40, paddingHorizontal: 20 }}>
         <Text style={[NotoSans.Bold, NotoSans.f_18]}>
           <Text style={{ color: colors.typo.black }}>
@@ -78,7 +107,6 @@ const MbtiResult = ({
           <Text style={{ color: colors.main.primary }}>{'한강'}</Text>
           <Text style={{ color: colors.typo.black }}>{'은?'}</Text>
         </Text>
-
         <View style={{ marginTop: 20 }}>
           <FlatList
             horizontal
@@ -91,8 +119,8 @@ const MbtiResult = ({
                 <Image
                   source={PARK_DATA_TABLE[PARK_TABLE[item]].image}
                   style={{
-                    width: 100,
-                    height: 100,
+                    width: (width - 60) / 3,
+                    height: (width - 60) / 3,
                     borderRadius: 4,
                   }}
                 />
@@ -113,10 +141,10 @@ const MbtiResult = ({
                   <Text
                     style={[
                       NotoSans.Regular,
-                      NotoSans.f_13,
-                      { textAlign: 'center' },
+                      NotoSans.f_12,
+                      { textAlign: 'center', color: colors.typo.black },
                     ]}>
-                    {``}
+                    {PARK_DATA_TABLE[PARK_TABLE[item]].summury}
                   </Text>
                 </View>
               </TouchableOpacity>

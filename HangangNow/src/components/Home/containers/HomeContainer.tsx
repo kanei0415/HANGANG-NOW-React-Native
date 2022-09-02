@@ -65,7 +65,7 @@ const HomeContainer = () => {
       events={events}
       index={index}
       setIndex={setIndex}
-      maxSize={3}
+      maxSize={events.length}
       onEventShowPressed={onEventShowPressed}
     />
   );

@@ -16,6 +16,11 @@ const MainTabNavigationContainer = () => {
         .getInitialLink()
         .then((dl) => dl?.url)) || (await Linking.getInitialURL());
 
+    if (initialUrl && initialUrl.match('start')) {
+      navigation.navigate('mbti');
+      return;
+    }
+
     const mbti = parseMbtiLink(initialUrl);
 
     if (mbti) {
